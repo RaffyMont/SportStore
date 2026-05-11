@@ -1,5 +1,3 @@
-/* Controllare gli ON CASCADE ecc... */
-
 CREATE TABLE Utente(
 	id_utente char(6) NOT NULL,
     nome varchar(128) NOT NULL,
@@ -16,9 +14,9 @@ CREATE TABLE Prodotto(
 	id_prodotto char(12) NOT NULL,
     modello varchar(64),
     descrizione varchar(256),
-    prezzo decimal(10, 2) NOT NULL,
+    prezzo decimal(10, 2) DEFAULT 0.0,
     marca varchar(64),
-    genere enum('uomo', 'donna', 'bambino', 'unisex') NOT NULL,
+    genere enum('uomo', 'donna', 'bambino', 'unisex') DEFAULT 'unisex',
     stock int NOT NULL DEFAULT 0,
     
     PRIMARY KEY(id_prodotto)
@@ -38,64 +36,101 @@ CREATE TABLE Taglia(
 	
     
 CREATE TABLE Indirizzo(
+	id_indirizzo int AUTO_INCREMENT,
 	città varchar(128) NOT NULL,
     CAP char(5) NOT NULL,
     via varchar(128) NOT NULL,
     civico varchar(5) NOT NULL,
-    id_utente char(6),
+    id_utente char(6) NOT NULL,
     
-    PRIMARY KEY(città, CAP, via, civico),
-    FOREIGN KEY(id_utente) REFERENCES Utente(id_utente) ON UPDATE cascade ON DELETE set null
+    PRIMARY KEY(id_indirizzo),
+    FOREIGN KEY(id_utente) REFERENCES Utente(id_utente) ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE Ordine(
 	id_ordine char(12) NOT NULL,
     data_ordine datetime,
     stato_ordine enum('consegnato', 'in spedizione', 'annullato'),
-    prezzo_totale decimal(10, 2) NOT NULL,
-    id_utente char(6),
-    città_spedizione varchar(128),
-    CAP_spedizione char(5),
-    via_spedizione varchar(128),
-    civico_spedizione varchar(5),
+    prezzo_totale decimal(10, 2) DEFAULT 0.0,
+    id_utente char(6) NOT NULL,
+    id_indirizzo int NOT NULL,
+    città_spedizione varchar(128) NOT NULL,
+    CAP_spedizione char(5) NOT NULL,
+    via_spedizione varchar(128) NOT NULL,
+    civico_spedizione varchar(5) NOT NULL,
     
     PRIMARY KEY(id_ordine),
-    FOREIGN KEY(citta_spedizione, CAP_spedizione, via_spedizione, civico_spedizione) REFERENCES Indirizzo(città, CAP, via, civico) ON UPDATE cascade ON DELETE set null
+    FOREIGN KEY(id_indirizzo) REFERENCES Indirizzo(id_indirizzo) ON UPDATE cascade ON DELETE cascade,
+	FOREIGN KEY(id_utente) REFERENCES Utente(id_utente) ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE DettagliOrdine(
-	id_dettaglio char(8) NOT NULL,
-    quantità int NOT NULL,
-    prezzo_unitario decimal(10, 2) NOT NULL,
-    id_ordine char(12),
-    id_prodotto char(12),
+    quantità int DEFAULT 0,
+    prezzo_unitario decimal(10, 2) DEFAULT 0.0,
+    id_ordine char(12) NOT NULL,
+    id_prodotto char(12) NOT NULL,
     
-    PRIMARY KEY(id_dettaglio),
-    FOREIGN KEY(id_ordine) REFERENCES Ordine(id_ordine) ON UPDATE cascade ON DELETE set null,
-    FOREIGN KEY(id_prodotto) REFERENCES Prodotto(id_prodotto) ON UPDATE cascade ON DELETE set null
+    PRIMARY KEY(id_ordine, id_prodotto),
+    FOREIGN KEY(id_ordine) REFERENCES Ordine(id_ordine) ON UPDATE cascade ON DELETE cascade,
+    FOREIGN KEY(id_prodotto) REFERENCES Prodotto(id_prodotto) ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE SupportoColore(
-	id_prodotto char(12),
-    nome varchar(32),
+	id_prodotto char(12) NOT NULL,
+    nome varchar(32) NOT NULL,
     
     PRIMARY KEY(id_prodotto, nome),
-    FOREIGN KEY(id_prodotto) REFERENCES Prodotto(id_prodotto) ON UPDATE cascade ON DELETE set null,
-    FOREIGN KEY(nome) REFERENCES Colore(nome) ON UPDATE cascade ON DELETE set null
+    FOREIGN KEY(id_prodotto) REFERENCES Prodotto(id_prodotto) ON UPDATE cascade ON DELETE cascade,
+    FOREIGN KEY(nome) REFERENCES Colore(nome) ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE SupportoTaglia(
-	id_prodotto char(12),
-    taglia varchar(10),
+	id_prodotto char(12) NOT NULL,
+    taglia varchar(10) NOT NULL,
     
     PRIMARY KEY(id_prodotto, taglia),
-    FOREIGN KEY(id_prodotto) REFERENCES Prodotto(id_prodotto) ON UPDATE cascade ON DELETE set null,
-    FOREIGN KEY(taglia) REFERENCES Taglia(taglia) ON UPDATE cascade ON DELETE set null
+    FOREIGN KEY(id_prodotto) REFERENCES Prodotto(id_prodotto) ON UPDATE cascade ON DELETE cascade,
+    FOREIGN KEY(taglia) REFERENCES Taglia(taglia) ON UPDATE cascade ON DELETE cascade
 );
 
-/* controllare su eclipse la soluzione con immagini nel file system */
 CREATE TABLE Immagine(
-	pathname varchar(255) /* Controllare che campo è su eclipse */,
+	pathname varchar(255) NOT NULL,
+	mime_type VARCHAR(50) DEFAULT NULL,
+    id_prodotto char(12) NOT NULL,
+
+    PRIMARY KEY(pathname),
+
+    FOREIGN KEY(id_prodotto) REFERENCES Prodotto(id_prodotto) ON UPDATE cascade ON DELETE cascade
+);
+
+CREATE TABLE Scarpe(
+	id_prodotto char(12) NOT NULL,
+    tipo_suola varchar(30),
+    materiale varchar(128),
     
-    PRIMARY KEY(pathname)
+    PRIMARY KEY(id_prodotto),
+    FOREIGN KEY(id_prodotto) REFERENCES Prodotto(id_prodotto) ON UPDATE cascade ON DELETE cascade
+);
+
+CREATE TABLE Vestiti(
+	id_prodotto char(12) NOT NULL,
+    tipo_vita varchar(30),
+    tessuto varchar(128),
+    stagione varchar(30),
+    categoria enum('maglietta', 'pantalone', 'tuta'),
+    tipo_collo varchar(30),
+    manica enum('corta', 'lunga'),
+    gamba enum('corti', 'lunghi'),
+    
+    PRIMARY KEY(id_prodotto),
+    FOREIGN KEY(id_prodotto) REFERENCES Prodotto(id_prodotto) ON UPDATE cascade ON DELETE cascade
+);
+
+CREATE TABLE Accessori(
+	id_prodotto char(12) NOT NULL,
+    tipo_accessorio varchar(30),
+    materiale varchar(128),
+    
+    PRIMARY KEY(id_prodotto),
+    FOREIGN KEY(id_prodotto) REFERENCES Prodotto(id_prodotto) ON UPDATE cascade ON DELETE cascade
 );
