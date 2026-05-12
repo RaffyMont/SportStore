@@ -1,13 +1,32 @@
+DROP DATABASE IF EXISTS storage;
+CREATE DATABASE storage;
+USE storage;
+
+CREATE TABLE Indirizzo(
+	id_indirizzo int AUTO_INCREMENT,
+    provincia varchar(128),
+    stato varchar(128),
+	città varchar(128) NOT NULL,
+    CAP char(5) NOT NULL,
+    via varchar(128) NOT NULL,
+    civico varchar(5) NOT NULL,
+    id_utente char(6),
+    
+    PRIMARY KEY(id_indirizzo)
+);
+
 CREATE TABLE Utente(
 	id_utente char(6) NOT NULL,
     nome varchar(128) NOT NULL,
     cognome varchar(128) NOT NULL,
     email varchar(256) NOT NULL,
     pwd varchar(128) NOT NULL,
-    ruolo enum('admin', 'common', 'guest'),
+    ruolo enum('admin', 'common'),
     cellulare char(10),
+    id_indirizzo int NOT NULL,
     
-    PRIMARY KEY(id_utente)
+    PRIMARY KEY(id_utente),
+    FOREIGN KEY(id_indirizzo) REFERENCES Indirizzo(id_indirizzo) ON UPDATE  cascade ON DELETE cascade
 );
 
 CREATE TABLE Prodotto(
@@ -34,23 +53,10 @@ CREATE TABLE Taglia(
     PRIMARY KEY(taglia)
 );
 	
-    
-CREATE TABLE Indirizzo(
-	id_indirizzo int AUTO_INCREMENT,
-	città varchar(128) NOT NULL,
-    CAP char(5) NOT NULL,
-    via varchar(128) NOT NULL,
-    civico varchar(5) NOT NULL,
-    id_utente char(6) NOT NULL,
-    
-    PRIMARY KEY(id_indirizzo),
-    FOREIGN KEY(id_utente) REFERENCES Utente(id_utente) ON UPDATE cascade ON DELETE cascade
-);
-
 CREATE TABLE Ordine(
 	id_ordine char(12) NOT NULL,
     data_ordine datetime,
-    stato_ordine enum('consegnato', 'in spedizione', 'annullato'),
+    stato_ordine enum('consegnato', 'in_spedizione', 'annullato', 'in_preparazione'),
     prezzo_totale decimal(10, 2) DEFAULT 0.0,
     id_utente char(6) NOT NULL,
     id_indirizzo int NOT NULL,
