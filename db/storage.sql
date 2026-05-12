@@ -6,11 +6,10 @@ CREATE TABLE Indirizzo(
 	id_indirizzo int AUTO_INCREMENT,
     provincia varchar(128),
     stato varchar(128),
-	città varchar(128) NOT NULL,
+	citta varchar(128) NOT NULL,
     CAP char(5) NOT NULL,
     via varchar(128) NOT NULL,
     civico varchar(5) NOT NULL,
-    id_utente char(6),
     
     PRIMARY KEY(id_indirizzo)
 );
@@ -60,7 +59,7 @@ CREATE TABLE Ordine(
     prezzo_totale decimal(10, 2) DEFAULT 0.0,
     id_utente char(6) NOT NULL,
     id_indirizzo int NOT NULL,
-    città_spedizione varchar(128) NOT NULL,
+    citta_spedizione varchar(128) NOT NULL,
     CAP_spedizione char(5) NOT NULL,
     via_spedizione varchar(128) NOT NULL,
     civico_spedizione varchar(5) NOT NULL,
