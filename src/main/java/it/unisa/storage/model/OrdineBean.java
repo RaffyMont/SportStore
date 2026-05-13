@@ -17,7 +17,7 @@ public class OrdineBean implements Serializable{
 	
 	public OrdineBean()
 	{
-		prezzo_totale = 0.0;
+		
 	}
 
 	public String getId_ordine() {
