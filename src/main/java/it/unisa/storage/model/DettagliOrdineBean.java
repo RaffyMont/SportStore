@@ -13,8 +13,7 @@ public class DettagliOrdineBean implements Serializable {
 	
 	public DettagliOrdineBean()
 	{
-		quantita = 0;
-		prezzo_unitario = 0.0;
+		
 	}
 
 	public int getQuantita() {
