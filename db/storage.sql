@@ -66,7 +66,7 @@ CREATE TABLE Ordine(
 );
 
 CREATE TABLE DettagliOrdine(
-    quantità int DEFAULT 0,
+    quantita int DEFAULT 0,
     prezzo_unitario decimal(10, 2) DEFAULT 0.0,
     id_ordine char(12) NOT NULL,
     id_prodotto char(12) NOT NULL,
