@@ -74,17 +74,4 @@ public class IndirizzoBean implements Serializable{
 	public void setCivico(String civico) {
 		this.civico = civico;
 	}
-    
-    
-    
-    /*
-    	Serve l'oggetto Immagine
-    public void setMimeType(String mimeType) {
-		this.mimeType = mimeType;
-	}
-
-	public boolean hasImage() {
-        return path != null && !path.isEmpty();
-    }
-    */
 }
