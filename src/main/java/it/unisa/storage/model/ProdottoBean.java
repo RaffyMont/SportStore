@@ -17,9 +17,7 @@ public abstract class ProdottoBean implements Serializable{
     
     public ProdottoBean()
     {
-    	prezzo = 0.0;
-    	genere = Genere.unisex;
-    	stock = 0;
+   
     }
 
 	public String getId_prodotto() {
