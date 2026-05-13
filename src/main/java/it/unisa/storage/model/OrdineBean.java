@@ -10,16 +10,10 @@ public class OrdineBean implements Serializable{
 	private String data_ordine;
 	private enum Stato{CONSEGNATO, IN_SPEDIZIONE, ANNULLATO, IN_PREPARAZIONE};
 	private Stato stato;
-	private double prezzo_totale; // default 0.0
+	private double prezzo_totale;
 	private UtenteBean id_utente;
 	private IndirizzoBean id_indirizzo;
 	
-    /*
-    citta_spedizione varchar(128) NOT NULL,
-    CAP_spedizione char(5) NOT NULL,
-    via_spedizione varchar(128) NOT NULL,
-    civico_spedizione varchar(5) NOT NULL,
-    */
 	
 	public OrdineBean()
 	{
