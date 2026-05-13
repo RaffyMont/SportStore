@@ -59,10 +59,6 @@ CREATE TABLE Ordine(
     prezzo_totale decimal(10, 2) DEFAULT 0.0,
     id_utente char(6) NOT NULL,
     id_indirizzo int NOT NULL,
-    citta_spedizione varchar(128) NOT NULL,
-    CAP_spedizione char(5) NOT NULL,
-    via_spedizione varchar(128) NOT NULL,
-    civico_spedizione varchar(5) NOT NULL,
     
     PRIMARY KEY(id_ordine),
     FOREIGN KEY(id_indirizzo) REFERENCES Indirizzo(id_indirizzo) ON UPDATE cascade ON DELETE cascade,
