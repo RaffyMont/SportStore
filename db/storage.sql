@@ -33,6 +33,7 @@ CREATE TABLE Prodotto(
     modello varchar(64),
     descrizione varchar(256),
     prezzo decimal(10, 2) DEFAULT 0.0,
+    attivo boolean,
     marca varchar(64),
     genere enum('uomo', 'donna', 'bambino', 'unisex') DEFAULT 'unisex',
     stock int NOT NULL DEFAULT 0,
@@ -66,14 +67,14 @@ CREATE TABLE Ordine(
 );
 
 CREATE TABLE DettagliOrdine(
-    quantita int DEFAULT 0,
+    quantità int DEFAULT 0,
     prezzo_unitario decimal(10, 2) DEFAULT 0.0,
     id_ordine char(12) NOT NULL,
     id_prodotto char(12) NOT NULL,
     
     PRIMARY KEY(id_ordine, id_prodotto),
     FOREIGN KEY(id_ordine) REFERENCES Ordine(id_ordine) ON UPDATE cascade ON DELETE cascade,
-    FOREIGN KEY(id_prodotto) REFERENCES Prodotto(id_prodotto) ON UPDATE cascade ON DELETE cascade
+    FOREIGN KEY(id_prodotto) REFERENCES Prodotto(id_prodotto) ON UPDATE cascade ON DELETE restrict
 );
 
 CREATE TABLE SupportoColore(
