@@ -21,12 +21,12 @@ public class UtenteBean implements Serializable{
     	
     }
 
-	public String getIs_utente() {
+	public String getId_utente() {
 		return id_utente;
 	}
 
-	public void setIs_utente(String is_utente) {
-		this.id_utente = is_utente;
+	public void setId_utente(String id_utente) {
+		this.id_utente = id_utente;
 	}
 
 	public String getNome() {
