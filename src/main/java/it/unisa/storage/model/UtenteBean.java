@@ -11,7 +11,7 @@ public class UtenteBean implements Serializable{
 	private String cognome;
     private String email;
     private String password;
-    private enum Ruolo{ADMIN, COMMON};
+    public enum Ruolo{ADMIN, COMMON};
     private Ruolo ruolo;
     private String cellulare;
     private IndirizzoBean indirizzo;

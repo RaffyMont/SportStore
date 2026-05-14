@@ -11,9 +11,9 @@ public abstract class ProdottoBean implements Serializable{
     private String descrizione;
     private double prezzo; 
     private String marca;
-    private enum Categoria{VESTITO, SCARPA, ACCESSORIO};
+    public enum Categoria{VESTITO, SCARPA, ACCESSORIO};
     private Categoria categoria;
-    private enum Genere{UOMO, DONNA, BAMBINO, UNISEX};
+    public enum Genere{UOMO, DONNA, BAMBINO, UNISEX};
     private Genere genere;
     private int stock;
     private boolean attivo;

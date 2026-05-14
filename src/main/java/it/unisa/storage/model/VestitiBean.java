@@ -7,12 +7,12 @@ public class VestitiBean extends ProdottoBean{
 	private String tipovita;
 	private String tessuto;
 	private String stagione;
-	private enum CategoriaVestiti{MAGLIETTA, PANTALONE, TUTA};
+	public enum CategoriaVestiti{MAGLIETTA, PANTALONE, TUTA};
 	private CategoriaVestiti categoria_vestito;
 	private String tipo_collo;
-	private enum Manica{CORTA, LUNGA};
+	public enum Manica{CORTA, LUNGA};
 	private Manica manica;
-	private enum Gamba{CORTI, LUNGHI};
+	public enum Gamba{CORTI, LUNGHI};
 	private Gamba gamba;
    
 	public VestitiBean()

@@ -8,7 +8,7 @@ public class OrdineBean implements Serializable{
 
 	private String id_ordine;
 	private String data_ordine;
-	private enum Stato{CONSEGNATO, IN_SPEDIZIONE, ANNULLATO, IN_PREPARAZIONE};
+	public enum Stato{CONSEGNATO, IN_SPEDIZIONE, ANNULLATO, IN_PREPARAZIONE};
 	private Stato stato;
 	private double prezzo_totale;
 	private UtenteBean id_utente;
