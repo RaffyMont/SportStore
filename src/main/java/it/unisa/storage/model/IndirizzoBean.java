@@ -10,7 +10,7 @@ public class IndirizzoBean implements Serializable{
     private String provincia;
     private String stato;
 	private String citta;
-    private String CAP;
+    private String cap;
     private String via;
     private String civico;
     
@@ -52,11 +52,11 @@ public class IndirizzoBean implements Serializable{
 	}
 
 	public String getCAP() {
-		return CAP;
+		return cap;
 	}
 
-	public void setCAP(String cAP) {
-		CAP = cAP;
+	public void setCAP(String cap) {
+		this.cap = cap;
 	}
 
 	public String getVia() {
