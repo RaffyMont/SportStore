@@ -35,6 +35,7 @@ CREATE TABLE Prodotto(
     prezzo decimal(10, 2) DEFAULT 0.0,
     attivo boolean,
     marca varchar(64),
+    categoria enum('vestito', 'scarpa', 'accessorio'),
     genere enum('uomo', 'donna', 'bambino', 'unisex') DEFAULT 'unisex',
     stock int NOT NULL DEFAULT 0,
     
