@@ -16,12 +16,21 @@ public abstract class ProdottoBean implements Serializable{
     private enum Genere{UOMO, DONNA, BAMBINO, UNISEX};
     private Genere genere;
     private int stock;
+    private boolean attivo;
     
     public ProdottoBean()
     {
    
     }
 
+	public boolean isAttivo() {
+		return attivo;
+	}
+
+	public void setAttivo(boolean attivo) {
+		this.attivo = attivo;
+	}
+	
 	public Categoria getCategoria() {
 		return categoria;
 	}
