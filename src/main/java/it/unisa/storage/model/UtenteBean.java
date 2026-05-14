@@ -6,12 +6,12 @@ public class UtenteBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private String is_utente;
+	private String id_utente;
 	private String nome;
 	private String cognome;
     private String email;
     private String password;
-    private enum Ruolo{admin, common};
+    private enum Ruolo{ADMIN, COMMON};
     private Ruolo ruolo;
     private String cellulare;
     private IndirizzoBean indirizzo;
