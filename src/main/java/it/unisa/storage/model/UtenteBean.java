@@ -22,11 +22,11 @@ public class UtenteBean implements Serializable{
     }
 
 	public String getIs_utente() {
-		return is_utente;
+		return id_utente;
 	}
 
 	public void setIs_utente(String is_utente) {
-		this.is_utente = is_utente;
+		this.id_utente = is_utente;
 	}
 
 	public String getNome() {
