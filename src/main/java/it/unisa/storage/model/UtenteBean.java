@@ -10,7 +10,7 @@ public class UtenteBean implements Serializable{
 	private String nome;
 	private String cognome;
     private String email;
-    private String password; //non so se serve
+    private String password;
     private enum Ruolo{admin, common};
     private Ruolo ruolo;
     private String cellulare;
