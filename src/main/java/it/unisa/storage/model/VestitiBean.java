@@ -8,7 +8,7 @@ public class VestitiBean extends ProdottoBean{
 	private String tessuto;
 	private String stagione;
 	private enum CategoriaVestiti{MAGLIETTA, PANTALONE, TUTA};
-	private CategoriaVestiti categoria;
+	private CategoriaVestiti categoria_vestito;
 	private String tipo_collo;
 	private enum Manica{CORTA, LUNGA};
 	private Manica manica;
@@ -44,12 +44,12 @@ public class VestitiBean extends ProdottoBean{
 		this.stagione = stagione;
 	}
 
-	public CategoriaVestiti getCategoria() {
-		return categoria;
+	public CategoriaVestiti getCategoriaVestito() {
+		return categoria_vestito;
 	}
 
-	public void setCategoria(CategoriaVestiti categoria) {
-		this.categoria = categoria;
+	public void setCategoriaVestito(CategoriaVestiti categoria_vestito) {
+		this.categoria_vestito = categoria_vestito;
 	}
 
 	public String getTipo_collo() {
