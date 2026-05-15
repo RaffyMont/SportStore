@@ -13,7 +13,7 @@ public class DettagliOrdineBean implements Serializable {
 	
 	public DettagliOrdineBean()
 	{
-		
+		this.id_ordine = new OrdineBean();
 	}
 
 	public int getQuantita() {

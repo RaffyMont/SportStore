@@ -17,7 +17,8 @@ public class OrdineBean implements Serializable{
 	
 	public OrdineBean()
 	{
-		
+		this.id_utente = new UtenteBean();
+		this.id_indirizzo = new IndirizzoBean();
 	}
 
 	public String getId_ordine() {

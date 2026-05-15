@@ -11,7 +11,7 @@ public class SupportoTagliaBean implements Serializable{
 	
 	public SupportoTagliaBean()
 	{
-		
+	    this.taglia = new TagliaBean();
 	}
 
 	public ProdottoBean getId_prodotto() {

@@ -11,7 +11,7 @@ public class SupportoColoreBean implements Serializable{
 	
 	public SupportoColoreBean()
 	{
-		
+		this.nome = new ColoreBean();
 	}
 
 	public ProdottoBean getId_prodotto() {

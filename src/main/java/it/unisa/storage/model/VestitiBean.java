@@ -17,7 +17,7 @@ public class VestitiBean extends ProdottoBean{
    
 	public VestitiBean()
 	{
-		
+		super();
 	}
 
 	public String getTipovita() {

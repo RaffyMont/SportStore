@@ -18,7 +18,7 @@ public class UtenteBean implements Serializable{
     
     public UtenteBean()
     {
-    	
+    	this.indirizzo = new IndirizzoBean();
     }
 
 	public String getId_utente() {

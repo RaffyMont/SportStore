@@ -10,7 +10,7 @@ public class ScarpeBean extends ProdottoBean{
 	
 	public ScarpeBean()
 	{
-		
+		super();
 	}
 
 	public String getTipo_suola() {
