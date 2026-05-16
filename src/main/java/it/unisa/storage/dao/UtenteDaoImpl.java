@@ -96,9 +96,34 @@ public class UtenteDaoImpl implements UtenteDao{
         }
         return bean;
 	}
-	/*
-	public UtenteBean doRetreiveByEmail(String email) throws SQLException;
 	
+	public UtenteBean doRetreiveByEmail(String email) throws SQLException
+	{
+		UtenteBean bean = new UtenteBean();
+        String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE email = ?";
+        try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
+            preparedStatement.setString(1, email);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                while (rs.next()) {
+                	bean.setId_utente(rs.getString("id_utente"));
+                    bean.setNome(rs.getString("nome"));
+                    bean.setCognome(rs.getString("cognome"));
+                    bean.setEmail(rs.getString("email"));
+                    bean.setPassword(rs.getString("pwd"));
+                    bean.setRuolo(Ruolo.valueOf(rs.getString("ruolo").toUpperCase()));
+                    bean.setCellulare(rs.getString("cellulare"));
+                    
+                    int idIndirizzo = rs.getInt("id_indirizzo");
+                    IndirizzoBean indirizzo = indirizzoDAO.doRetrieveByKey(idIndirizzo);
+                    bean.setIndirizzo(indirizzo);
+
+                }
+            }
+        }
+        return bean;
+	}
+	/*
 	public UtenteBean doAuthenticate(String email, String pwd) throws SQLException;
 	
 	public Collection<UtenteBean> doRetreiveAll(String order) throws SQLException;
