@@ -4,13 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.List;
 
 import javax.sql.DataSource;
 
 import it.unisa.storage.model.IndirizzoBean;
-import it.unisa.storage.model.ProductBean;
 
 public class IndirizzoDaoImpl implements IndirizzoDao{
 	
@@ -60,6 +57,26 @@ public class IndirizzoDaoImpl implements IndirizzoDao{
             int result = preparedStatement.executeUpdate();
             return result != 0;
         }
+    }
+    
+    public synchronized IndirizzoBean doRetrieveByKey(int code) throws SQLException {
+        IndirizzoBean bean = new IndirizzoBean();
+        String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE code = ?";
+        try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
+            preparedStatement.setInt(1, code);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                while (rs.next()) {
+                    bean.setProvincia(rs.getString("provincia"));
+                    bean.setStato(rs.getString("stato"));
+                    bean.setCitta(rs.getString("citta"));
+                    bean.setCAP(rs.getString("CAP"));
+                    bean.setVia(rs.getString("via"));
+                    bean.setCivico(rs.getString("civico"));
+                }
+            }
+        }
+        return bean;
     }
 
 }
