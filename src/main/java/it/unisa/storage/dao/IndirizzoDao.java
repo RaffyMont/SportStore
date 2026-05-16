@@ -16,5 +16,4 @@ public interface IndirizzoDao {
 
     IndirizzoBean doRetrieveByKey(int id_indirizzo) throws SQLException;
 
-    Collection<IndirizzoBean> doRetrieveAll(String order) throws SQLException;
 }
