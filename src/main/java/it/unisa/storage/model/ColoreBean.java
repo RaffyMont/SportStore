@@ -2,7 +2,7 @@ package it.unisa.storage.model;
 
 import java.io.Serializable;
 
-public class ColoreBean implements Serializable, Cloneable{
+public class ColoreBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
