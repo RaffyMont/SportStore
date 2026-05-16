@@ -51,5 +51,15 @@ public class IndirizzoDaoImpl implements IndirizzoDao{
             return rowsUpdated != 0;
         }
     }
+    
+    public synchronized boolean doDelete(int code) throws SQLException {
+        String deleteSQL = "DELETE FROM " + TABLE_NAME + " WHERE code = ?";
+        try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL)) {
+            preparedStatement.setInt(1, code);
+            int result = preparedStatement.executeUpdate();
+            return result != 0;
+        }
+    }
 
 }
