@@ -98,7 +98,7 @@ public class UtenteDaoImpl implements UtenteDao{
         return bean;
 	}
 	
-	public UtenteBean doRetreiveByEmail(String email) throws SQLException
+	public UtenteBean doRetrieveByEmail(String email) throws SQLException
 	{
 		UtenteBean bean = new UtenteBean();
         String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE email = ?";
