@@ -2,8 +2,6 @@ package it.unisa.storage.dao;
 
 import java.sql.SQLException;
 
-import java.util.Collection;
-
 import it.unisa.storage.model.IndirizzoBean;
 
 public interface IndirizzoDao {
