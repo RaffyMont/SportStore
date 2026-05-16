@@ -10,6 +10,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import it.unisa.storage.model.IndirizzoBean;
+import it.unisa.storage.model.ProductBean;
 
 public class IndirizzoDaoImpl implements IndirizzoDao{
 	
@@ -33,6 +34,21 @@ public class IndirizzoDaoImpl implements IndirizzoDao{
             preparedStatement.setString(5, indirizzo.getVia());
             preparedStatement.setString(6, indirizzo.getCivico());
             preparedStatement.executeUpdate();
+        }
+    }
+    
+    public synchronized boolean doUpdate(IndirizzoBean indirizzo) throws SQLException {
+        String sql = "UPDATE " + TABLE_NAME + " SET provincia = ?, stato = ?, citta = ?, CAP = ?, via = ?, civico = ?, WHERE code = ?";
+        try (Connection conn = ds.getConnection();
+        		PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, indirizzo.getProvincia());
+            ps.setString(2, indirizzo.getStato());
+            ps.setString(3, indirizzo.getCitta());
+            ps.setString(4, indirizzo.getCAP());
+            ps.setString(5, indirizzo.getVia());
+            ps.setString(6, indirizzo.getCivico());
+            int rowsUpdated = ps.executeUpdate();
+            return rowsUpdated != 0;
         }
     }
 
