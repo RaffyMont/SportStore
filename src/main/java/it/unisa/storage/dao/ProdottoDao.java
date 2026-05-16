@@ -7,11 +7,11 @@ import it.unisa.storage.model.ProdottoBean;
 
 public interface ProdottoDao {
 	
-	public void doSave(ProdottoBean utente) throws SQLException;
+	public void doSave(ProdottoBean prodotto) throws SQLException;
 	
-	public boolean doUpdate(ProdottoBean utente) throws SQLException;
+	public boolean doUpdate(ProdottoBean prodotto) throws SQLException;
 	
-	public boolean doDelete(String id_utente) throws SQLException;
+	public boolean doDelete(String id_prodotto) throws SQLException;
 	
 	public ProdottoBean doRetrieveByKey(String id_prodotto) throws SQLException;
 	
