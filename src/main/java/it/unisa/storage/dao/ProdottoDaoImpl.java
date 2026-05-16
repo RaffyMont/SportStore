@@ -86,7 +86,7 @@ public class ProdottoDaoImpl implements ProdottoDao{
         		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
             preparedStatement.setString(1, id_prodotto);
             try (ResultSet rs = preparedStatement.executeQuery()) {
-                while (rs.next()) {
+                if (rs.next()) {
                 	bean.setId_prodotto(rs.getString("id_prodotto"));
                     bean.setModello(rs.getString("modello"));
                     bean.setDescrizione(rs.getString("descrizione"));
