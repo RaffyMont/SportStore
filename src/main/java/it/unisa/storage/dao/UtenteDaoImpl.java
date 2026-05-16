@@ -2,20 +2,25 @@ package it.unisa.storage.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 
 import javax.sql.DataSource;
 
+import it.unisa.storage.model.IndirizzoBean;
 import it.unisa.storage.model.UtenteBean;
+import it.unisa.storage.model.UtenteBean.Ruolo;
 
 public class UtenteDaoImpl implements UtenteDao{
 	
 	private static final String TABLE_NAME = "Utente";
 	private DataSource ds = null;
+	private IndirizzoDao indirizzoDAO;
 
     public UtenteDaoImpl(DataSource ds) {
         this.ds = ds;
+        this.indirizzoDAO = new IndirizzoDaoImpl(ds);
     }
 
 	public synchronized void doSave(UtenteBean utente) throws SQLException
@@ -48,6 +53,7 @@ public class UtenteDaoImpl implements UtenteDao{
             ps.setString(5, "" + utente.getRuolo());
             ps.setString(6, utente.getCellulare());
             ps.setInt(7, utente.getIndirizzo().getId_indirizzo());
+            ps.setString(8, utente.getId_utente());
             int rowsUpdated = ps.executeUpdate();
             return rowsUpdated != 0;
         }
@@ -63,9 +69,34 @@ public class UtenteDaoImpl implements UtenteDao{
             return result != 0;
         }
 	}
-	/*
-	public UtenteBean doRetrieveByKey(String id_utente) throws SQLException;
 	
+	public UtenteBean doRetrieveByKey(String id_utente) throws SQLException
+	{
+		UtenteBean bean = new UtenteBean();
+        String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE id_utente = ?";
+        try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
+            preparedStatement.setString(1, id_utente);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                while (rs.next()) {
+                	bean.setId_utente(rs.getString("id_utente"));
+                    bean.setNome(rs.getString("nome"));
+                    bean.setCognome(rs.getString("cognome"));
+                    bean.setEmail(rs.getString("email"));
+                    bean.setPassword(rs.getString("pwd"));
+                    bean.setRuolo(Ruolo.valueOf(rs.getString("ruolo").toUpperCase()));
+                    bean.setCellulare(rs.getString("cellulare"));
+                    
+                    int idIndirizzo = rs.getInt("id_indirizzo");
+                    IndirizzoBean indirizzo = indirizzoDAO.doRetrieveByKey(idIndirizzo);
+                    bean.setIndirizzo(indirizzo);
+
+                }
+            }
+        }
+        return bean;
+	}
+	/*
 	public UtenteBean doRetreiveByEmail(String email) throws SQLException;
 	
 	public UtenteBean doAuthenticate(String email, String pwd) throws SQLException;
