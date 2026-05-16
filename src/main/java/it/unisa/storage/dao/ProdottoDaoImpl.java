@@ -37,9 +37,26 @@ public class ProdottoDaoImpl implements ProdottoDao{
             preparedStatement.executeUpdate();
         }
 	}
-	/*
-	public boolean doUpdate(ProdottoBean utente) throws SQLException;
 	
+	public synchronized boolean doUpdate(ProdottoBean prodotto) throws SQLException
+	{
+		String sql = "UPDATE " + TABLE_NAME + " SET modello = ?, descrizione = ?, prezzo = ?, attivo = ?, marca = ?, categoria = ?, genere = ?, stock = ?, WHERE id_prodotto = ?";
+        try (Connection conn = ds.getConnection();
+        		PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, prodotto.getModello());
+            ps.setString(2, prodotto.getDescrizione());
+            ps.setDouble(3, prodotto.getPrezzo());
+            ps.setBoolean(4, prodotto.isAttivo());
+            ps.setString(5, prodotto.getMarca());
+            ps.setString(6, "" + prodotto.getCategoria());
+            ps.setString(7, "" + prodotto.getGenere());
+            ps.setInt(8, prodotto.getStock());
+            ps.setString(9, prodotto.getId_prodotto());
+            int rowsUpdated = ps.executeUpdate();
+            return rowsUpdated != 0;
+        }
+	}
+	/*
 	public boolean doDelete(String id_utente) throws SQLException;
 	
 	public ProdottoBean doRetrieveByKey(String id_prodotto) throws SQLException;
