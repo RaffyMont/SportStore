@@ -2,12 +2,15 @@ package it.unisa.storage.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 
 import javax.sql.DataSource;
 
 import it.unisa.storage.model.ProdottoBean;
+import it.unisa.storage.model.ProdottoBean.Categoria;
+import it.unisa.storage.model.ProdottoBean.Genere;
 
 public class ProdottoDaoImpl implements ProdottoDao{
 	
@@ -73,9 +76,33 @@ public class ProdottoDaoImpl implements ProdottoDao{
 	}
 	
 	*/
-	/*
-	public ProdottoBean doRetrieveByKey(String id_prodotto) throws SQLException;
 	
+	//Controllare doRetrieveByKey, vedere su chat
+	public ProdottoBean doRetrieveByKey(String id_prodotto) throws SQLException
+	{
+		ProdottoBean bean = new ProdottoBean();
+        String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE id_prodotto = ?";
+        try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
+            preparedStatement.setString(1, id_prodotto);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                while (rs.next()) {
+                	bean.setId_prodotto(rs.getString("id_prodotto"));
+                    bean.setModello(rs.getString("modello"));
+                    bean.setDescrizione(rs.getString("descrizione"));
+                    bean.setPrezzo(rs.getDouble("prezzo"));
+                    bean.setAttivo(rs.getBoolean("attivo"));
+                    bean.setMarca(rs.getString("marca"));
+                    bean.setCategoria(Categoria.valueOf(rs.getString("categoria").toUpperCase()));
+                    bean.setGenere(Genere.valueOf(rs.getString("genere").toUpperCase()));
+                    bean.setStock(rs.getInt("stock"));
+
+                }
+            }
+        }
+        return bean;
+	}
+	/*
 	public Collection<ProdottoBean> doRetrieveAll(String order) throws SQLException;
 	
 	public Collection<ProdottoBean> doRetrieveByCategoria(String categoria) throws SQLException;
