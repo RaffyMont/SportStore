@@ -44,6 +44,7 @@ public class IndirizzoDaoImpl implements IndirizzoDao{
             ps.setString(4, indirizzo.getCAP());
             ps.setString(5, indirizzo.getVia());
             ps.setString(6, indirizzo.getCivico());
+            ps.setInt(7, indirizzo.getId_indirizzo());
             int rowsUpdated = ps.executeUpdate();
             return rowsUpdated != 0;
         }
