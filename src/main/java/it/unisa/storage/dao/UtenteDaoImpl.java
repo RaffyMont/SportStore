@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -151,7 +153,33 @@ public class UtenteDaoImpl implements UtenteDao{
         }
         return bean;
 	}
-	/*
-	public Collection<UtenteBean> doRetreiveAll(String order) throws SQLException;
-	*/
+	
+	public synchronized List<UtenteBean> doRetrieveAll(String order) throws SQLException 
+	{
+		List<UtenteBean> utenti = new LinkedList<>();
+        String selectSQL = "SELECT * FROM " + TABLE_NAME;
+        if (order != null && !order.isEmpty()) {
+            selectSQL += " ORDER BY " + order;
+        }
+        try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL);
+        		ResultSet rs = preparedStatement.executeQuery()) {
+            while (rs.next()) {
+                UtenteBean bean = new UtenteBean();
+                bean.setId_utente(rs.getString("id_utente"));
+                bean.setNome(rs.getString("nome"));
+                bean.setCognome(rs.getString("cognome"));
+                bean.setEmail(rs.getString("email"));
+                bean.setPassword(rs.getString("pwd"));
+                bean.setRuolo(Ruolo.valueOf(rs.getString("ruolo").toUpperCase()));
+                bean.setCellulare(rs.getString("cellulare"));
+                
+                int idIndirizzo = rs.getInt("id_indirizzo");
+                IndirizzoBean indirizzo = indirizzoDAO.doRetrieveByKey(idIndirizzo);
+                bean.setIndirizzo(indirizzo);
+                utenti.add(bean);
+            }
+        }
+        return utenti;
+    }
 }
