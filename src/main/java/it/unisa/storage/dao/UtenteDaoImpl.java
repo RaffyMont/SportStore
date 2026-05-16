@@ -52,9 +52,18 @@ public class UtenteDaoImpl implements UtenteDao{
             return rowsUpdated != 0;
         }
 	}
-	/*
-	public boolean doDelete(String id_utente) throws SQLException;
 	
+	public boolean doDelete(String id_utente) throws SQLException
+	{
+		String deleteSQL = "DELETE FROM " + TABLE_NAME + " WHERE id_utente = ?";
+        try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL)) {
+            preparedStatement.setString(1, id_utente);
+            int result = preparedStatement.executeUpdate();
+            return result != 0;
+        }
+	}
+	/*
 	public UtenteBean doRetrieveByKey(String id_utente) throws SQLException;
 	
 	public UtenteBean doRetreiveByEmail(String email) throws SQLException;
