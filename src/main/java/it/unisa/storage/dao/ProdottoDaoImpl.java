@@ -56,9 +56,24 @@ public class ProdottoDaoImpl implements ProdottoDao{
             return rowsUpdated != 0;
         }
 	}
+
 	/*
-	public boolean doDelete(String id_utente) throws SQLException;
+	 
+	 DA CONTROLLARE ASSOLUTAMENTE
+	 
+	public boolean doDelete(String id_prodotto) throws SQLException
+	{
+		String deleteSQL = "DELETE FROM " + TABLE_NAME + " WHERE id_prodotto = ?";
+        try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL)) {
+            preparedStatement.setString(1, id_prodotto);
+            int result = preparedStatement.executeUpdate();
+            return result != 0;
+        }
+	}
 	
+	*/
+	/*
 	public ProdottoBean doRetrieveByKey(String id_prodotto) throws SQLException;
 	
 	public Collection<ProdottoBean> doRetrieveAll(String order) throws SQLException;
