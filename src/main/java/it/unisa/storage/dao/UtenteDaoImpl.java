@@ -35,9 +35,24 @@ public class UtenteDaoImpl implements UtenteDao{
             preparedStatement.executeUpdate();
         }
 	}
-        /*
-	public boolean doUpdate(UtenteBean utente) throws SQLException;
-	
+        
+	public synchronized boolean doUpdate(UtenteBean utente) throws SQLException
+	{
+		String sql = "UPDATE " + TABLE_NAME + " SET nome = ?, cognome = ?, email = ?, pwd = ?, ruolo = ?, cellulare = ?, id_indirizzo = ?, WHERE id_utente = ?";
+        try (Connection conn = ds.getConnection();
+        		PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, utente.getNome());
+            ps.setString(2, utente.getCognome());
+            ps.setString(3, utente.getEmail());
+            ps.setString(4, utente.getPassword());
+            ps.setString(5, "" + utente.getRuolo());
+            ps.setString(6, utente.getCellulare());
+            ps.setInt(7, utente.getIndirizzo().getId_indirizzo());
+            int rowsUpdated = ps.executeUpdate();
+            return rowsUpdated != 0;
+        }
+	}
+	/*
 	public boolean doDelete(String id_utente) throws SQLException;
 	
 	public UtenteBean doRetrieveByKey(String id_utente) throws SQLException;
