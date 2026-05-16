@@ -19,6 +19,6 @@ public interface UtenteDao {
 	
 	public UtenteBean doAuthenticate(String email, String pwd) throws SQLException;
 	
-	public Collection<UtenteBean> doRetreiveAll(String order) throws SQLException;
+	public Collection<UtenteBean> doRetrieveAll(String order) throws SQLException;
 
 }
