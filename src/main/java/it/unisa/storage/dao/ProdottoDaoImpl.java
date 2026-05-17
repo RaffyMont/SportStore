@@ -74,8 +74,6 @@ public class ProdottoDaoImpl implements ProdottoDao{
         }
 	}
 	
-	
-	//Controllare doRetrieveByKey, vedere su chat
 	public synchronized ProdottoBean doRetrieveByKey(String id_prodotto) throws SQLException
 	{
 		ProdottoBean bean = new ProdottoBean();
@@ -101,7 +99,6 @@ public class ProdottoDaoImpl implements ProdottoDao{
         return bean;
 	}
 	
-	//Controllare doRetrieveAll, vedere su chat
 	public synchronized List<ProdottoBean> doRetrieveAll(String order) throws SQLException
 	{
 		List<ProdottoBean> prodotti = new LinkedList<>();
@@ -129,7 +126,6 @@ public class ProdottoDaoImpl implements ProdottoDao{
         return prodotti;
 	}
 	
-	//Controllare doRetrieveAll, vedere su chat
 	public synchronized List<ProdottoBean> doRetrieveByCategoria(String categoria) throws SQLException
 	{
 		List<ProdottoBean> prodotti = new LinkedList<ProdottoBean>();
@@ -156,7 +152,6 @@ public class ProdottoDaoImpl implements ProdottoDao{
         return prodotti;
 	}
 	
-	//Controllare doRetrieveAll, vedere su chat
 	public synchronized List<ProdottoBean> doRetrieveByGenere(String genere) throws SQLException
 	{
 		List<ProdottoBean> prodotti = new LinkedList<ProdottoBean>();
@@ -195,7 +190,6 @@ public class ProdottoDaoImpl implements ProdottoDao{
         }
 	}
 	
-	//Controllare doRetrieveAll, vedere su chat
 	public synchronized List<ProdottoBean> doRetrieveActive(String order) throws SQLException
 	{
 		List<ProdottoBean> prodotti = new LinkedList<>();
