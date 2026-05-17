@@ -1,0 +1,43 @@
+package it.unisa.storage.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import javax.sql.DataSource;
+
+import it.unisa.storage.model.VestitiBean;
+
+public class VestitiDaoImpl implements VestitiDao{
+	
+	private static final String TABLE_NAME = "Vestiti";
+	private DataSource ds = null;
+
+    public VestitiDaoImpl(DataSource ds) {
+        this.ds = ds;
+    }
+    
+    public synchronized void doSave(VestitiBean vestito) throws SQLException
+    {
+    	String insertSQL = "INSERT INTO " + TABLE_NAME
+                + " (id_prodotto, tipo_vita, tessuto, stagione, categoria, tipo_collo, manica, gamba) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(insertSQL)) {
+            preparedStatement.setString(1, vestito.getId_prodotto());
+            preparedStatement.setString(2, vestito.getTipovita());
+            preparedStatement.setString(3, vestito.getTessuto());
+            preparedStatement.setString(4, vestito.getStagione());
+            preparedStatement.setString(5,"" + vestito.getCategoria());
+            preparedStatement.setString(6, vestito.getTipo_collo());
+            preparedStatement.setString(7,"" + vestito.getManica());
+            preparedStatement.setString(8,"" +  vestito.getGamba());
+            preparedStatement.executeUpdate();
+        }
+    }
+    
+    public boolean doUpdate(VestitiBean v) throws SQLException;
+
+    public boolean doDelete(String id_prodotto) throws SQLException;
+
+    public VestitiBean doRetrieveByKey(String id_prodotto) throws SQLException;
+}
