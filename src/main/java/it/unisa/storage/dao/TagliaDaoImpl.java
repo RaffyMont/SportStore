@@ -28,7 +28,16 @@ public class TagliaDaoImpl implements TagliaDao{
         }
 	}
 
-    public boolean doDelete(String taglia) throws SQLException;
+    public synchronized boolean doDelete(String taglia) throws SQLException
+    {
+    	String deleteSQL = "DELETE FROM " + TABLE_NAME + " WHERE taglia = ?";
+        try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL)) {
+            preparedStatement.setString(1, taglia);
+            int result = preparedStatement.executeUpdate();
+            return result != 0;
+        }
+    }
 
     public TagliaBean doRetrieveByKey(String taglia) throws SQLException;
     
