@@ -45,7 +45,7 @@ public class ProdottoDaoImpl implements ProdottoDao{
 	
 	public synchronized boolean doUpdate(ProdottoBean prodotto) throws SQLException
 	{
-		String sql = "UPDATE " + TABLE_NAME + " SET modello = ?, descrizione = ?, prezzo = ?, attivo = ?, marca = ?, categoria = ?, genere = ?, stock = ?, WHERE id_prodotto = ?";
+		String sql = "UPDATE " + TABLE_NAME + " SET modello = ?, descrizione = ?, prezzo = ?, attivo = ?, marca = ?, categoria = ?, genere = ?, stock = ? WHERE id_prodotto = ?";
         try (Connection conn = ds.getConnection();
         		PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, prodotto.getModello());
@@ -182,9 +182,19 @@ public class ProdottoDaoImpl implements ProdottoDao{
         }
         return prodotti;
 	}
-	/*
-	public boolean doUpdateStock(String id_utente, int stock) throws SQLException;
 	
+	public synchronized boolean doUpdateStock(String id_prodotto, int stock) throws SQLException
+	{
+		String sql = "UPDATE " + TABLE_NAME + " SET stock = ? WHERE id_prodotto = ?";
+        try (Connection conn = ds.getConnection();
+        		PreparedStatement ps = conn.prepareStatement(sql)) {
+        	  ps.setInt(1, stock);
+              ps.setString(2, id_prodotto);
+            int rowsUpdated = ps.executeUpdate();
+            return rowsUpdated != 0;
+        }
+	}
+	/*
 	public Collection<ProdottoBean> doRetrieveActive(String order) throws SQLException;	
 	*/
 }
