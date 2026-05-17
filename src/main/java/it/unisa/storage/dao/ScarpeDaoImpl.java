@@ -31,7 +31,19 @@ public class ScarpeDaoImpl implements ScarpeDao{
         }
 	}
 
-    public boolean doUpdate(ScarpeBean scarpe) throws SQLException;
+    public synchronized boolean doUpdate(ScarpeBean scarpe) throws SQLException
+    {
+    	String sql = "UPDATE " + TABLE_NAME + " SET tipo_suolo = ?, materiale = ? WHERE id_prodotto = ?";
+        try (Connection conn = ds.getConnection();
+        		PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, scarpe.getTipo_suola());
+            ps.setString(2, scarpe.getMateriale());
+            ps.setString(3, scarpe.getId_prodotto());
+
+            int rowsUpdated = ps.executeUpdate();
+            return rowsUpdated != 0;
+        }
+    }
 
     public boolean doDelete(String id_prodotto) throws SQLException;
 
