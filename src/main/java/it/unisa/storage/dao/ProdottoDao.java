@@ -21,7 +21,7 @@ public interface ProdottoDao {
 	
 	public Collection<ProdottoBean> doRetrieveByGenere(String genere) throws SQLException;
 	
-	public boolean doUpdateStock(String id_utente, int stock) throws SQLException;
+	public boolean doUpdateStock(String id_prodotto, int stock) throws SQLException;
 	
 	public Collection<ProdottoBean> doRetrieveActive(String order) throws SQLException;
 }
