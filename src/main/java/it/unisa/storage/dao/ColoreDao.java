@@ -9,8 +9,6 @@ public interface ColoreDao {
 	
 	public void doSave(ColoreBean colore) throws SQLException;
 
-    public boolean doUpdate(ColoreBean colore) throws SQLException;
-
     public boolean doDelete(String nome) throws SQLException;
 
     public ColoreBean doRetrieveByKey(String nome) throws SQLException;
