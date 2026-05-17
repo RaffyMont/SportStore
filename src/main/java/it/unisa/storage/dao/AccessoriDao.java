@@ -6,9 +6,9 @@ import java.util.Collection;
 import it.unisa.storage.model.AccessoriBean;
 
 public interface AccessoriDao {
-	public void doSave(AccessoriBean scarpe) throws SQLException;
+	public void doSave(AccessoriBean accessori) throws SQLException;
 
-    public boolean doUpdate(AccessoriBean scarpe) throws SQLException;
+    public boolean doUpdate(AccessoriBean accessori) throws SQLException;
 
     public boolean doDelete(String id_prodotto) throws SQLException;
 
