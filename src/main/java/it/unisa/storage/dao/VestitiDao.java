@@ -1,6 +1,7 @@
 package it.unisa.storage.dao;
 
 import java.sql.SQLException;
+import java.util.Collection;
 
 import it.unisa.storage.model.VestitiBean;
 
@@ -12,4 +13,6 @@ public interface VestitiDao {
     public boolean doDelete(String id_prodotto) throws SQLException;
 
     public VestitiBean doRetrieveByKey(String id_prodotto) throws SQLException;
+    
+    public Collection<VestitiBean> doRetrieveByCategoriaVestiti(String categoria) throws SQLException;
 }
