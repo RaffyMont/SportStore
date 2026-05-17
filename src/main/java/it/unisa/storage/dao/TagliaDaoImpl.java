@@ -1,5 +1,7 @@
 package it.unisa.storage.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -16,7 +18,15 @@ public class TagliaDaoImpl implements TagliaDao{
         this.ds = ds;
     }
 
-	public void doSave(TagliaBean taglia) throws SQLException;
+	public synchronized void doSave(TagliaBean taglia) throws SQLException
+	{
+		String insertSQL = "INSERT INTO " + TABLE_NAME + " (taglia) VALUES (?)";
+        try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(insertSQL)) {
+            preparedStatement.setString(1, taglia.getTaglia());
+            preparedStatement.executeUpdate();
+        }
+	}
 
     public boolean doDelete(String taglia) throws SQLException;
 
