@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 
 import it.unisa.storage.model.AccessoriBean;
 
-public class AccessoriDaoImpl {
+public class AccessoriDaoImpl implements AccessoriDao {
 	
 	private static final String TABLE_NAME = "Accessori";
 	private DataSource ds = null;
