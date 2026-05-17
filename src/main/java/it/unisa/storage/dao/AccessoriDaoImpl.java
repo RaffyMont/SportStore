@@ -31,7 +31,19 @@ public class AccessoriDaoImpl {
         }
 	}
 
-    public boolean doUpdate(AccessoriBean scarpe) throws SQLException;
+    public synchronized boolean doUpdate(AccessoriBean accessori) throws SQLException
+    {
+    	String sql = "UPDATE " + TABLE_NAME + " SET tipo_accessorio = ?, materiale = ? WHERE id_prodotto = ?";
+        try (Connection conn = ds.getConnection();
+        		PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, accessori.getTipo_accessori());
+            ps.setString(2, accessori.getMateriali());
+            ps.setString(3, accessori.getId_prodotto());
+
+            int rowsUpdated = ps.executeUpdate();
+            return rowsUpdated != 0;
+        }
+    }
 
     public boolean doDelete(String id_prodotto) throws SQLException;
 
