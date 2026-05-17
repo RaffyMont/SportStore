@@ -35,7 +35,7 @@ public class IndirizzoDaoImpl implements IndirizzoDao{
     }
     
     public synchronized boolean doUpdate(IndirizzoBean indirizzo) throws SQLException {
-        String sql = "UPDATE " + TABLE_NAME + " SET provincia = ?, stato = ?, citta = ?, CAP = ?, via = ?, civico = ?, WHERE code = ?";
+        String sql = "UPDATE " + TABLE_NAME + " SET provincia = ?, stato = ?, citta = ?, CAP = ?, via = ?, civico = ? WHERE code = ?";
         try (Connection conn = ds.getConnection();
         		PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, indirizzo.getProvincia());
@@ -50,11 +50,11 @@ public class IndirizzoDaoImpl implements IndirizzoDao{
         }
     }
     
-    public synchronized boolean doDelete(int code) throws SQLException {
-        String deleteSQL = "DELETE FROM " + TABLE_NAME + " WHERE code = ?";
+    public synchronized boolean doDelete(int id_indirizzo) throws SQLException {
+        String deleteSQL = "DELETE FROM " + TABLE_NAME + " WHERE id_indirizzo = ?";
         try (Connection connection = ds.getConnection();
         		PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL)) {
-            preparedStatement.setInt(1, code);
+            preparedStatement.setInt(1, id_indirizzo);
             int result = preparedStatement.executeUpdate();
             return result != 0;
         }
