@@ -1,5 +1,7 @@
 package it.unisa.storage.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -16,7 +18,15 @@ public class ColoreDaoImpl implements ColoreDao{
         this.ds = ds;
     }
     
-    public void doSave(ColoreBean accessori) throws SQLException;
+    public void doSave(ColoreBean colore) throws SQLException
+    {
+    	String insertSQL = "INSERT INTO " + TABLE_NAME + " (nome) VALUES (?)";
+        try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(insertSQL)) {
+            preparedStatement.setString(1, colore.getColore());
+            preparedStatement.executeUpdate();
+        }
+    }
 
     public boolean doUpdate(ColoreBean accessori) throws SQLException;
 
