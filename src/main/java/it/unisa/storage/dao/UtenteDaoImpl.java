@@ -35,7 +35,7 @@ public class UtenteDaoImpl implements UtenteDao{
             preparedStatement.setString(3, utente.getCognome());
             preparedStatement.setString(4, utente.getEmail());
             preparedStatement.setString(5, utente.getPassword());
-            preparedStatement.setString(6, "" + utente.getRuolo());
+            preparedStatement.setString(6, utente.getRuolo().name().toLowerCase());
             preparedStatement.setString(7, utente.getCellulare());
             preparedStatement.setInt(8, utente.getIndirizzo().getId_indirizzo());
             preparedStatement.executeUpdate();
@@ -44,14 +44,14 @@ public class UtenteDaoImpl implements UtenteDao{
         
 	public synchronized boolean doUpdate(UtenteBean utente) throws SQLException
 	{
-		String sql = "UPDATE " + TABLE_NAME + " SET nome = ?, cognome = ?, email = ?, pwd = ?, ruolo = ?, cellulare = ?, id_indirizzo = ?, WHERE id_utente = ?";
+		String sql = "UPDATE " + TABLE_NAME + " SET nome = ?, cognome = ?, email = ?, pwd = ?, ruolo = ?, cellulare = ?, id_indirizzo = ? WHERE id_utente = ?";
         try (Connection conn = ds.getConnection();
         		PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, utente.getNome());
             ps.setString(2, utente.getCognome());
             ps.setString(3, utente.getEmail());
             ps.setString(4, utente.getPassword());
-            ps.setString(5, "" + utente.getRuolo());
+            ps.setString(5, utente.getRuolo().name().toLowerCase());
             ps.setString(6, utente.getCellulare());
             ps.setInt(7, utente.getIndirizzo().getId_indirizzo());
             ps.setString(8, utente.getId_utente());
