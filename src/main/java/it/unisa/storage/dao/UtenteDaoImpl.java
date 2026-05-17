@@ -79,7 +79,7 @@ public class UtenteDaoImpl implements UtenteDao{
         		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
             preparedStatement.setString(1, id_utente);
             try (ResultSet rs = preparedStatement.executeQuery()) {
-                while (rs.next()) {
+                if (rs.next()) {
                 	bean.setId_utente(rs.getString("id_utente"));
                     bean.setNome(rs.getString("nome"));
                     bean.setCognome(rs.getString("cognome"));
