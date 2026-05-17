@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -114,6 +115,32 @@ public class VestitiDaoImpl implements VestitiDao{
                     bean.setGamba(Gamba.valueOf(rs.getString("gamba").toUpperCase()));
                     vestiti.add(bean);
                 }
+            }
+        }
+        return vestiti;
+    }
+    
+    public synchronized List<VestitiBean> doRetrieveAll(String order) throws SQLException
+    {
+    	List<VestitiBean> vestiti = new LinkedList<>();
+        String selectSQL = "SELECT * FROM " + TABLE_NAME;
+        if (order != null && !order.isEmpty()) {
+            selectSQL += " ORDER BY " + order;
+        }
+        try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL);
+        		ResultSet rs = preparedStatement.executeQuery()) {
+            while (rs.next()) {
+                VestitiBean bean = new VestitiBean();
+                bean.setId_prodotto(rs.getString("id_prodotto"));
+                bean.setTipovita(rs.getString("tipo_vita"));
+                bean.setTessuto(rs.getString("tessuto"));
+                bean.setStagione(rs.getString("stagione"));
+                bean.setCategoriaVestito(CategoriaVestiti.valueOf(rs.getString("categoria").toUpperCase()));
+                bean.setTipo_collo(rs.getString("tipo_collo"));
+                bean.setManica(Manica.valueOf(rs.getString("manica").toUpperCase()));
+                bean.setGamba(Gamba.valueOf(rs.getString("gamba").toUpperCase()));
+                vestiti.add(bean);
             }
         }
         return vestiti;
