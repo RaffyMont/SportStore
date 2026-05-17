@@ -27,10 +27,10 @@ public class VestitiDaoImpl implements VestitiDao{
             preparedStatement.setString(2, vestito.getTipovita());
             preparedStatement.setString(3, vestito.getTessuto());
             preparedStatement.setString(4, vestito.getStagione());
-            preparedStatement.setString(5,"" + vestito.getCategoria());
+            preparedStatement.setString(5, vestito.getCategoria().name().toLowerCase());
             preparedStatement.setString(6, vestito.getTipo_collo());
-            preparedStatement.setString(7,"" + vestito.getManica());
-            preparedStatement.setString(8,"" +  vestito.getGamba());
+            preparedStatement.setString(7, vestito.getManica().name().toLowerCase());
+            preparedStatement.setString(8, vestito.getGamba().name().toLowerCase());
             preparedStatement.executeUpdate();
         }
     }
