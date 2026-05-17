@@ -63,7 +63,7 @@ public class ProdottoDaoImpl implements ProdottoDao{
 	}
 
 	 
-	public boolean doDelete(String id_prodotto) throws SQLException
+	public synchronized boolean doDelete(String id_prodotto) throws SQLException
 	{
 		String sql = "UPDATE " + TABLE_NAME + " SET attivo = false WHERE id_prodotto = ? AND attivo = true";
         try (Connection conn = ds.getConnection();
