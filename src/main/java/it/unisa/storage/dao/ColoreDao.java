@@ -7,9 +7,9 @@ import it.unisa.storage.model.ColoreBean;
 
 public interface ColoreDao {
 	
-	public void doSave(ColoreBean accessori) throws SQLException;
+	public void doSave(ColoreBean colore) throws SQLException;
 
-    public boolean doUpdate(ColoreBean accessori) throws SQLException;
+    public boolean doUpdate(ColoreBean colore) throws SQLException;
 
     public boolean doDelete(String nome) throws SQLException;
 
