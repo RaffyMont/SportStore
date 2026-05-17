@@ -2,12 +2,15 @@ package it.unisa.storage.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 
 import javax.sql.DataSource;
 
 import it.unisa.storage.model.ColoreBean;
+import it.unisa.storage.model.ProdottoBean.Categoria;
+import it.unisa.storage.model.ProdottoBean.Genere;
 
 public class ColoreDaoImpl implements ColoreDao{
 	
@@ -39,7 +42,22 @@ public class ColoreDaoImpl implements ColoreDao{
         }
     }
 
-    public ColoreBean doRetrieveByKey(String nome) throws SQLException;
+    public synchronized ColoreBean doRetrieveByKey(String nome) throws SQLException
+    {
+    	ColoreBean bean = new ColoreBean();
+    	String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE nome = ?";
+        try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
+            preparedStatement.setString(1, nome);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                	bean.setColore(rs.getString("colore"));
+
+                }
+            }
+        }
+        return bean;
+    }
     
     public Collection<ColoreBean> doRetrieveAll(String order) throws SQLException;
 }
