@@ -18,7 +18,7 @@ public class ColoreDaoImpl implements ColoreDao{
         this.ds = ds;
     }
     
-    public void doSave(ColoreBean colore) throws SQLException
+    public synchronized void doSave(ColoreBean colore) throws SQLException
     {
     	String insertSQL = "INSERT INTO " + TABLE_NAME + " (nome) VALUES (?)";
         try (Connection connection = ds.getConnection();
@@ -28,9 +28,16 @@ public class ColoreDaoImpl implements ColoreDao{
         }
     }
 
-    public boolean doUpdate(ColoreBean accessori) throws SQLException;
-
-    public boolean doDelete(String nome) throws SQLException;
+    public synchronized boolean doDelete(String nome) throws SQLException
+    {
+    	String deleteSQL = "DELETE FROM " + TABLE_NAME + " WHERE nome = ?";
+        try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL)) {
+            preparedStatement.setString(1, nome);
+            int result = preparedStatement.executeUpdate();
+            return result != 0;
+        }
+    }
 
     public ColoreBean doRetrieveByKey(String nome) throws SQLException;
     
