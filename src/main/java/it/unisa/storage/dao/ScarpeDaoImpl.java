@@ -2,6 +2,7 @@ package it.unisa.storage.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -56,7 +57,23 @@ public class ScarpeDaoImpl implements ScarpeDao{
         }
     }
 
-    public ScarpeBean doRetrieveByKey(String id_prodotto) throws SQLException;
+    public synchronized ScarpeBean doRetrieveByKey(String id_prodotto) throws SQLException
+    {
+    	ScarpeBean bean = new ScarpeBean();
+        String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE id_prodotto = ?";
+        try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
+            preparedStatement.setString(1, id_prodotto);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                	bean.setId_prodotto(rs.getString("id_prodotto"));
+                	bean.setTipo_suola(rs.getString("tipo_suola"));
+                	bean.setMateriale(rs.getString("materiale"));
+                }
+            }
+        }
+        return bean;
+    }
     
     public Collection<ScarpeBean> doRetrieveAll(String order) throws SQLException;
 }
