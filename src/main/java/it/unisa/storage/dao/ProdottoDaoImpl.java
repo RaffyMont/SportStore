@@ -76,7 +76,7 @@ public class ProdottoDaoImpl implements ProdottoDao{
 	
 	
 	//Controllare doRetrieveByKey, vedere su chat
-	public ProdottoBean doRetrieveByKey(String id_prodotto) throws SQLException
+	public synchronized ProdottoBean doRetrieveByKey(String id_prodotto) throws SQLException
 	{
 		ProdottoBean bean = new ProdottoBean();
         String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE id_prodotto = ?";
