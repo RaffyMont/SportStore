@@ -5,9 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.sql.DataSource;
-
 import it.unisa.storage.model.TagliaBean;
 
 public class TagliaDaoImpl implements TagliaDao{
@@ -57,5 +58,22 @@ public class TagliaDaoImpl implements TagliaDao{
         return bean;
     }
     
-    public Collection<TagliaBean> doRetrieveAll(String order) throws SQLException;
+    public synchronized List<TagliaBean> doRetrieveAll(String order) throws SQLException
+    {
+    	List<TagliaBean> taglie = new LinkedList<TagliaBean>();
+    	String selectSQL = "SELECT * FROM " + TABLE_NAME;
+        if (order != null && !order.isEmpty()) {
+            selectSQL += " ORDER BY " + order;
+        }
+        try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL);
+        		ResultSet rs = preparedStatement.executeQuery()) {
+            while (rs.next()) {
+                TagliaBean bean = new TagliaBean();
+                bean.setTaglia(rs.getString("taglia"));
+                taglie.add(bean);
+            }
+        }
+        return taglie;
+    }
 }
