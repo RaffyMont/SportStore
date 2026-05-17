@@ -194,7 +194,33 @@ public class ProdottoDaoImpl implements ProdottoDao{
             return rowsUpdated != 0;
         }
 	}
-	/*
-	public Collection<ProdottoBean> doRetrieveActive(String order) throws SQLException;	
-	*/
+	
+	//Controllare doRetrieveAll, vedere su chat
+	public synchronized List<ProdottoBean> doRetrieveActive(String order) throws SQLException
+	{
+		List<ProdottoBean> prodotti = new LinkedList<>();
+        String selectSQL = "SELECT * FROM " + TABLE_NAME + "WHERE active = true";
+        if (order != null && !order.isEmpty()) {
+            selectSQL += " ORDER BY " + order;
+        }
+        try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL);
+        		ResultSet rs = preparedStatement.executeQuery()) {
+            while (rs.next()) {
+                ProdottoBean bean = new ProdottoBean();
+                bean.setId_prodotto(rs.getString("id_prodotto"));
+                bean.setModello(rs.getString("modello"));
+                bean.setDescrizione(rs.getString("descrizione"));
+                bean.setPrezzo(rs.getDouble("prezzo"));
+                bean.setAttivo(rs.getBoolean("attivo"));
+                bean.setMarca(rs.getString("marca"));
+                bean.setCategoria(Categoria.valueOf(rs.getString("categoria").toUpperCase()));
+                bean.setGenere(Genere.valueOf(rs.getString("genere").toUpperCase()));
+                bean.setStock(rs.getInt("stock"));
+                prodotti.add(bean);
+            }
+        }
+        return prodotti;
+	}
+	
 }
