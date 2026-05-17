@@ -4,7 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -75,5 +76,24 @@ public class AccessoriDaoImpl {
         return bean;
     }
     
-    public Collection<AccessoriBean> doRetrieveAll(String order) throws SQLException;
+    public synchronized List<AccessoriBean> doRetrieveAll(String order) throws SQLException
+    {
+    	List<AccessoriBean> accessori = new LinkedList<>();
+        String selectSQL = "SELECT * FROM " + TABLE_NAME;
+        if (order != null && !order.isEmpty()) {
+            selectSQL += " ORDER BY " + order;
+        }
+        try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL);
+        		ResultSet rs = preparedStatement.executeQuery()) {
+            while (rs.next()) {
+                AccessoriBean bean = new AccessoriBean();
+                bean.setId_prodotto(rs.getString("id_prodotto"));
+                bean.setTipo_accessori(rs.getString("tipo_accessorio"));
+            	bean.setMateriali(rs.getString("materiale"));
+                accessori.add(bean);
+            }
+        }
+        return accessori;
+    }
 }
