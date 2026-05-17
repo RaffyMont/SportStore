@@ -15,4 +15,6 @@ public interface VestitiDao {
     public VestitiBean doRetrieveByKey(String id_prodotto) throws SQLException;
     
     public Collection<VestitiBean> doRetrieveByCategoriaVestiti(String categoria) throws SQLException;
+    
+    public Collection<VestitiBean> doRetrieveAll(String order) throws SQLException;
 }
