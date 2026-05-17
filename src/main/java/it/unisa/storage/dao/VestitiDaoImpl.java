@@ -2,11 +2,16 @@ package it.unisa.storage.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
 import it.unisa.storage.model.VestitiBean;
+import it.unisa.storage.model.VestitiBean.CategoriaVestiti;
+import it.unisa.storage.model.VestitiBean.Gamba;
+import it.unisa.storage.model.VestitiBean.Manica;
+
 
 public class VestitiDaoImpl implements VestitiDao{
 	
@@ -27,7 +32,7 @@ public class VestitiDaoImpl implements VestitiDao{
             preparedStatement.setString(2, vestito.getTipovita());
             preparedStatement.setString(3, vestito.getTessuto());
             preparedStatement.setString(4, vestito.getStagione());
-            preparedStatement.setString(5, vestito.getCategoria().name().toLowerCase());
+            preparedStatement.setString(5, vestito.getCategoriaVestito().name().toLowerCase());
             preparedStatement.setString(6, vestito.getTipo_collo());
             preparedStatement.setString(7, vestito.getManica().name().toLowerCase());
             preparedStatement.setString(8, vestito.getGamba().name().toLowerCase());
@@ -43,7 +48,7 @@ public class VestitiDaoImpl implements VestitiDao{
             ps.setString(1, vestito.getTipovita());
             ps.setString(2, vestito.getTessuto());
             ps.setString(3, vestito.getStagione());
-            ps.setString(4, vestito.getCategoria().name().toLowerCase());
+            ps.setString(4, vestito.getCategoriaVestito().name().toLowerCase());
             ps.setString(5, vestito.getTipo_collo());
             ps.setString(6, vestito.getManica().name().toLowerCase());
             ps.setString(7, vestito.getGamba().name().toLowerCase());
@@ -64,5 +69,26 @@ public class VestitiDaoImpl implements VestitiDao{
         }
     }
 
-    public VestitiBean doRetrieveByKey(String id_prodotto) throws SQLException;
+    public VestitiBean doRetrieveByKey(String id_prodotto) throws SQLException
+    {
+    	VestitiBean bean = new VestitiBean();
+        String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE id_prodotto = ?";
+        try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
+            preparedStatement.setString(1, id_prodotto);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                	bean.setId_prodotto(rs.getString("id_prodotto"));
+                    bean.setTipovita(rs.getString("tipo_vita"));
+                    bean.setTessuto(rs.getString("tessuto"));
+                    bean.setStagione(rs.getString("stagione"));
+                    bean.setCategoriaVestito(CategoriaVestiti.valueOf(rs.getString("categoria").toUpperCase()));
+                    bean.setTipo_collo(rs.getString("tipo_collo"));
+                    bean.setManica(Manica.valueOf(rs.getString("manica").toUpperCase()));
+                    bean.setGamba(Gamba.valueOf(rs.getString("gamba").toUpperCase()));
+                }
+            }
+        }
+        return bean;
+    }
 }
