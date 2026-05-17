@@ -2,6 +2,7 @@ package it.unisa.storage.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -39,7 +40,22 @@ public class TagliaDaoImpl implements TagliaDao{
         }
     }
 
-    public TagliaBean doRetrieveByKey(String taglia) throws SQLException;
+    public synchronized TagliaBean doRetrieveByKey(String taglia) throws SQLException
+    {
+    	TagliaBean bean = new TagliaBean();
+    	String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE taglia = ?";
+        try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
+            preparedStatement.setString(1, taglia);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                	bean.setTaglia(rs.getString("taglia"));
+
+                }
+            }
+        }
+        return bean;
+    }
     
     public Collection<TagliaBean> doRetrieveAll(String order) throws SQLException;
 }
