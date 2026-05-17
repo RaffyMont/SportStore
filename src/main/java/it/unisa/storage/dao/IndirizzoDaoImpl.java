@@ -60,14 +60,14 @@ public class IndirizzoDaoImpl implements IndirizzoDao{
         }
     }
     
-    public synchronized IndirizzoBean doRetrieveByKey(int code) throws SQLException {
+    public synchronized IndirizzoBean doRetrieveByKey(int id_indirizzo) throws SQLException {
         IndirizzoBean bean = new IndirizzoBean();
-        String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE code = ?";
+        String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE id_indirizzo = ?";
         try (Connection connection = ds.getConnection();
         		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
-            preparedStatement.setInt(1, code);
+            preparedStatement.setInt(1, id_indirizzo);
             try (ResultSet rs = preparedStatement.executeQuery()) {
-                while (rs.next()) {
+                if (rs.next()) {
                     bean.setProvincia(rs.getString("provincia"));
                     bean.setStato(rs.getString("stato"));
                     bean.setCitta(rs.getString("citta"));
