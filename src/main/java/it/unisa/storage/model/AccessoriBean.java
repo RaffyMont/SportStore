@@ -9,7 +9,7 @@ public class AccessoriBean extends ProdottoBean{
 	
 	public AccessoriBean()
 	{
-		
+		super();
 	}
 
 	public String getTipo_accessori() {
