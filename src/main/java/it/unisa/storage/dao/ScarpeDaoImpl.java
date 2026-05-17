@@ -45,7 +45,16 @@ public class ScarpeDaoImpl implements ScarpeDao{
         }
     }
 
-    public boolean doDelete(String id_prodotto) throws SQLException;
+    public synchronized boolean doDelete(String id_prodotto) throws SQLException
+    {
+    	String sql = "UPDATE " + TABLE_NAME + " SET attivo = false WHERE id_prodotto = ? AND attivo = true";
+        try (Connection conn = ds.getConnection();
+        		PreparedStatement ps = conn.prepareStatement(sql)) {
+        	ps.setString(1, id_prodotto);
+            int rowsUpdated = ps.executeUpdate();
+            return rowsUpdated != 0;
+        }
+    }
 
     public ScarpeBean doRetrieveByKey(String id_prodotto) throws SQLException;
     
