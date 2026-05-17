@@ -6,12 +6,12 @@ import it.unisa.storage.model.IndirizzoBean;
 
 public interface IndirizzoDao {
 
-    void doSave(IndirizzoBean indirizzo) throws SQLException;
+    public void doSave(IndirizzoBean indirizzo) throws SQLException;
 
-    boolean doUpdate(IndirizzoBean indirizzo) throws SQLException;
+    public boolean doUpdate(IndirizzoBean indirizzo) throws SQLException;
 
-    boolean doDelete(int id_indirizzo) throws SQLException;
+    public boolean doDelete(int id_indirizzo) throws SQLException;
 
-    IndirizzoBean doRetrieveByKey(int id_indirizzo) throws SQLException;
+    public IndirizzoBean doRetrieveByKey(int id_indirizzo) throws SQLException;
 
 }
