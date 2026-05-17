@@ -50,7 +50,7 @@ public class ColoreDaoImpl implements ColoreDao{
             preparedStatement.setString(1, nome);
             try (ResultSet rs = preparedStatement.executeQuery()) {
                 if (rs.next()) {
-                	bean.setColore(rs.getString("colore"));
+                	bean.setColore(rs.getString("nome"));
 
                 }
             }
