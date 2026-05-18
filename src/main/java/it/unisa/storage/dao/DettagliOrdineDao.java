@@ -10,11 +10,11 @@ public interface DettagliOrdineDao {
 	
 	public void doSave(DettagliOrdineBean dettagli) throws SQLException;
 	
-	public boolean doUpdate(String id_ordine, String id_prodotto) throws SQLException;
+	public boolean doUpdate(DettagliOrdineBean dettagli) throws SQLException;
 
     public boolean doDelete(String id_ordine, String id_prodotto) throws SQLException;
 
-    public DettagliOrdineBean doRetrieveByKey(String id_ordine) throws SQLException;
+    public DettagliOrdineBean doRetrieveByKey(String id_ordine, String id_prodotto) throws SQLException;
     
-    public Collection<DettagliOrdineBean> doRetrieveAll(String order) throws SQLException;
+    public Collection<DettagliOrdineBean> doRetrieveAllByOrdine(String id_ordine) throws SQLException;
 }
