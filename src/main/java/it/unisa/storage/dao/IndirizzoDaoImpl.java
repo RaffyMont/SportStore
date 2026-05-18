@@ -35,7 +35,7 @@ public class IndirizzoDaoImpl implements IndirizzoDao{
     }
     
     public synchronized boolean doUpdate(IndirizzoBean indirizzo) throws SQLException {
-        String sql = "UPDATE " + TABLE_NAME + " SET provincia = ?, stato = ?, citta = ?, CAP = ?, via = ?, civico = ? WHERE code = ?";
+        String sql = "UPDATE " + TABLE_NAME + " SET provincia = ?, stato = ?, citta = ?, CAP = ?, via = ?, civico = ? WHERE id_indirizzo = ?";
         try (Connection conn = ds.getConnection();
         		PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, indirizzo.getProvincia());
