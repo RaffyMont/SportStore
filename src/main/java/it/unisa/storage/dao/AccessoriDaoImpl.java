@@ -48,7 +48,7 @@ public class AccessoriDaoImpl implements AccessoriDao {
         		PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, accessori.getTipo_accessori());
             ps.setString(2, accessori.getMateriali());
-            ps.setString(3, accessori.getId_prodotto());
+            ps.setInt(3, accessori.getId_accessorio());
 
             int rowsUpdated = ps.executeUpdate();
             return rowsUpdated != 0;
