@@ -11,9 +11,9 @@ public interface ScarpeDao {
 
     public boolean doUpdate(ScarpeBean scarpe) throws SQLException;
 
-    public boolean doDelete(String id_prodotto) throws SQLException;
+    public boolean doChangeStatus(ScarpeBean scarpe, boolean status) throws SQLException;
 
-    public ScarpeBean doRetrieveByKey(String id_prodotto) throws SQLException;
+    public ScarpeBean doRetrieveByKey(int id_scarpa) throws SQLException;
     
-    public Collection<ScarpeBean> doRetrieveAll(String order) throws SQLException;
+    public Collection<ScarpeBean> doRetrieveAll() throws SQLException;
 }
