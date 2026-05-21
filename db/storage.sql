@@ -33,9 +33,9 @@ CREATE TABLE Prodotto(
     modello varchar(64),
     descrizione varchar(256),
     prezzo decimal(10, 2) DEFAULT 0.0,
-    attivo boolean,
+    attivo boolean DEFAULT TRUE,
     marca varchar(64),
-    categoria enum('vestito', 'scarpa', 'accessorio'),
+    categoria enum('vestito', 'scarpa', 'accessorio') NOT NULL,
     genere enum('uomo', 'donna', 'bambino', 'unisex') DEFAULT 'unisex',
     stock int NOT NULL DEFAULT 0,
     
@@ -108,32 +108,35 @@ CREATE TABLE Immagine(
 
 CREATE TABLE Scarpe(
 	id_prodotto char(12) NOT NULL,
+	id_scarpa int AUTO_INCREMENT,
     tipo_suola varchar(30),
     materiale varchar(128),
     
-    PRIMARY KEY(id_prodotto),
+    PRIMARY KEY(id_prodotto, id_scarpa),
     FOREIGN KEY(id_prodotto) REFERENCES Prodotto(id_prodotto) ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE Vestiti(
 	id_prodotto char(12) NOT NULL,
+	id_vestito int AUTO_INCREMENT,
     tipo_vita varchar(30),
     tessuto varchar(128),
     stagione varchar(30),
-    categoria enum('maglietta', 'pantalone', 'tuta'),
+    categoriaVestito enum('maglietta', 'pantalone', 'tuta') NOT NULL,
     tipo_collo varchar(30),
     manica enum('corta', 'lunga'),
     gamba enum('corti', 'lunghi'),
     
-    PRIMARY KEY(id_prodotto),
+    PRIMARY KEY(id_prodotto, id_vestito),
     FOREIGN KEY(id_prodotto) REFERENCES Prodotto(id_prodotto) ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE Accessori(
 	id_prodotto char(12) NOT NULL,
+	id_accessorio int AUTO_INCREMENT,
     tipo_accessorio varchar(30),
     materiale varchar(128),
     
-    PRIMARY KEY(id_prodotto),
+    PRIMARY KEY(id_prodotto, id_accessorio),
     FOREIGN KEY(id_prodotto) REFERENCES Prodotto(id_prodotto) ON UPDATE cascade ON DELETE cascade
 );
