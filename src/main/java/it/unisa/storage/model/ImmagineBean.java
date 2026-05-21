@@ -12,7 +12,7 @@ public class ImmagineBean implements Serializable{
 	
 	public ImmagineBean()
 	{
-		
+		this.id_prodotto = new ProdottoBean();
 	}
 
 	public String getPathname() {

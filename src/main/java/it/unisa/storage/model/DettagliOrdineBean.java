@@ -14,6 +14,7 @@ public class DettagliOrdineBean implements Serializable {
 	public DettagliOrdineBean()
 	{
 		this.id_ordine = new OrdineBean();
+		this.id_prodotto = new ProdottoBean();
 	}
 
 	public int getQuantita() {
