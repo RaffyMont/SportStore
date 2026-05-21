@@ -94,7 +94,7 @@ public class AccessoriDaoImpl implements AccessoriDao {
     public synchronized List<AccessoriBean> doRetrieveAll() throws SQLException
     {
     	List<AccessoriBean> accessori = new LinkedList<>();
-        String selectSQL = "SELECT * FROM " + TABLE_NAME;
+        String selectSQL = "SELECT * FROM " + TABLE_NAME + " acc JOIN Prodotto prod ON acc.id_prodotto = prod.id_prodotto";
  
         try (Connection connection = ds.getConnection();
         		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL);

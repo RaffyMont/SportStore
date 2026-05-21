@@ -10,11 +10,11 @@ public interface VestitiDao {
 
     public boolean doUpdate(VestitiBean v) throws SQLException;
 
-    public boolean doDelete(String id_prodotto) throws SQLException;
+    public boolean doChangeStatus(VestitiBean v, boolean status) throws SQLException;
 
-    public VestitiBean doRetrieveByKey(String id_prodotto) throws SQLException;
+    public VestitiBean doRetrieveByKey(int id_vestito) throws SQLException;
     
     public Collection<VestitiBean> doRetrieveByCategoriaVestiti(String categoria) throws SQLException;
     
-    public Collection<VestitiBean> doRetrieveAll(String order) throws SQLException;
+    public Collection<VestitiBean> doRetrieveAll() throws SQLException;
 }
