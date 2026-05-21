@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -61,23 +63,49 @@ public class IndirizzoDaoImpl implements IndirizzoDao{
     }
     
     public synchronized IndirizzoBean doRetrieveByKey(int id_indirizzo) throws SQLException {
-        IndirizzoBean bean = new IndirizzoBean();
         String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE id_indirizzo = ?";
         try (Connection connection = ds.getConnection();
         		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
             preparedStatement.setInt(1, id_indirizzo);
             try (ResultSet rs = preparedStatement.executeQuery()) {
                 if (rs.next()) {
+                	IndirizzoBean bean = new IndirizzoBean();
                     bean.setProvincia(rs.getString("provincia"));
                     bean.setStato(rs.getString("stato"));
                     bean.setCitta(rs.getString("citta"));
                     bean.setCAP(rs.getString("CAP"));
                     bean.setVia(rs.getString("via"));
                     bean.setCivico(rs.getString("civico"));
+                    return bean;
                 }
             }
         }
-        return bean;
+        return null;
+    }
+    
+    public synchronized List<IndirizzoBean> doRetrieveAll() throws SQLException{
+    	String sql = "SELECT * FROM " + TABLE_NAME;
+    	List<IndirizzoBean> indirizzi = new LinkedList<IndirizzoBean>();
+    	
+    	try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                while (rs.next()) {
+                	IndirizzoBean bean = new IndirizzoBean();
+                	
+                    bean.setProvincia(rs.getString("provincia"));
+                    bean.setStato(rs.getString("stato"));
+                    bean.setCitta(rs.getString("citta"));
+                    bean.setCAP(rs.getString("CAP"));
+                    bean.setVia(rs.getString("via"));
+                    bean.setCivico(rs.getString("civico"));
+                    indirizzi.add(bean);
+                }
+            }
+            
+            return indirizzi;
+        }
+    	
     }
 
 }
