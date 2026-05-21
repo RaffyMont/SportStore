@@ -13,5 +13,5 @@ public interface ColoreDao {
 
     public ColoreBean doRetrieveByKey(String nome) throws SQLException;
     
-    public Collection<ColoreBean> doRetrieveAll(String order) throws SQLException;
+    public Collection<ColoreBean> doRetrieveAll() throws SQLException;
 }

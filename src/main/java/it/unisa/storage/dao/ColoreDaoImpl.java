@@ -43,22 +43,22 @@ public class ColoreDaoImpl implements ColoreDao{
 
     public synchronized ColoreBean doRetrieveByKey(String nome) throws SQLException
     {
-    	ColoreBean bean = new ColoreBean();
     	String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE nome = ?";
         try (Connection connection = ds.getConnection();
         		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
             preparedStatement.setString(1, nome);
             try (ResultSet rs = preparedStatement.executeQuery()) {
                 if (rs.next()) {
+                	ColoreBean bean = new ColoreBean();
                 	bean.setColore(rs.getString("nome"));
-
+                	return bean;
                 }
             }
         }
-        return bean;
+        return null;
     }
     
-    public synchronized List<ColoreBean> doRetrieveAll(String order) throws SQLException
+    public synchronized List<ColoreBean> doRetrieveAll() throws SQLException
     {
     	List<ColoreBean> colori = new LinkedList<ColoreBean>();
     	String selectSQL = "SELECT * FROM " + TABLE_NAME;
