@@ -62,12 +62,13 @@ public class ProdottoDaoImpl implements ProdottoDao{
 	}
 
 	 
-	public synchronized boolean doDelete(String id_prodotto) throws SQLException
+	public synchronized boolean doChangeStatus(String id_prodotto, boolean status) throws SQLException
 	{
-		String sql = "UPDATE " + TABLE_NAME + " SET attivo = false WHERE id_prodotto = ? AND attivo = true";
+		String sql = "UPDATE " + TABLE_NAME + " SET attivo = ? WHERE id_prodotto = ?";
         try (Connection conn = ds.getConnection();
         		PreparedStatement ps = conn.prepareStatement(sql)) {
-        	ps.setString(1, id_prodotto);
+        	ps.setBoolean(1, status);
+        	ps.setString(2, id_prodotto);
             int rowsUpdated = ps.executeUpdate();
             return rowsUpdated != 0;
         }
@@ -75,13 +76,13 @@ public class ProdottoDaoImpl implements ProdottoDao{
 	
 	public synchronized ProdottoBean doRetrieveByKey(String id_prodotto) throws SQLException
 	{
-		ProdottoBean bean = new ProdottoBean();
         String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE id_prodotto = ?";
         try (Connection connection = ds.getConnection();
         		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
             preparedStatement.setString(1, id_prodotto);
             try (ResultSet rs = preparedStatement.executeQuery()) {
                 if (rs.next()) {
+                	ProdottoBean bean = new ProdottoBean();
                 	bean.setId_prodotto(rs.getString("id_prodotto"));
                     bean.setModello(rs.getString("modello"));
                     bean.setDescrizione(rs.getString("descrizione"));
@@ -92,19 +93,17 @@ public class ProdottoDaoImpl implements ProdottoDao{
                     bean.setGenere(Genere.valueOf(rs.getString("genere").toUpperCase()));
                     bean.setStock(rs.getInt("stock"));
 
+                    return bean;
                 }
             }
         }
-        return bean;
+        return null;
 	}
 	
-	public synchronized List<ProdottoBean> doRetrieveAll(String order) throws SQLException
+	public synchronized List<ProdottoBean> doRetrieveAll() throws SQLException
 	{
 		List<ProdottoBean> prodotti = new LinkedList<>();
         String selectSQL = "SELECT * FROM " + TABLE_NAME;
-        if (order != null && !order.isEmpty()) {
-            selectSQL += " ORDER BY " + order;
-        }
         try (Connection connection = ds.getConnection();
         		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL);
         		ResultSet rs = preparedStatement.executeQuery()) {
@@ -189,13 +188,10 @@ public class ProdottoDaoImpl implements ProdottoDao{
         }
 	}
 	
-	public synchronized List<ProdottoBean> doRetrieveActive(String order) throws SQLException
+	public synchronized List<ProdottoBean> doRetrieveActive() throws SQLException
 	{
 		List<ProdottoBean> prodotti = new LinkedList<>();
         String selectSQL = "SELECT * FROM " + TABLE_NAME + "WHERE active = true";
-        if (order != null && !order.isEmpty()) {
-            selectSQL += " ORDER BY " + order;
-        }
         try (Connection connection = ds.getConnection();
         		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL);
         		ResultSet rs = preparedStatement.executeQuery()) {

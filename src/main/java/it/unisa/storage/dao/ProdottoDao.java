@@ -11,11 +11,11 @@ public interface ProdottoDao {
 	
 	public boolean doUpdate(ProdottoBean prodotto) throws SQLException;
 	
-	public boolean doDelete(String id_prodotto) throws SQLException;
+	public boolean doChangeStatus(String id_prodotto, boolean status) throws SQLException;
 	
 	public ProdottoBean doRetrieveByKey(String id_prodotto) throws SQLException;
 	
-	public Collection<ProdottoBean> doRetrieveAll(String order) throws SQLException;
+	public Collection<ProdottoBean> doRetrieveAll() throws SQLException;
 	
 	public Collection<ProdottoBean> doRetrieveByCategoria(String categoria) throws SQLException;
 	
@@ -23,5 +23,5 @@ public interface ProdottoDao {
 	
 	public boolean doUpdateStock(String id_prodotto, int stock) throws SQLException;
 	
-	public Collection<ProdottoBean> doRetrieveActive(String order) throws SQLException;
+	public Collection<ProdottoBean> doRetrieveActive() throws SQLException;
 }
