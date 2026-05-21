@@ -7,7 +7,7 @@ import it.unisa.storage.model.ImmagineBean;
 
 public interface ImmaginiDao {
 	
-	public boolean doSave(ImmagineBean image) throws SQLException;
+	public void doSave(ImmagineBean image) throws SQLException;
 	
 	public boolean doUpdate(String pathname) throws SQLException;
 	
