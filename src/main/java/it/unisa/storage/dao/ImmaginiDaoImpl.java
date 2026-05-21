@@ -33,7 +33,17 @@ public class ImmaginiDaoImpl implements ImmaginiDao{
 
 	}
 	
-	public synchronized boolean doUpdate(String pathname) throws SQLException;
+	public synchronized boolean doUpdate(String oldPathname, String newPathname) throws SQLException
+	{
+		String sql = "UPDATE " + TABLE_NAME + " SET pathname = ? WHERE pathname = ?";
+        try (Connection conn = ds.getConnection();
+        		PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, newPathname);
+            ps.setString(1, oldPathname);
+            int rowsUpdated = ps.executeUpdate();
+            return rowsUpdated != 0;
+        }
+	}
 	
 	public synchronized boolean doDelete(String pathname) throws SQLException;
 	

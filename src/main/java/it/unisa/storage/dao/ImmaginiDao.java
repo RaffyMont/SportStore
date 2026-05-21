@@ -9,7 +9,7 @@ public interface ImmaginiDao {
 	
 	public void doSave(ImmagineBean image) throws SQLException;
 	
-	public boolean doUpdate(String pathname) throws SQLException;
+	public boolean doUpdate(String oldPathname, String newPathname) throws SQLException;
 	
 	public boolean doDelete(String pathname) throws SQLException;
 	
