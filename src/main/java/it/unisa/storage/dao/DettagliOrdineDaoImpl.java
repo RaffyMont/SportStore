@@ -65,7 +65,6 @@ public class DettagliOrdineDaoImpl implements DettagliOrdineDao{
 
     public synchronized DettagliOrdineBean doRetrieveByKey(String id_ordine, String id_prodotto) throws SQLException
     {
-    	DettagliOrdineBean bean = new DettagliOrdineBean();
         String selectSQL = "SELECT * FROM " + TABLE_NAME + " d" + " JOIN Prodotto p ON d.id_prodotto = p.id_prodotto " + "WHERE d.id_ordine = ? AND d.id_prodotto = ?";
         try (Connection connection = ds.getConnection();
         		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
@@ -73,6 +72,7 @@ public class DettagliOrdineDaoImpl implements DettagliOrdineDao{
             preparedStatement.setString(2, id_prodotto);
             try (ResultSet rs = preparedStatement.executeQuery()) {
                 if (rs.next()) {
+                	DettagliOrdineBean bean = new DettagliOrdineBean();
                 	bean.setQuantita(rs.getInt("quantità"));
                     bean.setPrezzo_unitario(rs.getDouble("prezzo_unitario"));
                     
@@ -91,10 +91,12 @@ public class DettagliOrdineDaoImpl implements DettagliOrdineDao{
                     prodotto.setGenere(Genere.valueOf(rs.getString("genere").toUpperCase()));
                     prodotto.setStock(rs.getInt("stock"));
                     bean.setId_prodotto(prodotto);
+                    
+                    return bean;
                 }	
             }
         }
-        return bean;
+        return null;
     }
     
     public synchronized List<DettagliOrdineBean> doRetrieveAllByOrdine(String id_ordine) throws SQLException
