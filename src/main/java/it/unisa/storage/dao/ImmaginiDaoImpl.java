@@ -45,7 +45,16 @@ public class ImmaginiDaoImpl implements ImmaginiDao{
         }
 	}
 	
-	public synchronized boolean doDelete(String pathname) throws SQLException;
+	public synchronized boolean doDelete(String pathname) throws SQLException
+	{
+		String deleteSQL = "DELETE FROM " + TABLE_NAME + " WHERE pathname = ?";
+        try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL)) {
+            preparedStatement.setString(1, pathname);
+            int result = preparedStatement.executeUpdate();
+            return result != 0;
+        }
+	}
 	
 	public synchronized List<ImmagineBean> doRetrieveAllByIdProdotto(String id_prodotto) throws SQLException;
 
