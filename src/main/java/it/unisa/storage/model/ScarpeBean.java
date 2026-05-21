@@ -1,16 +1,24 @@
 package it.unisa.storage.model;
 
-/* DA RIVEDERE MEGLIO */
 public class ScarpeBean extends ProdottoBean{
 
 	private static final long serialVersionUID = 1L;
 	
+	private int id_scarpa;
 	private String tipo_suola;
 	private String materiale;
 	
 	public ScarpeBean()
 	{
 		super();
+	}
+	
+	public int getId_scarpa() {
+		return id_scarpa;
+	}
+
+	public void setId_scarpa(int id_scarpa) {
+		this.id_scarpa = id_scarpa;
 	}
 
 	public String getTipo_suola() {
