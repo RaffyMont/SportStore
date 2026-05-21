@@ -1,13 +1,14 @@
 package it.unisa.storage.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 public class OrdineBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	private String id_ordine;
-	private String data_ordine;
+	private LocalDateTime data_ordine;
 	public enum Stato{CONSEGNATO, IN_SPEDIZIONE, ANNULLATO, IN_PREPARAZIONE};
 	private Stato stato;
 	private double prezzo_totale;
@@ -29,11 +30,11 @@ public class OrdineBean implements Serializable{
 		this.id_ordine = id_ordine;
 	}
 
-	public String getData_ordine() {
+	public LocalDateTime getData_ordine() {
 		return data_ordine;
 	}
 
-	public void setData_ordine(String data_ordine) {
+	public void setData_ordine(LocalDateTime data_ordine) {
 		this.data_ordine = data_ordine;
 	}
 
