@@ -10,9 +10,9 @@ public interface AccessoriDao {
 
     public boolean doUpdate(AccessoriBean accessori) throws SQLException;
 
-    public boolean doDelete(String id_prodotto) throws SQLException;
+    public boolean doChangeStatus(AccessoriBean accessori, boolean status) throws SQLException;
 
-    public AccessoriBean doRetrieveByKey(String id_prodotto) throws SQLException;
+    public AccessoriBean doRetrieveByKey(int id_accessorio) throws SQLException;
     
-    public Collection<AccessoriBean> doRetrieveAll(String order) throws SQLException;
+    public Collection<AccessoriBean> doRetrieveAll() throws SQLException;
 }
