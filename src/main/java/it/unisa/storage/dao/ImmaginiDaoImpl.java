@@ -2,21 +2,26 @@ package it.unisa.storage.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.sql.DataSource;
 
 import it.unisa.storage.model.ImmagineBean;
+import it.unisa.storage.model.ProdottoBean;
 
 public class ImmaginiDaoImpl implements ImmaginiDao{
 	
 	private static final String TABLE_NAME = "Immagine";
 	private DataSource ds = null;
+	private ProdottoDao prodottoDao;
 	
 	public ImmaginiDaoImpl(DataSource ds)
 	{
 		this.ds = ds;
+		this.prodottoDao = new ProdottoDaoImpl(ds);
 	}
 	
 	public synchronized void doSave(ImmagineBean image) throws SQLException
@@ -56,6 +61,32 @@ public class ImmaginiDaoImpl implements ImmaginiDao{
         }
 	}
 	
-	public synchronized List<ImmagineBean> doRetrieveAllByIdProdotto(String id_prodotto) throws SQLException;
+	public synchronized List<ImmagineBean> doRetrieveAllByIdProdotto(String id_prodotto) throws SQLException
+	{
+		String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id_prodotto = ?";
+    	List<ImmagineBean> immagini = new LinkedList<ImmagineBean>();
+    	
+    	try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+    		preparedStatement.setString(1, id_prodotto);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                while (rs.next()) {
+                	ImmagineBean bean = new ImmagineBean();
+                	
+                	bean.setPathname(rs.getString("pathname"));
+                	bean.setMime_type(rs.getString("mime_type"));
+                	
+                	String id = rs.getString("id_prodotto");
+                	ProdottoBean prodotto = prodottoDao.doRetrieveByKey(id);
+                	bean.setId_prodotto(prodotto);
+                   
+                    immagini.add(bean);
+                }
+            }
+            
+         return immagini;
+         
+    	}
+	}
 
 }
