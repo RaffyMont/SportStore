@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 
 import it.unisa.storage.model.UtenteBean;
+import it.unisa.storage.model.UtenteBean.Ruolo;
 
 public interface UtenteDao {
 	
@@ -19,6 +20,10 @@ public interface UtenteDao {
 	
 	public UtenteBean doAuthenticate(String email, String pwd) throws SQLException;
 	
-	public Collection<UtenteBean> doRetrieveAll(String order) throws SQLException;
+	public Collection<UtenteBean> doRetrieveAll() throws SQLException;
+	
+	public boolean doUpdateRuolo(String id_utente, Ruolo newRuolo) throws SQLException;
+	
+	public boolean doUpdatePwd(String id_utente, String newPwd) throws SQLException;
 
 }

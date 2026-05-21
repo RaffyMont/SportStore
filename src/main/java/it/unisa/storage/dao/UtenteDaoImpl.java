@@ -44,13 +44,11 @@ public class UtenteDaoImpl implements UtenteDao{
         
 	public synchronized boolean doUpdate(UtenteBean utente) throws SQLException
 	{
-		String sql = "UPDATE " + TABLE_NAME + " SET nome = ?, cognome = ?, email = ?, pwd = ?, ruolo = ?, cellulare = ?, id_indirizzo = ? WHERE id_utente = ?";
+		String sql = "UPDATE " + TABLE_NAME + " SET nome = ?, cognome = ?, ruolo = ?, cellulare = ?, id_indirizzo = ? WHERE id_utente = ?";
         try (Connection conn = ds.getConnection();
         		PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, utente.getNome());
             ps.setString(2, utente.getCognome());
-            ps.setString(3, utente.getEmail());
-            ps.setString(4, utente.getPassword());
             ps.setString(5, utente.getRuolo().name().toLowerCase());
             ps.setString(6, utente.getCellulare());
             ps.setInt(7, utente.getIndirizzo().getId_indirizzo());
@@ -60,7 +58,7 @@ public class UtenteDaoImpl implements UtenteDao{
         }
 	}
 	
-	public boolean doDelete(String id_utente) throws SQLException
+	public synchronized boolean doDelete(String id_utente) throws SQLException
 	{
 		String deleteSQL = "DELETE FROM " + TABLE_NAME + " WHERE id_utente = ?";
         try (Connection connection = ds.getConnection();
@@ -71,15 +69,15 @@ public class UtenteDaoImpl implements UtenteDao{
         }
 	}
 	
-	public UtenteBean doRetrieveByKey(String id_utente) throws SQLException
+	public synchronized UtenteBean doRetrieveByKey(String id_utente) throws SQLException
 	{
-		UtenteBean bean = new UtenteBean();
         String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE id_utente = ?";
         try (Connection connection = ds.getConnection();
         		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
             preparedStatement.setString(1, id_utente);
             try (ResultSet rs = preparedStatement.executeQuery()) {
                 if (rs.next()) {
+                	UtenteBean bean = new UtenteBean();
                 	bean.setId_utente(rs.getString("id_utente"));
                     bean.setNome(rs.getString("nome"));
                     bean.setCognome(rs.getString("cognome"));
@@ -92,21 +90,22 @@ public class UtenteDaoImpl implements UtenteDao{
                     IndirizzoBean indirizzo = indirizzoDAO.doRetrieveByKey(idIndirizzo);
                     bean.setIndirizzo(indirizzo);
 
+                    return bean;
                 }
             }
         }
-        return bean;
+        return null;
 	}
 	
-	public UtenteBean doRetrieveByEmail(String email) throws SQLException
+	public synchronized UtenteBean doRetrieveByEmail(String email) throws SQLException
 	{
-		UtenteBean bean = new UtenteBean();
         String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE email = ?";
         try (Connection connection = ds.getConnection();
         		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
             preparedStatement.setString(1, email);
             try (ResultSet rs = preparedStatement.executeQuery()) {
-                while (rs.next()) {
+                if (rs.next()) {
+                	UtenteBean bean = new UtenteBean();
                 	bean.setId_utente(rs.getString("id_utente"));
                     bean.setNome(rs.getString("nome"));
                     bean.setCognome(rs.getString("cognome"));
@@ -118,23 +117,25 @@ public class UtenteDaoImpl implements UtenteDao{
                     int idIndirizzo = rs.getInt("id_indirizzo");
                     IndirizzoBean indirizzo = indirizzoDAO.doRetrieveByKey(idIndirizzo);
                     bean.setIndirizzo(indirizzo);
+                    
+                    return bean;
 
                 }
             }
         }
-        return bean;
+        return null;
 	}
 	
-	public UtenteBean doAuthenticate(String email, String pwd) throws SQLException
+	public synchronized UtenteBean doAuthenticate(String email, String pwd) throws SQLException
 	{
-		UtenteBean bean = new UtenteBean();
         String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE email = ? AND pwd = ?";
         try (Connection connection = ds.getConnection();
         		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, pwd);
             try (ResultSet rs = preparedStatement.executeQuery()) {
-                while (rs.next()) {
+                if (rs.next()) {
+                	UtenteBean bean = new UtenteBean();
                 	bean.setId_utente(rs.getString("id_utente"));
                     bean.setNome(rs.getString("nome"));
                     bean.setCognome(rs.getString("cognome"));
@@ -146,20 +147,20 @@ public class UtenteDaoImpl implements UtenteDao{
                     int idIndirizzo = rs.getInt("id_indirizzo");
                     IndirizzoBean indirizzo = indirizzoDAO.doRetrieveByKey(idIndirizzo);
                     bean.setIndirizzo(indirizzo);
+                    
+                    return bean;
 
                 }
             }
         }
-        return bean;
+        return null;
 	}
 	
-	public synchronized List<UtenteBean> doRetrieveAll(String order) throws SQLException 
+	public synchronized List<UtenteBean> doRetrieveAll() throws SQLException 
 	{
 		List<UtenteBean> utenti = new LinkedList<>();
         String selectSQL = "SELECT * FROM " + TABLE_NAME;
-        if (order != null && !order.isEmpty()) {
-            selectSQL += " ORDER BY " + order;
-        }
+        
         try (Connection connection = ds.getConnection();
         		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL);
         		ResultSet rs = preparedStatement.executeQuery()) {
@@ -181,4 +182,30 @@ public class UtenteDaoImpl implements UtenteDao{
         }
         return utenti;
     }
+	
+	public synchronized boolean doUpdatePwd(String id_utente, String newPwd) throws SQLException{
+		String sqlUpdate = "UPDATE " + TABLE_NAME + " SET pwd = ? WHERE id_utente = ?";
+		
+		try(Connection connection = ds.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(sqlUpdate)){
+				
+				preparedStatement.setString(1, newPwd);
+				preparedStatement.setString(2, id_utente);
+				
+				return preparedStatement.executeUpdate() > 0;
+		}
+	}
+	
+	public synchronized boolean doUpdateRuolo(String id_utente, Ruolo newRuolo) throws SQLException{
+		String sqlUpdate = "UPDATE " + TABLE_NAME + " SET ruolo = ? WHERE id_utente = ?";
+		
+		try(Connection connection = ds.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(sqlUpdate)){
+				
+				preparedStatement.setString(1, newRuolo.name().toLowerCase());
+				preparedStatement.setString(2, id_utente);
+				
+				return preparedStatement.executeUpdate() > 0;
+		}
+	}
 }
