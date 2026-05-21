@@ -42,28 +42,25 @@ public class TagliaDaoImpl implements TagliaDao{
 
     public synchronized TagliaBean doRetrieveByKey(String taglia) throws SQLException
     {
-    	TagliaBean bean = new TagliaBean();
     	String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE taglia = ?";
         try (Connection connection = ds.getConnection();
         		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
             preparedStatement.setString(1, taglia);
             try (ResultSet rs = preparedStatement.executeQuery()) {
                 if (rs.next()) {
+                	TagliaBean bean = new TagliaBean();
                 	bean.setTaglia(rs.getString("taglia"));
-
+                	return bean;
                 }
             }
         }
-        return bean;
+        return null;
     }
     
-    public synchronized List<TagliaBean> doRetrieveAll(String order) throws SQLException
+    public synchronized List<TagliaBean> doRetrieveAll() throws SQLException
     {
     	List<TagliaBean> taglie = new LinkedList<TagliaBean>();
     	String selectSQL = "SELECT * FROM " + TABLE_NAME;
-        if (order != null && !order.isEmpty()) {
-            selectSQL += " ORDER BY " + order;
-        }
         try (Connection connection = ds.getConnection();
         		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL);
         		ResultSet rs = preparedStatement.executeQuery()) {

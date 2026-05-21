@@ -13,5 +13,5 @@ public interface TagliaDao {
 
     public TagliaBean doRetrieveByKey(String taglia) throws SQLException;
     
-    public Collection<TagliaBean> doRetrieveAll(String order) throws SQLException;
+    public Collection<TagliaBean> doRetrieveAll() throws SQLException;
 }
