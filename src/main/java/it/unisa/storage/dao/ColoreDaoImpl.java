@@ -62,9 +62,6 @@ public class ColoreDaoImpl implements ColoreDao{
     {
     	List<ColoreBean> colori = new LinkedList<ColoreBean>();
     	String selectSQL = "SELECT * FROM " + TABLE_NAME;
-        if (order != null && !order.isEmpty()) {
-            selectSQL += " ORDER BY " + order;
-        }
         try (Connection connection = ds.getConnection();
         		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL);
         		ResultSet rs = preparedStatement.executeQuery()) {
