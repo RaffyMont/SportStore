@@ -4,6 +4,7 @@ public class VestitiBean extends ProdottoBean{
 
 	private static final long serialVersionUID = 1L;
 	
+	private int id_vestito;
 	private String tipovita;
 	private String tessuto;
 	private String stagione;
@@ -18,6 +19,14 @@ public class VestitiBean extends ProdottoBean{
 	public VestitiBean()
 	{
 		super();
+	}
+
+	public int getId_vestito() {
+		return id_vestito;
+	}
+
+	public void setId_vestito(int id_vestito) {
+		this.id_vestito = id_vestito;
 	}
 
 	public String getTipovita() {
