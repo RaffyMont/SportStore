@@ -2,7 +2,9 @@ package it.unisa.storage.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -12,9 +14,11 @@ import it.unisa.storage.model.SupportoTagliaBean;
 public class SupportoTagliaDaoImpl {
 	private static final String TABLE_NAME = "SupportoTaglia";
 	private DataSource ds = null;
+	private TagliaDaoImpl tagliaDao;
 
     public SupportoTagliaDaoImpl(DataSource ds) {
         this.ds = ds;
+        this.tagliaDao = new TagliaDaoImpl(ds);
     }
     
     public synchronized void doSave(SupportoTagliaBean supporto) throws SQLException
@@ -28,12 +32,23 @@ public class SupportoTagliaDaoImpl {
             preparedStatement.executeUpdate();
         }
     }
-
-    public synchronized boolean doUpdate(SupportoTagliaBean indirizzo) throws SQLException;
-
-    public synchronized boolean doDelete(String id_prodotto, String taglia) throws SQLException;
-
-    public synchronized SupportoTagliaBean doRetrieveByProdotto(String id_prodotto) throws SQLException;
     
-    public synchronized List<SupportoTagliaBean> doRetrieveAllByProtto() throws SQLException;
+    public synchronized List<SupportoTagliaBean> doRetrieveAllByProdotto(String id_prodotto) throws SQLException
+    {
+    	List<SupportoTagliaBean> supporti = new LinkedList<SupportoTagliaBean>();
+    	String selectSQL = "SELECT t.taglia FROM " + TABLE_NAME + " s JOIN Taglia t ON t.taglia = s.taglia WHERE s.id_prodotto = ?";
+    	try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
+            preparedStatement.setString(1, id_prodotto);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+	            while (rs.next()) {
+	                SupportoTagliaBean bean = new SupportoTagliaBean();
+	                bean.setTaglia(tagliaDao.doRetrieveByKey(rs.getString("taglia")));
+	                supporti.add(bean);
+	            	}
+                }
+            }
+      
+        return supporti;
+    }
 }
