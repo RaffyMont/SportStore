@@ -37,7 +37,21 @@ public class OrdineDaoImpl implements OrdineDao{
         }
 	}
 	
-	public boolean doUpdate(OrdineBean ordine) throws SQLException;
+	public synchronized boolean doUpdate(OrdineBean ordine) throws SQLException
+	{
+		String sql = "UPDATE " + TABLE_NAME + " SET data_ordine = ?, stato_ordine = ?, prezzo_totale = ?, id_utente = ?, id_indirizzo = ? WHERE id_ordine = ?";
+        try (Connection conn = ds.getConnection();
+        		PreparedStatement ps = conn.prepareStatement(sql)) {
+        	ps.setTimestamp(1, Timestamp.valueOf(ordine.getData_ordine()));
+            ps.setString(2, ordine.getStato().name().toLowerCase());
+            ps.setDouble(3, ordine.getPrezzo_totale());
+            ps.setString(4, ordine.getId_utente().getId_utente());
+            ps.setInt(5, ordine.getId_indirizzo().getId_indirizzo());
+            ps.setString(6, ordine.getId_ordine());
+            int rowsUpdated = ps.executeUpdate();
+            return rowsUpdated != 0;
+        }
+	}
 
 	public Collection<OrdineBean> doRetrieveAll() throws SQLException;
 	
