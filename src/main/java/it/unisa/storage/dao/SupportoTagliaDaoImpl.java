@@ -1,5 +1,7 @@
 package it.unisa.storage.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -15,7 +17,17 @@ public class SupportoTagliaDaoImpl {
         this.ds = ds;
     }
     
-    public synchronized void doSave(SupportoTagliaBean supporto) throws SQLException;
+    public synchronized void doSave(SupportoTagliaBean supporto) throws SQLException
+    {
+    	String insertSQL = "INSERT INTO " + TABLE_NAME
+                + " (id_prodotto, taglia) VALUES (?, ?)";
+        try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(insertSQL)) {
+            preparedStatement.setString(1, supporto.getId_prodotto().getId_prodotto());
+            preparedStatement.setString(2, supporto.getTaglia().getTaglia());
+            preparedStatement.executeUpdate();
+        }
+    }
 
     public synchronized boolean doUpdate(SupportoTagliaBean indirizzo) throws SQLException;
 
