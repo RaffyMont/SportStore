@@ -103,8 +103,20 @@ public class OrdineDaoImpl implements OrdineDao{
         }
         return ordini;
 	}
-	}
 	
-	public boolean setStatusOrdine(String id_ordine, Stato stato_ordine) throws SQLException;
+	public boolean setStatusOrdine(String id_ordine, Stato stato_ordine) throws SQLException
+	{
+		String sql = "UPDATE "+ TABLE_NAME +" SET stato_ordine = ? WHERE id_ordine = ?";
+
+        try (Connection con = ds.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, stato_ordine.name().toLowerCase());
+            ps.setString(2, id_ordine);
+
+            return ps.executeUpdate() >0;
+        }    	
+
+	}
 
 }
