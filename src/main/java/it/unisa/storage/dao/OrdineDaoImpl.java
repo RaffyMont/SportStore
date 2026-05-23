@@ -2,9 +2,11 @@ package it.unisa.storage.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -15,10 +17,14 @@ public class OrdineDaoImpl implements OrdineDao{
 	
 	private static final String TABLE_NAME = "Ordine";
 	private DataSource ds = null;
+	private IndirizzoDaoImpl indirizzoDao;
+	private UtenteDaoImpl utenteDao;
 	
 	public OrdineDaoImpl(DataSource ds)
 	{
 		this.ds = ds;
+		this.indirizzoDao = new IndirizzoDaoImpl(ds);
+		this.utenteDao = new UtenteDaoImpl(ds);
 	}
 	
 	public synchronized void doSave(OrdineBean ordine) throws SQLException
@@ -53,9 +59,29 @@ public class OrdineDaoImpl implements OrdineDao{
         }
 	}
 
-	public Collection<OrdineBean> doRetrieveAll() throws SQLException;
+	public synchronized List<OrdineBean> doRetrieveAll() throws SQLException
+	{
+		List<OrdineBean> ordini = new LinkedList<>();
+        String selectSQL = "SELECT * FROM " + TABLE_NAME;
+        
+        try (Connection connection = ds.getConnection();
+        		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL);
+        		ResultSet rs = preparedStatement.executeQuery()) {
+            while (rs.next()) {
+                OrdineBean bean = new OrdineBean();
+                bean.setId_ordine(rs.getString("id_ordine"));
+                bean.setData_ordine(rs.getTimestamp("data_ordine").toLocalDateTime());
+                bean.setStato(Stato.valueOf(rs.getString("stato_ordine").toUpperCase()));
+                bean.setPrezzo_totale(rs.getDouble("prezzo_totale"));
+                bean.setId_utente(utenteDao.doRetrieveByKey(rs.getString("id_utente")));
+                bean.setId_indirizzo(indirizzoDao.doRetrieveByKey(rs.getInt("id_indirizzo")));;
+                ordini.add(bean);
+            }
+        }
+        return ordini;
+	}
 	
-	public Collection<OrdineBean> doRetrieveAllByUser(String id_utente) throws SQLException;
+	public synchronized List<OrdineBean> doRetrieveAllByUser(String id_utente) throws SQLException;
 	
 	public boolean setStatusOrdine(String id_ordine, Stato stato_ordine) throws SQLException;
 
