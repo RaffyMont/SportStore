@@ -39,7 +39,7 @@
 			<span class = "logo-shop">&nbsp;SHOP </span>
 		</a>
 		
-		<nav class = "navigazione" aria-label = "Naigazione principale">
+		<nav class = "navbar_nav" aria-label = "Naigazione principale">
 			<ul role = "list">
 				<li> <a href = "<%= hctx %>/Home" class = "nav-link <%= "home".equals(pagina) ? "nav-link--active" : "" %>"> HOME </a></li>
 				<li> <a href = "<%= hctx %>/Catalogo?genere=UOMO" class = "nav-link <%= "uomo".equals(pagina) ? "nav-link--active" : "" %>"> UOMO </a></li>
@@ -52,7 +52,7 @@
 		
 		<div class = "navbar_actions">
 		
-			<form class = "navbar_search" action = "<%= hctx %>/Catalogo" method = "get" aria-label = "Ricerca">
+			<form class = "navbar_search-form" action = "<%= hctx %>/Catalogo" method = "get" aria-label = "Ricerca">
 				<input type = "search" name = "q" id = "searchInput" placeholder = "Cerca..." aria-label = "Cerca prodotti" maxlength = 100>
 				<button type = "submit" class = "search-btn" aria-label = "Avvia ricerca"> 
 					 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
@@ -63,7 +63,7 @@
 			</form>
 			
 			<%  if(hutente != null){ %>
-				<div class = "navbar_userMenu" id = "userMenu">
+				<div class = "navbar_user-menu" id = "userMenu">
 					<button class = "user-trigger" id = "userTrigger" aria-haspopup = "true" aria-expanded = "false">
 						<span class = "user-avatar"> <%= hutente.getNome().charAt(0) %><%= hutente.getCognome().charAt(0)%></span>
 						<span class = "user-name"> <%= hutente.getNome() %></span>
