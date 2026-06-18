@@ -20,7 +20,7 @@ import it.unisa.storage.model.UtenteBean.Ruolo;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet(urlPatterns = {"/Login" , "/Logout"})
+@WebServlet("/Login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,18 +36,6 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String path = request.getServletPath();
-		
-		if("/Logout".equals(path))
-		{
-				HttpSession sessione = request.getSession(false);
-				if(sessione != null)
-					sessione.invalidate();
-				response.sendRedirect(request.getContextPath() + "/Home");
-				
-				return;
-		}
 		
 		HttpSession sessione = request.getSession(false);
 		if(sessione != null && sessione.getAttribute("utente") != null)
