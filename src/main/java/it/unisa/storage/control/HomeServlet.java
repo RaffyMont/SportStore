@@ -24,7 +24,7 @@ import it.unisa.storage.model.ProdottoBean;
 /**
  * Servlet implementation class HomeServlet
  */
-@WebServlet(urlPatterns = {"/Home", "/"})
+@WebServlet("/Home")
 public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
