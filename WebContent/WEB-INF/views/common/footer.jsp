@@ -12,7 +12,6 @@
 
 <footer class = "footer" aria-label = "Footer sito">
 	<div class = "footer_container">
-		<div>
 			<div class = "footer_brand">
 				<a href = "<%= fCtx %>/Home" class = "navbar_logo"> 
 					<span class = "logo-sport"> SPORT </span>
@@ -37,7 +36,7 @@
 				<ul role = "list">
 					<% if(futente != null){ %>
 						<li> <a href = "<%= fCtx %>/Profilo"> Il mio profilo </a></li>
-						<li> <a herf = "<%= fCtx %>/Profilo?sezione=ordini"> I miei ordini</a> </li>
+						<li> <a href = "<%= fCtx %>/Profilo?sezione=ordini"> I miei ordini</a> </li>
 						<li> <a href = "<%= fCtx %>/Logout"> Esci </a></li>
 					<% } else{ %>
 						<li> <a href = "<%= fCtx %>/Login"> Accedi </a></li>
@@ -55,10 +54,9 @@
 				</ul>
 			</nav>
 		</div>
-		
-		<div class = "footer_bottom">
+	
+	<div class = "footer_bottom">
 			<p> &copy; 2026 SportShop &ndash; Tutti i diritti riservati.
-		</div>
 	</div>
 </footer>
 	
