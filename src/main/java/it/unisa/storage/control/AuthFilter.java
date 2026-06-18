@@ -3,7 +3,7 @@ package it.unisa.storage.control;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -14,7 +14,7 @@ import java.io.IOException;
  * Servlet implementation class AuthFilter
  */
 @WebServlet("/*")
-public class AuthFilter extends HttpServlet {
+public class AuthFilter extends HttpFilter {
 	
 	protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException
 	{
@@ -41,7 +41,7 @@ public class AuthFilter extends HttpServlet {
 		if(autorizzato)
 			chain.doFilter(request, response);
 		else
-			response.sendRedirect(request.getContextPath() + "/index");
+			response.sendRedirect(request.getContextPath() + "/Home");
 			
 
 	}
