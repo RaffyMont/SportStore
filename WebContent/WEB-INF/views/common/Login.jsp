@@ -23,6 +23,7 @@
 <meta charset="UTF-8">
 	<title>Login</title>
 	<link rel="stylesheet" href="<%= ctx %>/styles/login.css">
+	<link rel="stylesheet" href="<%= ctx %>/styles/home.css">
 </head>
 <body class = "login-page">
 	<%@ include file = "header.jsp" %>
