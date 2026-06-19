@@ -46,7 +46,7 @@
 				<li> <a href = "<%= hctx %>/Catalogo?genere=DONNA" class = "nav-link <%= "donna".equals(pagina) ? "nav-link--active" : "" %>"> DONNA </a></li>
 				<li> <a href = "<%= hctx %>/Catalogo?genere=BAMBINO" class = "nav-link <%= "bambino".equals(pagina) ? "nav-link--active" : "" %>"> BAMBINO </a></li>
 				<li> <a href = "<%= hctx %>/Catalogo?genere=UNISEX" class = "nav-link <%= "unisex".equals(pagina) ? "nav-link--active" : "" %>"> UNISEX </a></li>
-				<li> <a href = "<%= hctx %>/Catalogo?categoria=ACCESSORIO" class = "nav-link <%= "accessori".equals(pagina) ? "nav-link--active" : "" %>"> ACCESSORI </a></li>
+				<li> <a href = "<%= hctx %>/Catalogo?genere=UNISEX&Catalogo?categoria=ACCESSORIO" class = "nav-link <%= "accessori".equals(pagina) ? "nav-link--active" : "" %>"> ACCESSORI </a></li>
 			</ul> 
 		</nav>
 		

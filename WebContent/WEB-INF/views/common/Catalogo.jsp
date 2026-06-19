@@ -1,4 +1,3 @@
-<%@page import="com.sun.management.UnixOperatingSystemMXBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="it.unisa.storage.model.ProdottoBean" %>
 <%@ page import="it.unisa.storage.model.ProdottoBean.Genere" %>
