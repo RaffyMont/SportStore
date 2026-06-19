@@ -2,7 +2,7 @@ package it.unisa.storage.control;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,14 +13,14 @@ import java.io.IOException;
 /**
  * Servlet implementation class AuthFilter
  */
-@WebServlet("/*")
+@WebFilter("/*")
 public class AuthFilter extends HttpFilter {
 	
 	protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException
 	{
 		String path = request.getServletPath();
 		
-		if(!path.startsWith("/admin/") && !path.startsWith("/common/"))
+		if(!path.startsWith("/admin/"))
 		{
 			chain.doFilter(request, response);
 			return;
@@ -34,8 +34,6 @@ public class AuthFilter extends HttpFilter {
 		{
 			if(path.startsWith("/admin/"))
 				autorizzato = role.equals("admin");
-			else if(path.startsWith("/common/"))
-				autorizzato = role.equals("admin") || role.equals("user");
 		}
 		
 		if(autorizzato)
