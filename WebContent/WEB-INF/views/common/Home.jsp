@@ -106,7 +106,7 @@
 
     <!-- ── SCARPE ────────────────────────────────────────────────────── -->
     <% if (scarpeList != null && !scarpeList.isEmpty()) { %>
-    <section class="catalog-sectiop" id="scarpe" aria-labelledby="title-scarpe">
+    <section class="catalog-section" id="scarpe" aria-labelledby="title-scarpe">
         <div class="catalog-section_header">
             <h2 class="catalog-section_title" id="title-scarpe">Scarpe</h2>
             <a href="<%= ctx %>/Catalogo?categoria=SCARPA" class="catalog-section__more">Vedi tutte &rarr;</a>
