@@ -19,7 +19,7 @@
 	<meta charset="UTF-8">
 	<title>Registrazione</title>
 	<link rel = "stylesheet" href = "<%= ctx %>/styles/home.css">
-	<link rel = "stylesheet" href = "<%= ctx %>/styles/Registrazione.css">
+	<link rel = "stylesheet" href = "<%= ctx %>/styles/registrazione.css">
 </head>
 <body id = "body_registrazione">
 	<%@ include file = "header.jsp" %>
@@ -38,7 +38,7 @@
 				<h1 id = "header_title"> Crea il tuo account </h1>
 				<p id = "hedear_paragraph"> Registrati e inizia a fare shopping
 			
-			</div>
+			
 			
 			<form class = "registrazione_form" id = "form" action = "<%= ctx %>/Registrazione" method = "post">
 				<div class = "titolo_sezione">
@@ -177,7 +177,7 @@
 			 		<a href = "<%= ctx %>/Login" id = "link_login"> Accedi </a>
 			 	</div>
 
-			
+			</div>
 		</main>
 	
 	<%@ include file = "footer.jsp" %>
