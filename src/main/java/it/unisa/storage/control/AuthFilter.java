@@ -16,6 +16,8 @@ import java.io.IOException;
 @WebFilter("/*")
 public class AuthFilter extends HttpFilter {
 	
+	private static final long serialVersionUID = 1L;
+
 	protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException
 	{
 		String path = request.getServletPath();

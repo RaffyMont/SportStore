@@ -90,20 +90,18 @@ public class LoginServlet extends HttpServlet {
 			sessione.setAttribute("token", utente.getId_utente());
 			sessione.setAttribute("role", utente.getRuolo().name().toLowerCase());
 			
-			if (Ruolo.ADMIN.equals(utente.getRuolo())) 
-                response.sendRedirect(request.getContextPath() + "/admin/Dashboard");
-			
-            else if (redirect != null && !redirect.isBlank() && redirect.startsWith(request.getContextPath()))
+            if (redirect != null && !redirect.isBlank() && redirect.startsWith(request.getContextPath()))
                 response.sendRedirect(redirect);
-             else 
+            else 
                 response.sendRedirect(request.getContextPath() + "/Home");
             
 
-        } catch (SQLException e) {
-            log("LoginServlet: errore DB - " + e.getMessage());
-            request.setAttribute("errore", "Errore di sistema. Riprova più tardi.");
-            request.getRequestDispatcher("/WEB-INF/views/common/Login.jsp").forward(request, response);
-        }
+          } catch (SQLException e) {
+	            log("LoginServlet: errore DB - " + e.getMessage());
+	            request.setAttribute("errore", "Errore di sistema. Riprova più tardi.");
+	            request.setAttribute("paginaAttiva", "login");
+	            request.getRequestDispatcher("/WEB-INF/views/common/Login.jsp").forward(request, response);
+         }
 
 	}
 
