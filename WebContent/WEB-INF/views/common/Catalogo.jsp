@@ -42,6 +42,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Catalogo</title>
+	<link rel = "stylesheet" href = "<%= ctx %>/styles/home.css">
 	<link rel = "stylesheet" href = "<%= ctx %>/styles/catalogo.css">
 </head>
 <body>
@@ -102,9 +103,9 @@
 								<% }							
 									String nomeCategoria = "Accessori";
 									
-									if ("SCARPA".equals(p.getCategoria())) {
+									if ("SCARPA".equals(p.getCategoria().name())) {
 									    nomeCategoria = "Scarpe";
-									} else if ("VESTITO".equals(p.getCategoria())) {
+									} else if ("VESTITO".equals(p.getCategoria().name())) {
 									    nomeCategoria = "Abbigliamento";
 									}
 								%>
