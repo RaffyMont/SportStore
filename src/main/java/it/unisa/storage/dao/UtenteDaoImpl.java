@@ -38,7 +38,8 @@ public class UtenteDaoImpl implements UtenteDao{
             preparedStatement.setString(6, utente.getRuolo().name().toLowerCase());
             preparedStatement.setString(7, utente.getCellulare());
             preparedStatement.setInt(8, utente.getIndirizzo().getId_indirizzo());
-            preparedStatement.executeUpdate();
+            int r = preparedStatement.executeUpdate();
+            System.out.println(r);
         }
 	}
         
@@ -49,10 +50,10 @@ public class UtenteDaoImpl implements UtenteDao{
         		PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, utente.getNome());
             ps.setString(2, utente.getCognome());
-            ps.setString(5, utente.getRuolo().name().toLowerCase());
-            ps.setString(6, utente.getCellulare());
-            ps.setInt(7, utente.getIndirizzo().getId_indirizzo());
-            ps.setString(8, utente.getId_utente());
+            ps.setString(3, utente.getRuolo().name().toLowerCase());
+            ps.setString(4, utente.getCellulare());
+            ps.setInt(5, utente.getIndirizzo().getId_indirizzo());
+            ps.setString(6, utente.getId_utente());
             int rowsUpdated = ps.executeUpdate();
             return rowsUpdated != 0;
         }

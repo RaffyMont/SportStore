@@ -25,7 +25,9 @@ public class IndirizzoDaoImpl implements IndirizzoDao{
         String insertSQL = "INSERT INTO " + TABLE_NAME
                 + " (provincia, stato, citta, CAP, via, civico) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection connection = ds.getConnection();
-        		PreparedStatement preparedStatement = connection.prepareStatement(insertSQL)) {
+        		//PreparedStatement preparedStatement = connection.prepareStatement(insertSQL)
+        		PreparedStatement preparedStatement = connection.prepareStatement(
+        		        insertSQL, PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, indirizzo.getProvincia());
             preparedStatement.setString(2, indirizzo.getStato());
             preparedStatement.setString(3, indirizzo.getCitta());
@@ -33,6 +35,12 @@ public class IndirizzoDaoImpl implements IndirizzoDao{
             preparedStatement.setString(5, indirizzo.getVia());
             preparedStatement.setString(6, indirizzo.getCivico());
             preparedStatement.executeUpdate();
+            
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    indirizzo.setId_indirizzo(generatedKeys.getInt(1));
+                }
+            }
         }
     }
     
@@ -70,6 +78,7 @@ public class IndirizzoDaoImpl implements IndirizzoDao{
             try (ResultSet rs = preparedStatement.executeQuery()) {
                 if (rs.next()) {
                 	IndirizzoBean bean = new IndirizzoBean();
+                	bean.setId_indirizzo(rs.getInt("id_indirizzo"));
                     bean.setProvincia(rs.getString("provincia"));
                     bean.setStato(rs.getString("stato"));
                     bean.setCitta(rs.getString("citta"));
@@ -93,6 +102,7 @@ public class IndirizzoDaoImpl implements IndirizzoDao{
                 while (rs.next()) {
                 	IndirizzoBean bean = new IndirizzoBean();
                 	
+                	bean.setId_indirizzo(rs.getInt("id_indirizzo"));
                     bean.setProvincia(rs.getString("provincia"));
                     bean.setStato(rs.getString("stato"));
                     bean.setCitta(rs.getString("citta"));
