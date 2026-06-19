@@ -106,7 +106,7 @@
 
     <!-- ── SCARPE ────────────────────────────────────────────────────── -->
     <% if (scarpeList != null && !scarpeList.isEmpty()) { %>
-    <section class="catalog-section" id="scarpe" aria-labelledby="title-scarpe">
+    <section class="catalog-sectiop" id="scarpe" aria-labelledby="title-scarpe">
         <div class="catalog-section_header">
             <h2 class="catalog-section_title" id="title-scarpe">Scarpe</h2>
             <a href="<%= ctx %>/Catalogo?categoria=SCARPA" class="catalog-section__more">Vedi tutte &rarr;</a>
@@ -251,11 +251,5 @@
 
 <!-- ═══════════════════════════  FOOTER  ══════════════════════════════ -->
 <%@ include file="footer.jsp" %>
-
-<!-- Toast notifica AJAX (aggiunta al carrello) -->
-<div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
-
-<!-- Script esterno (in /scripts, fuori WEB-INF) -->
-<script src="<%= ctx %>/scripts/home.js"></script>
 </body>
 </html>
