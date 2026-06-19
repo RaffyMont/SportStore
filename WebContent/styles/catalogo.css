@@ -1,12 +1,15 @@
 @charset "UTF-8";
 
 #main {
-    background: #f5f5f5;
+    background: #e8e8e8;
+    min-height: 100vh;
+    padding-bottom: 40px;
 }
 
 body
 {
-	background: #0d1b2a;
+	background: #e8e8e8;
+	margin: 0;
 }
 
 #banner {
@@ -90,7 +93,7 @@ body
 #griglia {
     max-width: 1200px;
     margin: 25px auto;
-    padding: 0 15px;
+    padding: 0 15px 60px 15px;
 }
 
 #griglia_iterno {
@@ -100,35 +103,35 @@ body
 }
 
 
-#prodotto_card {
+.prodotto_card {
     background: white;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 2px 10px rgba(0,0,0,0.10);
 }
 
-#prodotto_card:hover {
+.prodotto_card:hover {
     transform: translateY(-4px);
 }
 
-#card_link {
+.card_link {
     text-decoration: none;
     color: inherit;
 }
 
-#card_media {
+.card_media {
     position: relative;
     background: #eee;
     height: 230px;
 }
 
-#img_prodotto {
+.img_prodotto {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-#esaurito {
+.esaurito {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -139,7 +142,7 @@ body
     border-radius: 4px;
 }
 
-#prodotto_categoria {
+.prodotto_categoria {
     position: absolute;
     bottom: 10px;
     right: 10px;
@@ -150,45 +153,45 @@ body
     border-radius: 4px;
 }
 
-#prodotto_card_body {
+.prodotto_card_body {
     padding: 15px;
 }
 
-#brand {
+.brand {
     color: #888;
     font-size: 12px;
     font-weight: bold;
     text-transform: uppercase;
 }
 
-#name {
+.name {
     font-size: 17px;
     margin: 8px 0;
 }
 
-#name a {
+.name a {
     color: #222;
     text-decoration: none;
 }
 
-#name a:hover {
+.name a:hover {
     color: #2e7d32;
 }
 
-#card_footer {
+.card_footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 12px;
 }
 
-#prezzo {
+.prezzo {
     color: #1b5e20;
     font-weight: bold;
     font-size: 17px;
 }
 
-#bottone {
+.bottone {
     background: #2e7d32;
     color: white;
     border: none;
@@ -198,11 +201,11 @@ body
     cursor: pointer;
 }
 
-#bottone:hover {
+.bottone:hover {
     background: #43a047;
 }
 
-#alt_bottone {
+.alt_bottone {
     background: #bdbdbd;
     color: white;
     padding: 8px 13px;

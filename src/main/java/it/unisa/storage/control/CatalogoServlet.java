@@ -45,16 +45,18 @@ public class CatalogoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String genereParam = request.getParameter("genere");
-		Genere genere;
+		Genere genere = null;
 		
-		try
-		{
-			genere = Genere.valueOf(genereParam.toUpperCase());
-		}
-		catch(IllegalArgumentException e)
-		{
-			response.sendRedirect(request.getContextPath() + "/Home");
-			return;
+		String genereLabel = "Tutti";
+
+		if (genereParam != null && !genereParam.isBlank()) {
+		    try {
+		        genere = Genere.valueOf(genereParam.toUpperCase());
+		        genereLabel = genere.name().charAt(0) + genere.name().substring(1).toLowerCase();
+		    } catch (IllegalArgumentException e) {
+		        response.sendRedirect(request.getContextPath() + "/Home");
+		        return;
+		    }
 		}
 		
 		String categoriaParam = request.getParameter("categoria");
@@ -67,8 +69,10 @@ public class CatalogoServlet extends HttpServlet {
 		
 		try
 		{
-			Collection<ProdottoBean> prodotti2 = prodottoDao.doRetrieveByGenere(genere.name());
-			prodotti = new ArrayList<ProdottoBean>(prodotti2);
+			if (genere != null)
+			    prodotti = new ArrayList<>(prodottoDao.doRetrieveByGenere(genere.name()));
+			else
+			    prodotti = new ArrayList<>(prodottoDao.doRetrieveAll());
 			
 			if(categoriaParam != null && !categoriaParam.isBlank())
 			{
@@ -112,17 +116,9 @@ public class CatalogoServlet extends HttpServlet {
 		if(carrello != null)
 			for(int quantita : carrello.values())
 				totale += quantita;
-		
-		String genereLabel;
-		
-		if(genere.name() == null || genere.name().isEmpty())
-			genereLabel = genere.name();
-		else
-			genereLabel = genere.name().charAt(0) + genere.name().substring(1).toLowerCase();
 
-		
 		request.setAttribute("genereLabel", genereLabel);
-		request.setAttribute("genereParam", genere.name());
+		request.setAttribute("genereParam", genere != null ? genere.name() : "");
 		request.setAttribute("prodotti", prodotti);
 		request.setAttribute("immagini", immagini);
 		request.setAttribute("categoriaFiltro", categoriaParam);

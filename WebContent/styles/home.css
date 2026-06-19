@@ -515,7 +515,7 @@ img {
 .footer {
     background-color: #0d1b2a;
     color: #b0bec5;
-    margin-top: 60px;
+    margin-top: 0;
 }
  
 .footer_container {

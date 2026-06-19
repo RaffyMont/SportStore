@@ -81,7 +81,7 @@
 			<div id = "toolbar_dx">
 				<span id = "conteggio"> <%= numeroProdotti %> prodotti</span>
 			</div>
-			
+			</section>			
 			<% if(prodotti != null && !prodotti.isEmpty()){ %>
 			<section id = "griglia">
 				<div id = "griglia_iterno">
@@ -94,12 +94,12 @@
 							
 							boolean esaurito = p.getStock() <= 0;
 					%>
-					<article id = "prodotto_card">
-						<a href = "<%= ctx %>/DettaglioProdotto?id=<%= p.getId_prodotto() %>" id = "card_link">
-							<div id = "card_media">
-								<img src = "<%= img %>" alt = "<%= p.getMarca() %> <%= p.getModello() %>" id = "img_prodotto">
+					<article class = "prodotto_card">
+						<a href = "<%= ctx %>/DettaglioProdotto?id=<%= p.getId_prodotto() %>" class = "card_link">
+							<div class = "card_media">
+								<img src = "<%= img %>" alt = "<%= p.getMarca() %> <%= p.getModello() %>" class = "img_prodotto">
 								<% if(esaurito){ %>
-									<span id = "esaurito"> Esaurito </span>
+									<span class = "esaurito"> Esaurito </span>
 								<% }							
 									String nomeCategoria = "Accessori";
 									
@@ -109,23 +109,23 @@
 									    nomeCategoria = "Abbigliamento";
 									}
 								%>
-								<span id = "prodotto_categoria"> <%= nomeCategoria %></span>
+								<span class = "prodotto_categoria"> <%= nomeCategoria %></span>
 							</div>
 						</a>
-						<div id = "prodotto_card_body">
-							<span id = "brand"> <%= p.getMarca() %></span>
-							<h2 id = "name">
+						<div class = "prodotto_card_body">
+							<span class = "brand"> <%= p.getMarca() %></span>
+							<h2 class = "name">
 								<a href = "<%= ctx %>/DettaglioProdotto?id=<%= p.getId_prodotto() %>"> <%= p.getModello() %></a>
 							</h2>
 							
-							<div id = "card_footer">
-								<span id = "prezzo"> &euro;&nbsp;<%= String.format("%.2f", p.getPrezzo()) %></span>
+							<div class = "card_footer">
+								<span class = "prezzo"> &euro;&nbsp;<%= String.format("%.2f", p.getPrezzo()) %></span>
 								<% if(!esaurito) { %>
-									<button id = "bottone" onclick = "aggiungiAlCarrello('<%= p.getId_prodotto() %>', this)">
+									<button class = "bottone" onclick = "aggiungiAlCarrello('<%= p.getId_prodotto() %>', this)">
 										+ Carrello
 									</button>
 								<% } else { %>
-									<span id = "alt_bottone"> Esaurito </span>
+									<span class = "alt_bottone"> Esaurito </span>
 								<% } %>
 							</div>
 						</div>
