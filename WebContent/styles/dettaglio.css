@@ -1,0 +1,177 @@
+@charset "UTF-8";
+
+#container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+#immagine {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#imgPrincipale {
+    width: 100%;
+    border-radius: 10px;
+}
+
+#miniature {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.mini {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border: 1px solid lightgray;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.mini:hover {
+    border-color: green;
+}
+
+#informazioni {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#marca {
+    color: gray;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+#modello {
+    font-size: 28px;
+    margin: 0;
+}
+
+#prezzo {
+    font-size: 26px;
+    font-weight: bold;
+    color: green;
+}
+
+#descrizione {
+    color: #555;
+    line-height: 1.5;
+}
+
+.sezione {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.label {
+    font-weight: bold;
+    margin: 0;
+}
+
+#colori, #taglie {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tag_colore, .box_taglia {
+    padding: 8px 12px;
+    border: 1px solid lightgray;
+    border-radius: 6px;
+    background-color: white;
+}
+
+#disponibilita {
+    margin-top: 10px;
+}
+
+#disponibile {
+    color: green;
+    font-weight: bold;
+}
+
+#esaurito {
+    color: red;
+    font-weight: bold;
+}
+
+#quantita_wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#quantita {
+    display: flex;
+    width: fit-content;
+    border: 1px solid lightgray;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.bottone {
+    width: 40px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.input {
+    width: 50px;
+    text-align: center;
+    border: none;
+    border-left: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+}
+
+#aggiungi {
+    padding: 14px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#aggiungi:hover {
+    background-color: darkgreen;
+}
+
+#non\ aggiungi {
+    padding: 14px;
+    background-color: gray;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: not-allowed;
+}
+
+#torna {
+    color: gray;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#torna:hover {
+    color: black;
+}
+
+#error {
+    max-width: 1000px;
+    margin: 40px auto;
+    text-align: center;
+    color: gray;
+}
