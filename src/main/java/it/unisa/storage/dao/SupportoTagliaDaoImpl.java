@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 
 import it.unisa.storage.model.SupportoTagliaBean;
 
-public class SupportoTagliaDaoImpl {
+public class SupportoTagliaDaoImpl implements SupportoTagliaDao{
 	private static final String TABLE_NAME = "SupportoTaglia";
 	private DataSource ds = null;
 	private TagliaDaoImpl tagliaDao;
