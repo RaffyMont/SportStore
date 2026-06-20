@@ -64,7 +64,7 @@
 			
 			<%  if(hutente != null){ %>
 				<div class = "navbar_user-menu" id = "userMenu">
-					<button class = "user-trigger" id = "userTrigger" aria-haspopup = "true" aria-expanded = "false">
+					<button class = "user-trigger" id = "userTrigger" aria-haspopup = "true" aria-expanded = "false" onclick = "toggleMenu()">
 						<span class = "user-avatar"> <%= hutente.getNome().charAt(0) %><%= hutente.getCognome().charAt(0)%></span>
 						<span class = "user-name"> <%= hutente.getNome() %></span>
 						<svg class="user-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
@@ -127,5 +127,6 @@
 			</a>
 		</div>
 	</div>
+	<script src="<%= hctx %>/scripts/header.js"></script>
 </header>
 	

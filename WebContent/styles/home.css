@@ -262,7 +262,7 @@ img {
     display: block;
 }
  
-.user-dropdown__item {
+.user-dropdown_item {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -569,28 +569,3 @@ img {
     font-size: 12px;
     color: #455a64;
 }
- 
-.toast {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background-color: #0d1b2a;
-    color: #ffffff;
-    padding: 14px 20px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: bold;
-    border-left: 4px solid #2e7d32;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-    opacity: 0;
-    transform: translateY(80px);
-    transition: opacity 0.3s, transform 0.3s;
-    pointer-events: none;
-    z-index: 999;
-}
- 
-.toast.show {
-    opacity: 1;
-    transform: translateY(0);
-}
- 
