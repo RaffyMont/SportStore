@@ -32,6 +32,7 @@
 	<meta charset="UTF-8">
 	<title> <%= prodotto != null ? prodotto.getModello() : "Prodotto" %></title>
 	<link rel = "stylesheet" href = "<%= ctx %>/styles/home.css">
+	<link rel = "stylesheet" href = "<%= ctx %>/styles/dettaglio.css">
 </head>
 <body>
 	<%@ include file = "header.jsp" %>
@@ -92,7 +93,7 @@
 						<p class = "label"> Quantità
 						<div id = "quantita">
 							<button type = "button" class = "bottone" id = "meno" onclick="cambiaQuantita(-1, <%= prodotto.getStock() %>)"> &#8722; </button>
-							<input type = "number" id = "input_quantità" class = "input" value="1" min="1" max="<%= prodotto.getStock() %>" readonly>
+							<input type = "number" id = "input_quantita" class = "input" value = "1" min="1" max="<%= prodotto.getStock() %>" readonly>
 							<button type = "button" class = "bottone" id = "piu" onclick="cambiaQuantita(+1, <%= prodotto.getStock() %>)"> &#43; </button>
 						</div>
 					</div>
@@ -109,5 +110,6 @@
 	</main>
 	
 	<%@ include file = "footer.jsp" %>
+	<script src = "<%= ctx %>/scripts/dettaglio.js"></script>
 </body>
 </html>
