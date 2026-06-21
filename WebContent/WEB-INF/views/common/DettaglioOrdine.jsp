@@ -28,6 +28,7 @@
 	<meta charset="UTF-8">
 	<title>Dettaglio Ordine</title>
 	<link rel = "stylesheet" href = "<%= ctx %>/styles/home.css">
+	<link rel = "stylesheet" href = "<%= ctx %>/styles/dettaglioOrdine.css">
 </head>
 <body>
 	<%@ include file = "header.jsp" %>
@@ -69,18 +70,22 @@
 							{
 								case "CONSEGNATO": 
 									statoCss = "consegnato";
+									statoLabel = "Consegnato";
 									break;
 									
 								case "IN_SPEDIZIONE": 
 									statoCss = "spedizione";
+									statoLabel = "Spedizione";
 									break;
 									
 								case "ANNULLATO": 
-									statoCss = "consegnato";
+									statoCss = "annullato";
+									statoLabel = "Annullato";
 									break;
 									
 								default:
 									statoCss = "";
+									statoLabel = "";
 							}
 						%>
 						<span id = "badge_<%= statoCss %>"> <%= statoLabel %></span>
@@ -142,7 +147,7 @@
 				
 				<div id = "azioni">
 					<a href = "<%= ctx %>/Profilo?sezione=ordini" id = "azione_secondaria">&larr; Torna ai miei ordini </a>
-					<a href = "<%= ctx %>/Home" id = "azione_primaria"> Continua con lo shopping </a>
+					<a href = "<%= ctx %>/Catalogo" id = "azione_primaria"> Continua con lo shopping </a>
 				</div>
 			</div>
 			

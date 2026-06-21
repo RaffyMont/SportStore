@@ -1,0 +1,201 @@
+@charset "UTF-8";
+
+#breadcrumb {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+#breadcrumb ol {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+}
+
+#breadcrumb a {
+    color: gray;
+    text-decoration: none;
+}
+
+[aria-current="page"] {
+    font-weight: bold;
+    color: #333;
+}
+
+.alert {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 12px;
+    background-color: #ffe5e5;
+    color: red;
+    border-left: 4px solid red;
+}
+
+#contenitore {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#titolo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#data {
+    color: gray;
+}
+
+#badge {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 13px;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+#badge_consegnato {
+    background-color: #e8f5e9;
+    color: green;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 13px;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+#badge_spedizione {
+    background-color: #e3f2fd;
+    color: blue;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 13px;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+#badge_preparazione {
+    background-color: #fff3e0;
+    color: orange;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 13px;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+#badge_annullato {
+    background-color: #ffebee;
+    color: red;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 13px;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+
+.box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.box_titolo {
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 2px solid green;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+#tabella_ordine {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#tabella_ordine th,
+#tabella_ordine td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+#tabella_ordine th {
+    background-color: #f5f5f5;
+}
+
+.prodotto_nome {
+    font-weight: bold;
+}
+
+.prodotto_categoria {
+    display: block;
+    color: gray;
+    font-size: 12px;
+}
+
+.prodotto_subtotale {
+    color: green;
+    font-weight: bold;
+}
+
+#totale {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid lightgray;
+    font-weight: bold;
+}
+
+#totale_prezzo {
+    color: green;
+    font-size: 20px;
+}
+
+#indirizzo {
+    line-height: 1.6;
+}
+
+#vuoto {
+    text-align: center;
+    color: gray;
+    padding: 20px;
+}
+
+#azioni {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+#azione_secondaria, #azione_primaria {
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#azione_secondaria {
+    border: 1px solid black;
+    color: black;
+}
+
+#azione_primaria {
+    background-color: green;
+    color: white;
+}
