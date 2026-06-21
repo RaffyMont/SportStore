@@ -35,6 +35,7 @@
 	<meta charset="UTF-8">
 	<title>Area Admin - Gestione Ordini </title>
 	<link rel = "stylesheet" href = "<%= ctx %>/styles/home.css">
+	<link rel = "stylesheet" href = "<%= ctx %>/styles/admin.css">
 </head>
 <body>
 	<%@ include file = "../common/header.jsp" %>
@@ -120,7 +121,7 @@
 							</select>
 						</div>
 						<button type = "submit" id = "bottone_principale"> Filtra </button>
-						<a href = "<%= ctx %>/admin/Ordini" id = "bottone_secondario"> Reset </a>
+						<a href = "<%= ctx %>/admin/GestioneOrdini" id = "bottone_secondario"> Reset </a>
 					</form>
 				</div>
 				

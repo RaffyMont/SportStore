@@ -1,0 +1,243 @@
+@charset "UTF-8";
+
+#breadcrump {
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 0 20px;
+    color: gray;
+}
+
+#breadcrump ol {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+}
+
+#breadcrump a {
+    color: gray;
+    text-decoration: none;
+}
+
+#container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 20px;
+}
+
+#sidebar {
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px 0;
+}
+
+#sidebar_label {
+    padding: 8px 18px;
+    font-size: 11px;
+    font-weight: bold;
+    color: orange;
+    text-transform: uppercase;
+}
+
+.sidebar_link {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 12px 18px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.sidebar_link:hover {
+    background-color: #fff3e0;
+    color: orange;
+}
+
+#sidebar_separator {
+    height: 1px;
+    background-color: #eee;
+    margin: 6px 0;
+}
+
+#contenuto {
+    width: 100%;
+}
+
+#header {
+    margin-bottom: 20px;
+}
+
+#title {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+#filtri {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#filtri_form {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: end;
+}
+
+.filtro_gruppo {
+    display: flex;
+    flex-direction: column;
+}
+
+.filtro_label {
+    font-size: 12px;
+    font-weight: bold;
+    color: gray;
+}
+
+.filtro_input, .filtro_select {
+    padding: 8px;
+    border: 1px solid lightgray;
+    border-radius: 6px;
+}
+
+#bottone_principale,
+#bottone_secondario {
+    padding: 9px 18px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#bottone_principale {
+    background-color: green;
+    color: white;
+    border: none;
+}
+
+#bottone_secondario {
+    background-color: white;
+    color: #555;
+    border: 1px solid lightgray;
+}
+
+#stats {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stat_card {
+    background-color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+}
+
+.stat_valore {
+    display: block;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.stat_label {
+    font-size: 12px;
+    color: gray;
+}
+
+#alert {
+    padding: 12px;
+    background-color: #ffebee;
+    color: red;
+    border-left: 4px solid red;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+#box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#tabella {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#tabella th, #tabella td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+#tabella th {
+    background-color: #f5f5f5;
+    color: #555;
+}
+
+.td_id, .td_nominativo {
+    font-weight: bold;
+}
+
+.td_email {
+    font-size: 12px;
+    color: gray;
+}
+
+.td_prezzo {
+    color: green;
+    font-weight: bold;
+}
+
+.stato_consegnato, .stato_spedizione, .stato_preparazione, .stato_annullato {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.stato_consegnato {
+    background-color: #e8f5e9;
+    color: green;
+}
+
+.stato_spedizione {
+    background-color: #e3f2fd;
+    color: blue;
+}
+
+.stato_preparazione {
+    background-color: #fff3e0;
+    color: orange;
+}
+
+.stato_annullato {
+    background-color: #ffebee;
+    color: red;
+}
+
+.azione {
+    padding: 6px 12px;
+    border: 1px solid green;
+    border-radius: 6px;
+    color: green;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.azione:hover {
+    background-color: green;
+    color: white;
+}
+
+#vuoto {
+    text-align: center;
+    color: gray;
+    padding: 30px;
+}

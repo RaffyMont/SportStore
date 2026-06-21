@@ -46,16 +46,13 @@ public class AdminGestioneOrdiniServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String ctx = request.getContextPath();
 		HttpSession session = request.getSession(false);
-		UtenteBean utente = null;
-		
-		if(session != null)
-			utente = (UtenteBean) session.getAttribute("utente");
-		
-		if(utente == null)
-		{
-			response.sendRedirect(ctx + "/Home");
-			return;
+		String token = (session != null) ? (String) session.getAttribute("token") : null;
+		if (token == null) {
+		    response.sendRedirect(ctx + "/Login");  
+		    return;
 		}
+		String role = (String) session.getAttribute("role");
+		UtenteBean utente = (UtenteBean) session.getAttribute("utente");
 		
 		String dataInizioStr = request.getParameter("dataInizio");
 		String dataFineStr = request.getParameter("dataFine");
