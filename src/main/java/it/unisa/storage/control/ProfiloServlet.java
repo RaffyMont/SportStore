@@ -1,0 +1,103 @@
+package it.unisa.storage.control;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Collection;
+import java.util.Map;
+
+import javax.sql.DataSource;
+
+import it.unisa.storage.dao.OrdineDao;
+import it.unisa.storage.dao.OrdineDaoImpl;
+import it.unisa.storage.model.OrdineBean;
+import it.unisa.storage.model.UtenteBean;
+
+/**
+ * Servlet implementation class ProfiloServlet
+ */
+@WebServlet("/Profilo")
+public class ProfiloServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ProfiloServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String ctx = request.getContextPath();
+		HttpSession session = request.getSession(false);
+		UtenteBean utente = null;
+		
+		if(session != null)
+			utente = (UtenteBean) session.getAttribute("utente");
+		
+		if(utente == null)
+		{
+			response.sendRedirect(ctx + "/Login");
+			return;
+		}
+		
+		String sezione = request.getParameter("sezione");
+		if(sezione == null || sezione.isBlank())
+			sezione = "dati";
+		
+		@SuppressWarnings("unchecked")
+		Map<String, Integer> carrello = (Map<String, Integer>) session.getAttribute("carrello");
+		int totaleArticoli = 0;
+		
+		if(carrello != null)
+			for(int quantita : carrello.values())
+				totaleArticoli += quantita;
+		
+		Collection<OrdineBean> ordini = null;
+		String dbError = null;
+		
+		if("ordini".equals(sezione))
+		{
+			DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+			OrdineDao ordineDao = new OrdineDaoImpl(ds);
+			try
+			{
+				ordini = ordineDao.doRetrieveAllByUser(utente.getId_utente());
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+				dbError = "Impossibile caricare gli ordini. Riprova più tardi.";
+			}
+		}
+		
+		request.setAttribute("ctx", ctx);
+		request.setAttribute("paginaAttiva", "profilo");
+		request.setAttribute("utente", utente);
+		request.setAttribute("sezione", sezione);
+		request.setAttribute("ordini", ordini);
+		request.setAttribute("dbError", dbError);
+		request.setAttribute("totaleArticoli", totaleArticoli);
+		
+		request.getRequestDispatcher("/WEB-INF/views/common/Profilo.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
