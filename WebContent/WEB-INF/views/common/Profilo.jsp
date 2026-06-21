@@ -236,7 +236,7 @@
 										<td> <span class = "stato_badge_<%= statoCss %>"> <%= statoLabel %> </span></td>
 										<td class = "td_totale">&euro; <%= String.format("%.2f", o.getPrezzo_totale()) %></td>
 										<td>
-											<a href = "<%= ctx %>/DettaglioOrdine?id=<%=o.getId_ordine() %>" class = "vedi"> Vedi </a>
+											<a href = "<%= ctx %>/DettaglioOrdine?id=<%= o.getId_ordine() %>" class = "vedi"> Vedi </a>
 										</td>
 									</tr>
 									<% } %>
