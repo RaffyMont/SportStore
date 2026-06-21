@@ -1,0 +1,309 @@
+@charset "UTF-8";
+/* Layout pagina */
+
+#profilo_container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 25px;
+}
+
+/* Breadcrumb */
+
+#breadcrump {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 0 20px;
+    color: gray;
+    font-size: 14px;
+}
+
+#breadcrump ol {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+}
+
+#breadcrump a {
+    color: gray;
+    text-decoration: none;
+}
+
+[aria-current="page"] {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Sidebar */
+
+#sidebar_avatar {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px lightgray;
+    overflow: hidden;
+}
+
+#avatar {
+    background-color: #0d1b2a;
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+
+#cerchio {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    background-color: green;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+#nominativo {
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+#email {
+    font-size: 12px;
+    color: lightgray;
+}
+
+/* Menu sidebar */
+
+#sidebar_nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar_label {
+    padding: 10px 20px 4px;
+    font-size: 11px;
+    font-weight: bold;
+    color: gray;
+    text-transform: uppercase;
+}
+
+.sidebar_link,
+.sidebar-link {
+    padding: 12px 20px;
+    color: #333;
+    font-weight: bold;
+    text-decoration: none;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.sidebar_link:hover,
+.sidebar-link:hover {
+    background-color: #f0f0f0;
+}
+
+.sidebar_link_active {
+    color: #2e7d32;
+    border-left: 3px solid #2e7d32;
+    background-color: #f1f8f1;
+}
+
+.sidebar_link[href*="Logout"] {
+    color: #c62828;
+}
+
+.sidebar_link[href*="Logout"]:hover {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+.separator {
+    height: 1px;
+    background-color: #eee;
+    margin: 5px 0;
+}
+
+/* Contenuto */
+
+#profilo_contenuto {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profilo_box {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px lightgray;
+    padding: 20px;
+}
+
+.box_titolo {
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 2px solid green;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+#box_sottotitolo {
+    font-size: 16px;
+    color: #555;
+    margin-top: 20px;
+}
+
+/* Dati personali */
+
+.griglia_dati {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.campo_dati {
+    display: flex;
+    flex-direction: column;
+}
+
+.label_dati {
+    font-size: 12px;
+    font-weight: bold;
+    color: gray;
+    text-transform: uppercase;
+}
+
+.valore_dati {
+    font-size: 14px;
+}
+
+/* Alert */
+
+#alert {
+    padding: 12px;
+    background-color: #ffe5e5;
+    color: red;
+    border-left: 4px solid red;
+    border-radius: 6px;
+}
+
+/* Ordini vuoti */
+
+#vuoto {
+    text-align: center;
+    padding: 30px;
+    color: gray;
+}
+
+#shopping {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: green;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+/* Tabella ordini */
+
+#tabella_ordini {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#tabella_ordini th,
+#tabella_ordini td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+#tabella_ordini th {
+    background-color: #f5f5f5;
+    color: #555;
+}
+
+.td_id {
+    font-weight: bold;
+}
+
+.td_totale {
+    color: green;
+    font-weight: bold;
+}
+
+/* Stato ordine */
+
+.stato_badge {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 13px;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.stato_badge_consegnato {
+    background-color: #e8f5e9;
+    color: green;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 13px;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.stato_badge_spedizione {
+    background-color: #e3f2fd;
+    color: blue;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 13px;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.stato_badge_preparazione {
+    background-color: #fff3e0;
+    color: orange;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 13px;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.stato_badge_annullato {
+    background-color: #ffebee;
+    color: red;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 13px;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+/* Link vedi */
+
+.vedi {
+    padding: 6px 12px;
+    border: 1px solid green;
+    border-radius: 6px;
+    color: green;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.vedi:hover {
+    background-color: green;
+    color: white;
+}

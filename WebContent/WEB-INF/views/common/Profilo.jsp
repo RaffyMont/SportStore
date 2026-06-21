@@ -29,6 +29,7 @@
 	<meta charset="UTF-8">
 	<title>Profilo</title>
 	<link rel = "stylesheet" href = "<%= ctx %>/styles/home.css">
+	<link rel = "stylesheet" href = "<%= ctx %>/styles/profilo.css">
 	
 </head>
 <body>
@@ -38,6 +39,7 @@
 		<nav id = "breadcrump">
 			<ol>
 				<li> <a href = "<%= ctx %>/Home"> Home </a> </li>
+				<li> / </li>
 				<li aria-current = "page"> Il mio profilo
 			</ol>
 		</nav>
@@ -54,14 +56,14 @@
 				
 				<nav id = "sidebar_nav">
 					<span class = "sidebar_label"> Il mio account </span>
-					<a href = "<%= ctx %>/Profilo" class = "sidebar_link"> 
+					<a href = "<%= ctx %>/Profilo" class = "sidebar_link <%= (sezione == null || "dati".equals(sezione)) ? "sidebar_link_active" : "" %>"> 
 						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 							<circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
 						</svg>
 						I miei dati
 					</a>
 					
-					<a href = "<%= ctx %>/Profilo?sezione=ordini" class = "sidebar_link">
+					<a href = "<%= ctx %>/Profilo?sezione=ordini" class = "sidebar_link <%= (sezione == null || "ordini".equals(sezione)) ? "sidebar_link_active" : "" %>">
 						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 							<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
 							<polyline points="14 2 14 8 20 8"/>
@@ -74,7 +76,7 @@
 					<% if(utente.getRuolo() == UtenteBean.Ruolo.ADMIN){ %>
 						<div class = "separator"></div>
 						<span class = "sidebar_label"> Gestione </span>
-						<a href = "<%= ctx %>/admin/CatalogoCompleto" class = "sidebar-link">
+						<a href = "<%= ctx %>/admin/CatalogoCompleto" class = "sidebar_link">
 							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 								<rect x="3" y="3" width="7" height="7"/>
 								<rect x="14" y="3" width="7" height="7"/>
@@ -184,7 +186,7 @@
 									<polyline points="14 2 14 8 20 8"/>
 								</svg>
 								
-								<p> Non hai ancora effettuato ordini.
+								<p> Non hai ancora effettuato ordini. <br>
 								<a href = "<%= ctx %>/Catalogo" id = "shopping"> Vai al catalogo per iniziare a fare shopping </a>
 							</div>
 						<% } else { %>
@@ -231,7 +233,7 @@
 									<tr>
 										<td class = "td_id">#<%= o.getId_ordine() %> </td>
 										<td> <%= o.getData_ordine().format(formatter) %> </td>
-										<td> <span clss = "stato_badge_<%= statoCss %>_<%= statoLabel %>"> </span></td>
+										<td> <span class = "stato_badge_<%= statoCss %>"> <%= statoLabel %> </span></td>
 										<td class = "td_totale">&euro; <%= String.format("%.2f", o.getPrezzo_totale()) %></td>
 										<td>
 											<a href = "<%= ctx %>/DettaglioOrdine?id=<%=o.getId_ordine() %>" class = "vedi"> Vedi </a>
