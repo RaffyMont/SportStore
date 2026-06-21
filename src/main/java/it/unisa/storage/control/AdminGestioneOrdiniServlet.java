@@ -51,7 +51,6 @@ public class AdminGestioneOrdiniServlet extends HttpServlet {
 		    response.sendRedirect(ctx + "/Login");  
 		    return;
 		}
-		String role = (String) session.getAttribute("role");
 		UtenteBean utente = (UtenteBean) session.getAttribute("utente");
 		
 		String dataInizioStr = request.getParameter("dataInizio");

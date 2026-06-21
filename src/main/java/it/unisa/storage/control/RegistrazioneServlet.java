@@ -43,11 +43,12 @@ public class RegistrazioneServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession(false);
-		if(session != null && session.getAttribute("utente") != null)
-		{
-			response.sendRedirect(request.getContextPath() + "/Home");
-			return;
-		}
+		String token = (session != null) ? (String) session.getAttribute("token") : null;
+	    if (token != null) {
+	         response.sendRedirect(request.getContextPath() + "/Home");
+	         return;
+	    }
+	    request.setAttribute("paginaAttiva", "registrazione");
 		request.getRequestDispatcher("/WEB-INF/views/common/Registrazione.jsp").forward(request, response);
 	}
 
@@ -123,6 +124,7 @@ public class RegistrazioneServlet extends HttpServlet {
 		{
 			e.printStackTrace(); 
 			request.setAttribute("errore", e.getMessage());
+			request.setAttribute("paginaAttiva", "registrazione");
 			request.getRequestDispatcher("/WEB-INF/views/common/Registrazione.jsp").forward(request, response);
 		}
 	}

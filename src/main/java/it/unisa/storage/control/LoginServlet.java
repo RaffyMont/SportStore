@@ -38,11 +38,11 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession sessione = request.getSession(false);
-		if(sessione != null && sessione.getAttribute("utente") != null)
-		{
-			response.sendRedirect(request.getContextPath() + "/Home");
-			return;
-		}
+		String token = (sessione != null) ? (String) sessione.getAttribute("token") : null;
+	    if (token != null) {
+	         response.sendRedirect(request.getContextPath() + "/Home");
+	         return;
+	    }
 		
 		String redirectUrl = request.getParameter("redicter");
 		if(redirectUrl != null && !redirectUrl.isBlank())
@@ -81,6 +81,7 @@ public class LoginServlet extends HttpServlet {
 			{
 				request.setAttribute("errore", "Email o password non corretti");
 				request.setAttribute("emailInserita", email);
+				request.setAttribute("paginaAttiva", "login");
 				request.getRequestDispatcher("/WEB-INF/views/common/Login.jsp").forward(request, response);
 				return;
 			}

@@ -58,6 +58,10 @@ public class DettaglioProdottoServlet extends HttpServlet {
 			return;
 		}
 		
+		HttpSession session = request.getSession(false);
+        String     token   = (session != null) ? (String)     session.getAttribute("token")  : null;
+        UtenteBean utente  = (token   != null) ? (UtenteBean) session.getAttribute("utente") : null;
+		
 		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
 		ProdottoDao prodottoDao = new ProdottoDaoImpl(ds);
 		ImmaginiDao immaginiDao = new ImmaginiDaoImpl(ds);
@@ -77,16 +81,8 @@ public class DettaglioProdottoServlet extends HttpServlet {
 			Collection<SupportoColoreBean> colori = coloreDao.doRetrieveAllByProdotto(idProdotto);
 			Collection<SupportoTagliaBean> taglie = tagliaDao.doRetrieveAllByProdotto(idProdotto);
 			
-			HttpSession session = request.getSession(false);
-			UtenteBean utente = null;
-			Map<String, Integer> carrello = null;
+			Map<String, Integer> carrello =  (Map<String, Integer>) (session != null ? session.getAttribute("carrello") : null);;
 			int totale = 0;
-			
-			if(session != null)
-				utente = (UtenteBean) session.getAttribute("utente");
-			
-			if(session != null)
-				carrello = (Map<String, Integer>) session.getAttribute("carrello");
 			
 			if(carrello != null)
 				for(int quantita : carrello.values())

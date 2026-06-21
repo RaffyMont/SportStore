@@ -43,16 +43,13 @@ public class DettaglioOrdineServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String ctx = request.getContextPath();
 		HttpSession session = request.getSession(false);
-		UtenteBean utente = null;
-		
-		if(session != null)
-			utente = (UtenteBean) session.getAttribute("utente");
-		
-		if(utente == null)
-		{
-			response.sendRedirect(ctx + "/Login");
-			return;
-		}
+		String token = (session != null) ? (String) session.getAttribute("token") : null;
+        if (token == null) {
+            response.sendRedirect(ctx + "/Login");
+            return;
+        }
+ 
+        UtenteBean utente = (UtenteBean) session.getAttribute("utente");
 		
 		String idOrdine = request.getParameter("id");
 		if(idOrdine == null || idOrdine.isBlank())
