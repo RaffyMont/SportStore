@@ -91,7 +91,7 @@
 						<div id = "griglia">
 							<div class = "gruppo" id = "g_modello">
 								<label class = "label" for = "modello"> Modello <span class = "req">*</span></label>
-								<input type = "text" id = "modello" name = "modello" class = "input" value = "<%= vModello != null ? vModello : ""  %>" maxlenght = "100">
+								<input type = "text" id = "modello" name = "modello" class = "input" value = "<%= vModello != null ? vModello : ""  %>" maxlength = "100">
 							</div>
 							
 							<div class = "gruppo" id = "g_marca">
@@ -148,5 +148,6 @@
 	</main>
 	
 	<%@ include file = "../common/footer.jsp" %>
+	<script src = "<%= ctx %>/scripts/formInserisci.js"></script>
 </body>
 </html>
