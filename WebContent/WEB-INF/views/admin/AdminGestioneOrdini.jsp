@@ -191,7 +191,7 @@
 							<tr>
 								<td class = "td_id">#<%= o.getId_ordine() %></td>
 								<td><%= o.getData_ordine().format(formatter) %></td>
-								<td class = "td_nominativo"> <%= o.getId_utente().getNome() %><%= o.getId_utente().getCognome() %><br>
+								<td class = "td_nominativo"> <%= o.getId_utente().getNome() %> <%= o.getId_utente().getCognome() %><br>
 									<span class = "td_email"><%= o.getId_utente().getEmail() %></span>
 								</td>
 								<td>
