@@ -91,7 +91,7 @@
     color: #e53935;
 }
 
-.input_wrap input {
+.input_wrap input.form_input {
     width: 100%;
     padding: 0.6rem 0.85rem;
     border: 1px solid #ccc;
@@ -101,9 +101,14 @@
     transition: border-color 0.2s;
 }
 
-.input_wrap input:focus {
+.input_wrap input.form_input:focus {
     outline: none;
     border-color: #2e7d32;
+}
+
+.input_wrap input.form_input.input_errore {
+    border-color: #e53935;
+    background: #fff8f8;
 }
 
 #button {
@@ -153,4 +158,16 @@
     color: #e53935;
     font-size: 0.85rem;
     text-align: center;
+}
+
+.errore_campo {
+    color: #e53935;
+    font-size: 12px;
+    margin-top: 4px;
+    display: block;
+}
+
+.input_errore {
+    border-color: #e53935 !important;
+    background: #fff8f8;
 }

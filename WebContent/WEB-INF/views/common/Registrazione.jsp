@@ -181,5 +181,6 @@
 		</main>
 	
 	<%@ include file = "footer.jsp" %>
+	<script src="<%= ctx %>/scripts/registrazione.js"></script>
 </body>
 </html>
