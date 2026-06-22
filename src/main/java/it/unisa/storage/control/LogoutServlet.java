@@ -27,9 +27,9 @@ public class LogoutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String role = (String) request.getSession().getAttribute("role");
-		if(role != null)
-			request.getSession().invalidate();
+		String token = (String) request.getSession().getAttribute("token");
+	    if (token != null)
+	        request.getSession().invalidate();
 		
 		response.sendRedirect(request.getContextPath() + "/Home");
 	}
