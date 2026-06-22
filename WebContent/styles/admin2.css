@@ -1,0 +1,201 @@
+@charset "UTF-8";
+
+#breadcrumb {
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+#breadcrumb ol {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+}
+
+#breadcrumb a {
+    color: gray;
+    text-decoration: none;
+}
+
+#container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 20px;
+}
+
+#sidebar {
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px 0;
+}
+
+#sidebar_label {
+    padding: 8px 18px;
+    font-size: 11px;
+    font-weight: bold;
+    color: orange;
+    text-transform: uppercase;
+}
+
+.sidebar_link {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 12px 18px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.sidebar_link:hover {
+    background-color: #fff3e0;
+    color: orange;
+}
+
+#sidebar_separator {
+    height: 1px;
+    background-color: #eee;
+    margin: 6px 0;
+}
+
+#contenuto {
+    width: 100%;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#title {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+#bottone_principale {
+    padding: 9px 18px;
+    background-color: green;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#alert_successo {
+    padding: 12px;
+    background-color: #e8f5e9;
+    color: green;
+    border-left: 4px solid green;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+#alert_errore {
+    padding: 12px;
+    background-color: #ffebee;
+    color: red;
+    border-left: 4px solid red;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+#box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#tabella {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#tabella th,
+#tabella td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+#tabella th {
+    background-color: #f5f5f5;
+    color: #555;
+}
+
+.tr_disattivo {
+    opacity: 0.5;
+}
+
+.td_id {
+    font-size: 12px;
+    font-weight: bold;
+    color: gray;
+}
+
+.td_modello {
+    font-weight: bold;
+}
+
+.td_prezzo {
+    color: green;
+    font-weight: bold;
+}
+
+.td_azioni {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.stato_attivo,
+.stato_inattivo {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.stato_attivo {
+    background-color: #e8f5e9;
+    color: green;
+}
+
+.stato_inattivo {
+    background-color: #f5f5f5;
+    color: gray;
+}
+
+.modifica, .elimina, .reinserisci {
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.modifica {
+    background-color: #e3f2fd;
+    color: blue;
+}
+
+.elimina {
+    background-color: #ffebee;
+    color: red;
+}
+
+.reinserisci{
+	background-color: #ffebee;
+    color: green;
+}
+
+#vuoto {
+    text-align: center;
+    color: gray;
+    padding: 30px;
+}

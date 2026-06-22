@@ -21,6 +21,7 @@
 	<meta charset="UTF-8">
 	<title> Admin - Gestione Catalogo </title>
 	<link rel = "stylesheet" href = "<%= ctx %>/styles/home.css">
+	<link rel = "stylesheet" href = "<%= ctx %>/styles/admin2.css">
 </head>
 <body>
 	<%@ include file = "../common/header.jsp" %>
@@ -122,9 +123,16 @@
 										<a href = "<%= ctx %>/admin/ModificaProdotto?id=<%= p.getId_prodotto() %>" class = "modifica"> Modifica </a>
 										<% if(p.isAttivo()){ %>
 											<form method = "post" action = "<%= ctx %>/admin/CatalogoCompleto">
-												<input type = "hidden" name = "action" value = "elimina">
+												<input type = "hidden" name = "action" value = "disattiva">
 												<input type = "hidden" name = "id" value = "<%= p.getId_prodotto() %>">
 												<button type = "submit" class = "elimina"> Rimuovi </button>
+											</form>
+										<% } %>
+										<% if(!p.isAttivo()){ %>
+											<form method = "post" action = "<%= ctx %>/admin/CatalogoCompleto">
+												<input type = "hidden" name = "action" value = "riattiva">
+												<input type = "hidden" name = "id" value = "<%= p.getId_prodotto() %>">
+												<button type = "submit" class = "reinserisci"> Riattiva </button>
 											</form>
 										<% } %>
 									</td>
