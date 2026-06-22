@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+#griglia {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.gruppo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#g_descrizione {
+    grid-column: 1 / -1;
+}
+
+.label {
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+}
+
+.req {
+    color: red;
+}
+
+.input,
+.select,
+.textarea {
+    padding: 10px;
+    border: 1px solid lightgray;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.textarea {
+    width: 100%;
+    resize: vertical;
+    font-family: inherit;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+    border-color: green;
+    outline: none;
+}
+
+.azioni {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+#bottone_primario,
+.bottone_secondario {
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#bottone_primario {
+    border: none;
+    background-color: green;
+    color: white;
+    cursor: pointer;
+}
+
+.bottone_secondario {
+    border: 1px solid lightgray;
+    color: #333;
+    background-color: white;
+}

@@ -23,6 +23,8 @@
 	<meta charset="UTF-8">
 	<title>Admin - Catalogo Completo - Inserisci Prodotto</title>
 	<link rel = "stylesheet" href = "<%= ctx %>/styles/home.css">
+	<link rel = "stylesheet" href = "<%= ctx %>/styles/admin2.css">
+	<link rel = "stylesheet" href = "<%= ctx %>/styles/adminForm.css">
 </head>
 <body>
 	<%@ include file = "../common/header.jsp" %>
@@ -94,7 +96,7 @@
 							
 							<div class = "gruppo" id = "g_marca">
 								<label class = "label" for = "marca"> Marca <span class = "req">*</span></label>
-								<input type = "text" id = "marca" name = "marca" class = "input" value = "<%= vMarca != null ? vMarca : ""  %>" maxlenght = "100">
+								<input type = "text" id = "marca" name = "marca" class = "input" value = "<%= vMarca != null ? vMarca : ""  %>" maxlength = "100">
 							</div>
 							
 							<div class = "gruppo" id = "g_prezzo">
