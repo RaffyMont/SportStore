@@ -54,7 +54,7 @@
 		<div id = "container">
 			<aside id = "sidebar">
 				<p id = "sidebar_label"> Gestione
-				<a href = "<%= ctx %>/admin/Catalogo" class = "sidebar_link">
+				<a href = "<%= ctx %>/admin/CatalogoCompleto" class = "sidebar_link">
 					 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/>
 					 	<rect x="14" y="3" width="7" height="7"/>
 					 	<rect x="14" y="14" width="7" height="7"/>
@@ -63,7 +63,7 @@
 					Catalogo
 				</a>
 				
-				<a href = "<%= ctx %>/admin/Ordini" class = "sidebar_link">
+				<a href = "<%= ctx %>/admin/GestioneOrdini" class = "sidebar_link">
 					 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 					 	<line x1="8" y1="6" x2="21" y2="6"/>
 					 	<line x1="8" y1="12" x2="21" y2="12"/>
