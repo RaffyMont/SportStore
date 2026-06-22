@@ -116,7 +116,7 @@
 										<% if(p.isAttivo()){ %>
 											<span class = "stato_attivo"> Attivo </span>
 										<% } else { %>
-											<span clss = "stato_inattivo"> Disattivo </span>
+											<span class = "stato_inattivo"> Disattivo </span>
 										<% } %>
 									</td>
 									<td class = "td_azioni">

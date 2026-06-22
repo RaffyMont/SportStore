@@ -17,6 +17,11 @@
     text-decoration: none;
 }
 
+[aria-current="page"] {
+    font-weight: bold;
+    color: #333;
+}
+
 #container {
     max-width: 1100px;
     margin: 30px auto;
@@ -108,16 +113,18 @@
     background-color: white;
     padding: 20px;
     border-radius: 10px;
+    overflow-x: auto;
 }
 
 #tabella {
     width: 100%;
     border-collapse: collapse;
+    min-width: 800px;
 }
 
 #tabella th,
 #tabella td {
-    padding: 12px;
+    padding: 12px 8px;
     border-bottom: 1px solid #eee;
     text-align: left;
 }
@@ -135,6 +142,7 @@
     font-size: 12px;
     font-weight: bold;
     color: gray;
+    white-space: nowrap;
 }
 
 .td_modello {
@@ -150,6 +158,19 @@
     display: flex;
     gap: 8px;
     align-items: center;
+    flex-wrap: nowrap;
+}
+
+.td_azioni form {
+    display: contents; 
+    margin: 0;
+    padding: 0;
+}
+
+#tabella th:last-child,
+#tabella td:last-child {
+    width: 160px;
+    min-width: 160px;
 }
 
 .stato_attivo,
