@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,6 +72,16 @@ public class CatalogoServlet extends HttpServlet {
 			    prodotti = new ArrayList<>(prodottoDao.doRetrieveByGenere(genere.name()));
 			else
 			    prodotti = new ArrayList<>(prodottoDao.doRetrieveAll());
+			
+			List<ProdottoBean> prodottiAttivi = new ArrayList<>();
+
+			for (ProdottoBean p : prodotti) {
+			    if (p.isAttivo()) {
+			        prodottiAttivi.add(p);
+			    }
+			}
+
+			prodotti = prodottiAttivi;
 			
 			if(categoriaParam != null && !categoriaParam.isBlank())
 			{
