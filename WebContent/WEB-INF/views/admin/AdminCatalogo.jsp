@@ -20,6 +20,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title> Admin - Gestione Catalogo </title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel = "stylesheet" href = "<%= ctx %>/styles/home.css">
 	<link rel = "stylesheet" href = "<%= ctx %>/styles/admin2.css">
 </head>
@@ -105,21 +106,21 @@
 							<tbody>
 								<% for (ProdottoBean p : prodotti) { %>
 		                        	<tr class="<%= !p.isAttivo() ? "tr_disattivo" : "" %>">
-		                            <td class="td_id"><%= p.getId_prodotto() %></td>
-		                            <td class="td_modello"><%= p.getModello() %></td>
-		                            <td><%= p.getMarca() %></td>
-		                            <td><%= p.getCategoria().name() %></td>
-		                            <td><%= p.getGenere().name() %></td>
-		                            <td class="td_prezzo"><%= String.format("%.2f", p.getPrezzo()) %>&euro; </td>
-									<td><%= p.getStock() %></td>
-									<td>
+		                            <td data-label = "Id" class="td_id"><%= p.getId_prodotto() %></td>
+		                            <td data-label = "Modello" class="td_modello"><%= p.getModello() %></td>
+		                            <td data-label = "Marca"><%= p.getMarca() %></td>
+		                            <td data-label = "Categoria"><%= p.getCategoria().name() %></td>
+		                            <td data-label = "Genere"><%= p.getGenere().name() %></td>
+		                            <td data-label = "Prezzo" class="td_prezzo"><%= String.format("%.2f", p.getPrezzo()) %>&euro; </td>
+									<td data-label = "Stock"><%= p.getStock() %></td>
+									<td data-label = "Status">
 										<% if(p.isAttivo()){ %>
 											<span class = "stato_attivo"> Attivo </span>
 										<% } else { %>
 											<span class = "stato_inattivo"> Disattivo </span>
 										<% } %>
 									</td>
-									<td class = "td_azioni">
+									<td data-label = "Azioni" class = "td_azioni">
 										<a href = "<%= ctx %>/admin/ModificaProdotto?id=<%= p.getId_prodotto() %>" class = "modifica"> Modifica </a>
 										<% if(p.isAttivo()){ %>
 											<form method = "post" action = "<%= ctx %>/admin/CatalogoCompleto">
