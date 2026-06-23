@@ -33,6 +33,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Area Admin - Gestione Ordini </title>
 	<link rel = "stylesheet" href = "<%= ctx %>/styles/home.css">
 	<link rel = "stylesheet" href = "<%= ctx %>/styles/admin.css">
@@ -189,15 +190,15 @@
 									}
 							%>
 							<tr>
-								<td class = "td_id">#<%= o.getId_ordine() %></td>
-								<td><%= o.getData_ordine().format(formatter) %></td>
-								<td class = "td_nominativo"> <%= o.getId_utente().getNome() %> <%= o.getId_utente().getCognome() %><br>
+								<td data-label = "Ordine" class = "td_id">#<%= o.getId_ordine() %></td>
+								<td data-label = "Data"><%= o.getData_ordine().format(formatter) %></td>
+								<td data-label = "Cliente" class = "td_nominativo"> <%= o.getId_utente().getNome() %> <%= o.getId_utente().getCognome() %><br>
 									<span class = "td_email"><%= o.getId_utente().getEmail() %></span>
 								</td>
-								<td>
+								<td data-label = "Stato">
 									<span class = "stato_<%= statoCss %>"> <%= statoLabel %></span>
 								</td>
-								<td class = "td_prezzo"> <%= String.format("%.2f", o.getPrezzo_totale()) %></td>
+								<td data-label = "Totale" class = "td_prezzo"> <%= String.format("%.2f", o.getPrezzo_totale()) %></td>
 								<td>
 									<a href = "<%= ctx %>/DettaglioOrdine?id=<%= o.getId_ordine() %>" class = "azione"> Vedi </a>
 								</td>

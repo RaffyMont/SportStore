@@ -246,3 +246,97 @@
     color: gray;
     padding: 30px;
 }
+
+@media screen and (max-width: 1024px) {
+    #container {
+        grid-template-columns: 170px 1fr;
+        padding: 15px;
+    }
+}
+ 
+@media screen and (max-width: 768px) {
+    #container {
+        grid-template-columns: 1fr !important;
+        gap: 15px;
+        padding: 10px;
+        margin: 10px auto;
+    }
+
+    #sidebar {
+        display: flex !important;
+        flex-wrap: wrap;
+        flex-direction: row;
+        padding: 8px;
+    }
+
+    #sidebar_label {
+        width: 100%;
+    }
+
+    .sidebar_link {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    #filtri_form {
+        flex-direction: column;
+    }
+
+    .filtro_input, .filtro_select {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    #bottone_principale, #bottone_secondario {
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    #stats {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #box {
+        background: transparent !important;
+        padding: 0 !important;
+    }
+
+    #tabella thead {
+        display: none !important;
+    }
+
+    #tabella, #tabella tbody, #tabella tr, #tabella td {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    #tabella tr {
+        background: white;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        padding: 12px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    #tabella td {
+        border: none !important;
+        padding: 6px 0 !important;
+        font-size: 13px;
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #tabella td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #555;
+        font-size: 11px;
+        text-transform: uppercase;
+        flex-shrink: 0;
+        margin-right: 10px;
+    }
+}
