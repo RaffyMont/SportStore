@@ -26,6 +26,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Dettaglio Ordine</title>
 	<link rel = "stylesheet" href = "<%= ctx %>/styles/home.css">
 	<link rel = "stylesheet" href = "<%= ctx %>/styles/dettaglioOrdine.css">
@@ -109,14 +110,14 @@
 							<tbody>
 								<% for(DettagliOrdineBean d : dettagli){ %>
 									<tr>
-										<td class = "td_prodotto">
+										<td data-label = "Prodotto" class = "td_prodotto">
 											<span class = "prodotto_nome"> <%= d.getId_prodotto().getModello() %></span>
 											<span class = "prodotto_categoria"> <%= d.getId_prodotto().getCategoria().name() %></span>
 										</td>
-										<td><%= d.getId_prodotto().getMarca() %> </td>
-										<td><%= String.format("%.2f", d.getPrezzo_unitario()) %>&euro;</td>
-										<td><%= d.getQuantita() %></td>
-										<td class = "prodotto_subtotale"><%= String.format("%.2f", d.getPrezzo_unitario() * d.getQuantita()) %>&euro;</td>
+										<td data-label = "Marca"><%= d.getId_prodotto().getMarca() %> </td>
+										<td data-label = "Prezzo Unitario"><%= String.format("%.2f", d.getPrezzo_unitario()) %>&euro;</td>
+										<td data-label = "Quantità"><%= d.getQuantita() %></td>
+										<td data-label = "Prezzo Subtotale" class = "prodotto_subtotale"><%= String.format("%.2f", d.getPrezzo_unitario() * d.getQuantita()) %>&euro;</td>
 									</tr>
 								<% } %>
 							</tbody>
