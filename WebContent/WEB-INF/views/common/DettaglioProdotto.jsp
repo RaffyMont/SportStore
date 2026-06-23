@@ -98,7 +98,7 @@
 							<button type = "button" class = "bottone" id = "piu" onclick="cambiaQuantita(+1, <%= prodotto.getStock() %>)"> &#43; </button>
 						</div>
 					</div>
-					<button type = "submit" id = "aggiungi"> Aggiungi al carrello</button>
+					<button type = "submit" id = "aggiungi"> <!-- Da implementare successivamente --> Aggiungi al carrello</button>
 				<% } else { %>
             		<button type = "submit" id = "non aggiungi" disabled> Prodotto esaurito </button>
             	<% } %>

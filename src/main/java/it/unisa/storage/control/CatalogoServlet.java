@@ -18,6 +18,7 @@ import it.unisa.storage.dao.ImmaginiDao;
 import it.unisa.storage.dao.ImmaginiDaoImpl;
 import it.unisa.storage.dao.ProdottoDao;
 import it.unisa.storage.dao.ProdottoDaoImpl;
+import it.unisa.storage.model.CarrelloBean;
 import it.unisa.storage.model.ImmagineBean;
 import it.unisa.storage.model.ProdottoBean;
 import it.unisa.storage.model.ProdottoBean.Categoria;
@@ -118,12 +119,11 @@ public class CatalogoServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		@SuppressWarnings("unchecked")
-		Map<String, Integer> carrello = (Map<String, Integer>) request.getSession().getAttribute("carrello");
+		CarrelloBean carrello = (CarrelloBean) request.getSession().getAttribute("carrello");
 		int totale = 0;
 		
 		if(carrello != null)
-			for(int quantita : carrello.values())
+			for(int quantita = 0; quantita < carrello.getNumeroArticoli(); quantita++)
 				totale += quantita;
 
 		request.setAttribute("genereLabel", genereLabel);

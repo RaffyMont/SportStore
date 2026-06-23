@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -18,6 +17,7 @@ import it.unisa.storage.dao.DettagliOrdineDao;
 import it.unisa.storage.dao.DettagliOrdineDaoImpl;
 import it.unisa.storage.dao.OrdineDao;
 import it.unisa.storage.dao.OrdineDaoImpl;
+import it.unisa.storage.model.CarrelloBean;
 import it.unisa.storage.model.DettagliOrdineBean;
 import it.unisa.storage.model.OrdineBean;
 import it.unisa.storage.model.UtenteBean;
@@ -83,11 +83,10 @@ public class DettaglioOrdineServlet extends HttpServlet {
 			
 			Collection<DettagliOrdineBean> dettagli = dettaglioDao.doRetrieveAllByOrdine(idOrdine);
 			
-			@SuppressWarnings("unchecked")
-			Map<String, Integer> carrello = (Map<String, Integer>) session.getAttribute("carrello");
+			CarrelloBean carrello = (CarrelloBean) session.getAttribute("carrello");
 			int totaleArticoli = 0;
 			if(carrello != null)
-				for(int quantita : carrello.values())
+				for(int quantita = 0; quantita < carrello.getNumeroArticoli(); quantita++)
 					totaleArticoli += quantita;
 			
 			request.setAttribute("ctx", ctx);

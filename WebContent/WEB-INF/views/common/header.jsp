@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page import="it.unisa.storage.model.CarrelloBean"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "it.unisa.storage.model.UtenteBean" %>
 <%@ page import = "java.util.Map" %>
 
@@ -21,9 +21,9 @@
 		totale = (int) totAtt;
 	else
 	{
-		Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("carrello");
-		if(cart != null)
-			for(int i : cart.values())
+		CarrelloBean carrello = (CarrelloBean) session.getAttribute("carrello");
+		if(carrello != null)
+			for(int i = 0; i < carrello.getNumeroArticoli(); i++)
 				totale += i;
 	}
 	

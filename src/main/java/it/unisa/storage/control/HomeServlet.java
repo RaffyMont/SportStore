@@ -18,6 +18,7 @@ import it.unisa.storage.dao.ImmaginiDao;
 import it.unisa.storage.dao.ImmaginiDaoImpl;
 import it.unisa.storage.dao.ProdottoDao;
 import it.unisa.storage.dao.ProdottoDaoImpl;
+import it.unisa.storage.model.CarrelloBean;
 import it.unisa.storage.model.ImmagineBean;
 import it.unisa.storage.model.ProdottoBean;
 
@@ -95,13 +96,12 @@ public class HomeServlet extends HttpServlet {
 					immaginiMap.put(p.getId_prodotto(), null);
 			}
 			
-			@SuppressWarnings("unchecked")
-			Map<String, Integer> carrello = (Map<String, Integer>) request.getSession().getAttribute("carrello");
+			CarrelloBean carrello = (CarrelloBean) request.getSession().getAttribute("carrello");
 			int totaleArticoli = 0;
 			
 			if(carrello != null)
-				for(int quantità : carrello.values())
-					totaleArticoli += quantità;
+				for(int quantita = 0; quantita < carrello.getNumeroArticoli(); quantita++)
+					totaleArticoli += quantita;
 			
 			request.setAttribute("scarpeEvidenza", scarpe);
 			request.setAttribute("vestitiEvidenza", vestiti);

@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -22,6 +21,7 @@ import it.unisa.storage.dao.SupportoColoreDao;
 import it.unisa.storage.dao.SupportoColoreDaoImpl;
 import it.unisa.storage.dao.SupportoTagliaDao;
 import it.unisa.storage.dao.SupportoTagliaDaoImpl;
+import it.unisa.storage.model.CarrelloBean;
 import it.unisa.storage.model.ImmagineBean;
 import it.unisa.storage.model.ProdottoBean;
 import it.unisa.storage.model.SupportoColoreBean;
@@ -46,7 +46,6 @@ public class DettaglioProdottoServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String ctx  = request.getContextPath();
@@ -81,11 +80,11 @@ public class DettaglioProdottoServlet extends HttpServlet {
 			Collection<SupportoColoreBean> colori = coloreDao.doRetrieveAllByProdotto(idProdotto);
 			Collection<SupportoTagliaBean> taglie = tagliaDao.doRetrieveAllByProdotto(idProdotto);
 			
-			Map<String, Integer> carrello =  (Map<String, Integer>) (session != null ? session.getAttribute("carrello") : null);;
+			CarrelloBean carrello =  (CarrelloBean) (session != null ? session.getAttribute("carrello") : null);;
 			int totale = 0;
 			
 			if(carrello != null)
-				for(int quantita : carrello.values())
+				for(int quantita = 0; quantita < carrello.getNumeroArticoli(); quantita++)
 					totale += quantita;
 			
 			request.setAttribute("ctx", ctx);

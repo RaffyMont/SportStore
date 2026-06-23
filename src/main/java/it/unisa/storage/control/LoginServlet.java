@@ -15,8 +15,6 @@ import javax.sql.DataSource;
 import it.unisa.storage.dao.UtenteDao;
 import it.unisa.storage.dao.UtenteDaoImpl;
 import it.unisa.storage.model.UtenteBean;
-import it.unisa.storage.model.UtenteBean.Ruolo;
-
 /**
  * Servlet implementation class LoginServlet
  */
