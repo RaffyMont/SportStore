@@ -30,6 +30,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title> <%= prodotto != null ? prodotto.getModello() : "Prodotto" %></title>
 	<link rel = "stylesheet" href = "<%= ctx %>/styles/home.css">
 	<link rel = "stylesheet" href = "<%= ctx %>/styles/dettaglio.css">
@@ -60,7 +61,7 @@
 				<% if(prodotto.getDescrizione() != null && !prodotto.getDescrizione().isBlank()){ %>
 					<p id = "descrizione"> <%= prodotto.getDescrizione() %>
 				<% } %>
-				<% if(colori != null && !colori.isEmpty()){ %>>
+				<% if(colori != null && !colori.isEmpty()){ %>
 					   <div class = "sezione">
 					   		<p class = "label"> Colori Disponibili
 					   		<div id = "colori">
@@ -97,7 +98,7 @@
 							<button type = "button" class = "bottone" id = "piu" onclick="cambiaQuantita(+1, <%= prodotto.getStock() %>)"> &#43; </button>
 						</div>
 					</div>
-					<button type = "submit" id = "aggiungi"> <!-- Da implementare successivamente --> Aggiungi al carrello</button>
+					<button type = "submit" id = "aggiungi"> Aggiungi al carrello</button>
 				<% } else { %>
             		<button type = "submit" id = "non aggiungi" disabled> Prodotto esaurito </button>
             	<% } %>
@@ -105,7 +106,7 @@
 			</div>
 		</div>
 		<% } else { %>
-    		<div id = "error ">Prodotto non trovato.</div>
+    		<div id = "error">Prodotto non trovato.</div>
     	<% } %>
 	</main>
 	

@@ -101,7 +101,7 @@
 					</button>
 				</div>
 				
-				<span class = "form-error" id = "err-email" role = "alert" aria-live = "polite"></span>
+				<span class = "form-error" id = "err-password" role = "alert" aria-live = "polite"></span>
 				
 			</div>
 			
@@ -126,5 +126,6 @@
 		</div>
 	</main>
 	<%@ include file = "footer.jsp" %>
+	<script src = "<%= ctx %>/scripts/login.js"></script>
 </body>
 </html>
