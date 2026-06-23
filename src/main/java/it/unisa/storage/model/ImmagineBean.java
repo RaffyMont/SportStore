@@ -6,7 +6,7 @@ public class ImmagineBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private  byte[] pathname;
+	private String pathname;
 	private String mime_type;
 	private ProdottoBean id_prodotto;
 	
@@ -15,14 +15,13 @@ public class ImmagineBean implements Serializable{
 		this.id_prodotto = new ProdottoBean();
 	}
 
-	public byte[] getImage() {
+	public String getPathname() {
 		return pathname;
 	}
 
-	public void setImage(byte[] image) {
-		this.pathname = image;
+	public void setPathname(String pathname) {
+		this.pathname = pathname;
 	}
-	
 
 	public String getMime_type() {
 		return mime_type;

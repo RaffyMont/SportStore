@@ -48,9 +48,9 @@
 			<nav class = "footer_nav" aria-label = "Informazioni">
 				<h4> Info </h4>
 				<ul role = "list">
-					<li> <a href = "<%= fCtx %>/Contatti"> Contatti </a></li>
-					<li> <a href = "<%= fCtx %>/SpedizioniResi"> Spedizioni e Resi </a></li>
-					<li> <a href = "<%= fCtx %>/Privacy"> Privacy </a></li>
+					<li> <a href = "<%= fCtx %>/Home"> Contatti </a></li>
+					<li> <a href = "<%= fCtx %>/Home"> Spedizioni e Resi </a></li>
+					<li> <a href = "<%= fCtx %>/Home"> Privacy </a></li>
 				</ul>
 			</nav>
 		</div>

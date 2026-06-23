@@ -97,7 +97,7 @@ CREATE TABLE SupportoTaglia(
 );
 
 CREATE TABLE Immagine(
-	pathname LONGBLOB DEFAULT NULL,
+	pathname varchar(256) DEFAULT NULL,
 	mime_type VARCHAR(50) DEFAULT NULL,
     id_prodotto char(12) NOT NULL,
 
