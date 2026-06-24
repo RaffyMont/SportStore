@@ -165,6 +165,9 @@
 
 <%@ include file="footer.jsp" %>
 
+<script>
+    var CTX = "<%= ctx %>";
+</script>
 <script src="<%= ctx %>/scripts/carrello.js"></script>
 </body>
 </html>

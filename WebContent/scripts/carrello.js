@@ -99,8 +99,6 @@ function rimuoviArticolo(chiave) {
 }
 
 function svuotaCarrello() {
-    if (!confirm("Vuoi svuotare il carrello?")) return;
-
     postCarrello({ action: "svuota" })
     .then(data => {
         if (!data.success) { showToast("Errore.", "err"); return; }
