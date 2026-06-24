@@ -171,3 +171,63 @@
     border-color: #e53935 !important;
     background: #fff8f8;
 }
+
+@media (max-width: 1024px) {
+    #registrazione_card {
+        max-width: 600px;
+        padding: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    #registrazione_card {
+        max-width: 100%;
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    .registrazione_schermata {
+        grid-template-columns: 1fr;
+    }
+
+    .sezione_interna {
+        flex-direction: column;
+    }
+
+    #div_civico {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    #registrazione_card {
+        margin: 0.5rem;
+        padding: 1.2rem;
+        border-radius: 8px;
+    }
+
+    #header_title {
+        font-size: 1.2rem;
+    }
+
+    .input_wrap input.form_input {
+        font-size: 16px;
+        padding: 0.7rem 0.85rem;
+    }
+
+    #button {
+        padding: 0.85rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 360px) {
+    #registrazione_card {
+        margin: 0.3rem;
+        padding: 1rem;
+    }
+
+    #header_title {
+        font-size: 1.1rem;
+    }
+}
