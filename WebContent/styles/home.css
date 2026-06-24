@@ -569,3 +569,151 @@ img {
     font-size: 12px;
     color: #455a64;
 }
+
+@media (max-width: 1024px) {
+    .navbar_container {
+        padding: 10px 16px;
+        gap: 14px;
+    }
+
+    .navbar_search-form input {
+        width: 100px;
+    }
+
+    .hero {
+        padding: 50px 6%;
+    }
+
+    .hero_title {
+        font-size: 40px;
+    }
+
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar_nav {
+        display: none;
+    }
+
+    .navbar_search-form {
+        display: none;
+    }
+
+    .navbar_login-label {
+        display: none;
+    }
+
+    .hero {
+        flex-direction: column;
+        padding: 40px 20px;
+        text-align: center;
+        gap: 30px;
+        min-height: auto;
+    }
+
+    .hero_title {
+        font-size: 32px;
+    }
+
+    .hero_sub {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .hero_visual {
+        max-width: 100%;
+    }
+
+    .benefit--sep {
+        display: none;
+    }
+
+    .benefits_container {
+        gap: 20px;
+        padding: 12px 16px;
+    }
+
+    .catalog-section {
+        padding: 0 14px;
+        margin: 28px auto 0;
+    }
+
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+        gap: 14px;
+    }
+
+    .footer_container {
+        gap: 24px;
+        padding: 30px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar_container {
+        padding: 10px 12px;
+        gap: 10px;
+    }
+
+    .hero {
+        padding: 30px 14px;
+    }
+
+    .hero_title {
+        font-size: 26px;
+    }
+
+    .catalog-section {
+        padding: 0 10px;
+        margin: 20px auto 0;
+    }
+
+    .catalog-section_title {
+        font-size: 18px;
+    }
+
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px;
+    }
+
+    .product-card_body {
+        padding: 10px;
+    }
+
+    .product-card_name {
+        font-size: 13px;
+    }
+
+    .product-card_price {
+        font-size: 14px;
+    }
+
+    .footer_container {
+        flex-direction: column;
+        gap: 20px;
+        padding: 24px 14px;
+    }
+
+    .footer_bottom {
+        padding: 12px 14px;
+    }
+}
+
+@media (max-width: 360px) {
+    .hero_title {
+        font-size: 22px;
+    }
+
+    .products-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .user-name {
+        display: none;
+    }
+}
