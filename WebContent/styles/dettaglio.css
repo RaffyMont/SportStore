@@ -181,3 +181,77 @@
     color: white;
     border-color: green;
 }
+
+@media (max-width: 1024px) {
+    #container {
+        gap: 24px;
+        padding: 16px;
+    }
+
+    #modello { font-size: 24px; }
+    #prezzo { font-size: 22px; }
+}
+
+@media (max-width: 768px) {
+    #container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 16px;
+        margin: 16px auto;
+    }
+
+    #imgPrincipale {
+        max-height: 400px;
+        object-fit: contain;
+    }
+
+    #modello { font-size: 22px; }
+    #prezzo { font-size: 20px; }
+
+    #aggiungi {
+        width: 100%;
+        font-size: 16px;
+    }
+
+    #non\ aggiungi {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    #container {
+        padding: 10px;
+        margin: 10px auto;
+    }
+
+    #modello { font-size: 20px; }
+    #prezzo { font-size: 18px; }
+
+    .mini {
+        width: 55px;
+        height: 55px;
+    }
+
+    .tag_colore, .box_taglia {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+
+    .bottone {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+
+    #torna { font-size: 13px; }
+}
+
+@media (max-width: 360px) {
+    #modello { font-size: 18px; }
+    #prezzo { font-size: 16px; }
+
+    .mini {
+        width: 48px;
+        height: 48px;
+    }
+}
