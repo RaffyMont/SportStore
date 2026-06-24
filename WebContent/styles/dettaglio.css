@@ -175,3 +175,9 @@
     text-align: center;
     color: gray;
 }
+
+.sel {
+    background-color: green;
+    color: white;
+    border-color: green;
+}

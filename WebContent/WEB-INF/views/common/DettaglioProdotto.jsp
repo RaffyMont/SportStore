@@ -66,7 +66,7 @@
 					   		<p class = "label"> Colori Disponibili
 					   		<div id = "colori">
 					   			<% for(SupportoColoreBean c : colori){ %>
-					   			<span class = "tag_colore"> <%= c.getNome().getColore() %></span>
+					   			<span class = "tag_colore" data-valore="<%= c.getNome().getColore() %>"> <%= c.getNome().getColore() %></span>
 					   			<% } %>
 					   		</div>
 					   </div>
@@ -76,7 +76,7 @@
 							<p class = "label"> Taglie disponibili
 							<div id = "taglie">
 								<% for(SupportoTagliaBean t : taglie){ %>
-					   			<span class = "box_taglia"> <%= t.getTaglia().getTaglia() %></span>
+					   			<span class = "box_taglia" data-valore = "<%= t.getTaglia().getTaglia() %>"> <%= t.getTaglia().getTaglia() %></span>
 					   			<% } %>
 							</div>
 						</div>
@@ -98,7 +98,7 @@
 							<button type = "button" class = "bottone" id = "piu" onclick="cambiaQuantita(+1, <%= prodotto.getStock() %>)"> &#43; </button>
 						</div>
 					</div>
-					<button type = "submit" id = "aggiungi"> <!-- Da implementare successivamente --> Aggiungi al carrello</button>
+					<button type = "submit" id = "aggiungi"  onclick="aggiungiAlCarrelloConQuantita('<%= prodotto.getId_prodotto() %>', this)"> <!-- Da implementare successivamente --> Aggiungi al carrello</button>
 				<% } else { %>
             		<button type = "submit" id = "non aggiungi" disabled> Prodotto esaurito </button>
             	<% } %>
