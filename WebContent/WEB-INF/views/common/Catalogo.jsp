@@ -55,7 +55,8 @@
 				<p id = "title_paragraph"> <%= "UOMO".equals(genereParam) ? "Abbigliamento, scarpe e accessori pensati per le tue performance"
 											  : "DONNA".equals(genereParam) ? "Stile e performance per ogni tipo di allenamento"
 											  : "BAMBINO".equals(genereParam) ? "Tutto il necessario per i piccoli sportivi in crescita"
-											  : "Capi versatili adatti a tutti, senza distinzioni"
+											  : "UNISEX".equals(genereParam) ? "Capi versatili adatti a tutti, senza distinzioni"
+										      : "Tutti i prodotti del nostro catalogo"
 											%>
 			</div>
 			

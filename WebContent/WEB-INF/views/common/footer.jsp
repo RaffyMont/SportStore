@@ -27,7 +27,6 @@
 				<li> <a href = "<%= fCtx %>/Catalogo?genere=DONNA"> Donna </a></li>
 				<li> <a href = "<%= fCtx %>/Catalogo?genere=BAMBINO"> Bambino </a></li>
 				<li> <a href = "<%= fCtx %>/Catalogo?genere=UNISEX"> Unisex </a></li>
-				<li> <a href = "<%= fCtx %>/Catalogo?genere=UNISEX&Catalogo?categoria=ACCESSORIO"> Accessori </a></li>
 			</ul>
 			</nav>
 			
