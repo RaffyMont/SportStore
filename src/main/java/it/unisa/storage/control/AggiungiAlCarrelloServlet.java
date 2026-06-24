@@ -48,8 +48,8 @@ public class AggiungiAlCarrelloServlet extends HttpServlet {
 		String idProdotto = request.getParameter("id_prodotto");
         String colore = request.getParameter("colore");
         String taglia = request.getParameter("taglia");
-        String qStr       = request.getParameter("quantita");
-        int quantita      = 1;
+        String qStr = request.getParameter("quantita");
+        int quantita = 1;
         if (qStr != null && !qStr.isBlank()) {
             try { quantita = Integer.parseInt(qStr); } catch (NumberFormatException e) { quantita = 1; }
         }

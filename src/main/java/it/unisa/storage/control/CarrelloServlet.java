@@ -45,10 +45,10 @@ public class CarrelloServlet extends HttpServlet {
         //Forse da correggere con il token in sessione
         UtenteBean utente = (session != null) ? (UtenteBean) session.getAttribute("utente") : null;
         
-        request.setAttribute("ctx",            ctx);
-        request.setAttribute("paginaAttiva",   "");
-        request.setAttribute("utente",         utente);
-        request.setAttribute("carrello",       carrello);
+        request.setAttribute("ctx", ctx);
+        request.setAttribute("paginaAttiva", "");
+        request.setAttribute("utente", utente);
+        request.setAttribute("carrello", carrello);
         request.setAttribute("totaleArticoli", carrello.getNumeroArticoli());
         request.getRequestDispatcher("/WEB-INF/views/common/Carrello.jsp").forward(request, response);
 
@@ -73,8 +73,8 @@ public class CarrelloServlet extends HttpServlet {
             return;
 		}
 		
-		String action  = request.getParameter("action");
-	    String chiave  = request.getParameter("chiave");
+		String action = request.getParameter("action");
+	    String chiave = request.getParameter("chiave");
 
 	    switch (action != null ? action : "") {
 

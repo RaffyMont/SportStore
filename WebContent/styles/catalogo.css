@@ -212,3 +212,122 @@ body
     border-radius: 6px;
     font-weight: bold;
 }
+
+@media (max-width: 1024px) {
+    #banner {
+        padding: 30px 20px;
+    }
+
+    #banner_title {
+        font-size: 32px;
+    }
+
+    #griglia_iterno {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    #banner {
+        padding: 24px 16px;
+    }
+
+    #banner_title {
+        font-size: 26px;
+    }
+
+    #toolbar {
+        margin: 16px auto 0;
+        padding: 10px 12px;
+        gap: 8px;
+    }
+
+    .filtro {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+
+    #griglia {
+        padding: 0 12px 40px 12px;
+        margin: 16px auto;
+    }
+
+    #griglia_iterno {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 14px;
+    }
+
+    .card_media {
+        height: 180px;
+    }
+
+    .name {
+        font-size: 15px;
+    }
+
+    .prezzo {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    #banner_title {
+        font-size: 22px;
+    }
+
+    #title_paragraph {
+        font-size: 13px;
+    }
+
+    #toolbar {
+        padding: 8px 10px;
+        gap: 6px;
+    }
+
+    .filtro {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+
+    #griglia_iterno {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 10px;
+    }
+
+    .card_media {
+        height: 150px;
+    }
+
+    .prodotto_card_body {
+        padding: 10px;
+    }
+
+    .name {
+        font-size: 13px;
+        margin: 5px 0;
+    }
+
+    .prezzo {
+        font-size: 13px;
+    }
+
+    .bottone {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+    #toolbar_dx {
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 360px) {
+    #griglia_iterno {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .card_media {
+        height: 130px;
+    }
+}

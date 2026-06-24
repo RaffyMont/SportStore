@@ -8,7 +8,7 @@
     if (ctx == null) ctx = request.getContextPath();
     request.setAttribute("ctx", ctx);
 
-    UtenteBean  utente   = (UtenteBean)  request.getAttribute("utente");
+    UtenteBean utente = (UtenteBean)  request.getAttribute("utente");
     CarrelloBean carrello2 = (CarrelloBean) request.getAttribute("carrello");
 
     Map<String, CarrelloItemBean> items =
@@ -148,7 +148,7 @@
                 </div>
 
                 <% if (utente != null) { %>
-                    <a href="<%= ctx %>/Checkout" id="btn_checkout">PROCEDI AL CHECKOUT</a>
+                    <a href="<%= ctx %>/Checkout" id="btn_checkout">PROCEDI ALL'ACQUISTO</a>
                 <% } else { %>
                     <a href="<%= ctx %>/Login?redirect=<%= ctx %>/Carrello" id="btn_checkout">
                         ACCEDI PER CONTINUARE
