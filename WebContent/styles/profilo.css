@@ -287,3 +287,166 @@
     background-color: green;
     color: white;
 }
+
+@media (max-width: 1024px) {
+    #profilo_container {
+        grid-template-columns: 220px 1fr;
+        padding: 15px;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    #profilo_container {
+        grid-template-columns: 1fr !important;
+        padding: 15px;
+        margin: 15px auto;
+        gap: 15px;
+    }
+
+    #breadcrump {
+        padding: 0 15px;
+        margin: 15px auto;
+    }
+
+    #sidebar_avatar {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+    }
+
+    #avatar {
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-width: 120px;
+    }
+
+    #cerchio {
+        width: 50px;
+        height: 50px;
+        font-size: 18px;
+        margin-bottom: 6px;
+    }
+
+    #nominativo {
+        font-size: 13px;
+    }
+
+    #email {
+        font-size: 11px;
+    }
+
+    #sidebar_nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        flex: 1;
+    }
+
+    .sidebar_label {
+        width: 100%;
+        padding: 8px 12px 4px;
+    }
+
+    .sidebar_link, .sidebar-link {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+
+    .separator {
+        width: 100%;
+    }
+
+    .griglia_dati {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .box_titolo {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    #profilo_container {
+        padding: 10px;
+        margin: 10px auto;
+    }
+
+    #breadcrump {
+        padding: 0 10px;
+        margin: 10px auto;
+    }
+
+    #sidebar_avatar {
+        flex-direction: column;
+    }
+
+    #avatar {
+        padding: 16px;
+        min-width: unset;
+    }
+
+    #sidebar_nav {
+        flex-direction: column;
+    }
+
+    .griglia_dati {
+        grid-template-columns: 1fr;
+    }
+
+    .profilo_box {
+        padding: 14px;
+    }
+
+    #tabella_ordini thead {
+        display: none;
+    }
+
+    #tabella_ordini,
+    #tabella_ordini tbody,
+    #tabella_ordini tr,
+    #tabella_ordini td {
+        display: block;
+        width: 100%;
+    }
+
+    #tabella_ordini tr {
+        border: 1px solid #eee;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+
+    #tabella_ordini td {
+        border: none;
+        padding: 4px 0;
+        font-size: 13px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #tabella_ordini td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #555;
+        font-size: 11px;
+        text-transform: uppercase;
+        flex-shrink: 0;
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 360px) {
+    .sidebar_link, .sidebar-link {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    .box_titolo {
+        font-size: 14px;
+    }
+}

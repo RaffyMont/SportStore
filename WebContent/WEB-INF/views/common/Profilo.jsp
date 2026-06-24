@@ -27,6 +27,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Profilo</title>
 	<link rel = "stylesheet" href = "<%= ctx %>/styles/home.css">
 	<link rel = "stylesheet" href = "<%= ctx %>/styles/profilo.css">
@@ -231,11 +232,11 @@
 									%>
 									
 									<tr>
-										<td class = "td_id">#<%= o.getId_ordine() %> </td>
-										<td> <%= o.getData_ordine().format(formatter) %> </td>
-										<td> <span class = "stato_badge_<%= statoCss %>"> <%= statoLabel %> </span></td>
-										<td class = "td_totale">&euro; <%= String.format("%.2f", o.getPrezzo_totale()) %></td>
-										<td>
+										<td data-label = "Ordine" class = "td_id">#<%= o.getId_ordine() %> </td>
+										<td data-label = "Data"> <%= o.getData_ordine().format(formatter) %> </td>
+										<td data-label = "Stato"> <span class = "stato_badge_<%= statoCss %>"> <%= statoLabel %> </span></td>
+										<td data-label = "Totale" class = "td_totale">&euro; <%= String.format("%.2f", o.getPrezzo_totale()) %></td>
+										<td data-label = "">
 											<a href = "<%= ctx %>/DettaglioOrdine?id=<%= o.getId_ordine() %>" class = "vedi"> Vedi </a>
 										</td>
 									</tr>
