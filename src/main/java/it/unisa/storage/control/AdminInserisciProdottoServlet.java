@@ -9,14 +9,29 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 import javax.sql.DataSource;
 
+import it.unisa.storage.dao.ColoreDao;
+import it.unisa.storage.dao.ColoreDaoImpl;
 import it.unisa.storage.dao.ProdottoDao;
 import it.unisa.storage.dao.ProdottoDaoImpl;
+import it.unisa.storage.dao.SupportoColoreDao;
+import it.unisa.storage.dao.SupportoColoreDaoImpl;
+import it.unisa.storage.dao.SupportoTagliaDao;
+import it.unisa.storage.dao.SupportoTagliaDaoImpl;
+import it.unisa.storage.dao.TagliaDao;
+import it.unisa.storage.dao.TagliaDaoImpl;
 import it.unisa.storage.model.ProdottoBean.Categoria;
 import it.unisa.storage.model.ProdottoBean.Genere;
+import it.unisa.storage.model.SupportoColoreBean;
+import it.unisa.storage.model.SupportoTagliaBean;
 import it.unisa.storage.model.ProdottoBean;
 import it.unisa.storage.model.UtenteBean;
 
@@ -105,6 +120,50 @@ public class AdminInserisciProdottoServlet extends HttpServlet {
 	        p.setGenere(genere);
 	        p.setAttivo(true);
 	        prodottoDao.doSave(p);
+	        
+	        SupportoTagliaDao supportoTagliaDao = new SupportoTagliaDaoImpl(ds);
+	        TagliaDao tagliaDao = new TagliaDaoImpl(ds);
+
+	        String[] taglie;
+	        if (categoria == Categoria.SCARPA) {
+	            taglie = new String[]{"38", "39", "40", "41", "42", "43", "44", "45"};
+	        } else if (categoria == Categoria.VESTITO) {
+	            taglie = new String[]{"XS", "S", "M", "L", "XL", "XXL"};
+	        } else {
+	            taglie = new String[]{"TU"};
+	        }
+
+	        for (String t : taglie) {
+	            SupportoTagliaBean st = new SupportoTagliaBean();
+	            st.setId_prodotto(p);
+	            st.setTaglia(tagliaDao.doRetrieveByKey(t));
+	            supportoTagliaDao.doSave(st);
+	        }
+	        
+	        SupportoColoreDao supportoColoreDao = new SupportoColoreDaoImpl(ds);
+	        ColoreDao coloreDao = new ColoreDaoImpl(ds);
+
+	        String[] coloriDisponibili = {
+	            "Nero", "Bianco", "Grigio", "Rosso", "Blu",
+	            "Verde", "Giallo Fluo", "Arancione", "Navy", "Celeste"
+	        };
+
+	        Random random = new Random();
+
+	        int quantiColori = random.nextInt(10) + 1;
+
+	        List<String> listaColori = new ArrayList<>(Arrays.asList(coloriDisponibili));
+	        Collections.shuffle(listaColori);
+
+	        for (int i = 0; i < quantiColori; i++) {
+	            String nomeColore = listaColori.get(i);
+
+	            SupportoColoreBean sc = new SupportoColoreBean();
+	            sc.setId_prodotto(p);
+	            sc.setNome(coloreDao.doRetrieveByKey(nomeColore));
+
+	            supportoColoreDao.doSave(sc);
+	        }
 	        
 	        response.sendRedirect(ctx + "/admin/CatalogoCompleto?successo=Prodotto+inserito+con+successo");
         }
