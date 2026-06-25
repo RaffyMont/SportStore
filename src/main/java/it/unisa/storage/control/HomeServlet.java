@@ -100,8 +100,7 @@ public class HomeServlet extends HttpServlet {
 			int totaleArticoli = 0;
 			
 			if(carrello != null)
-				for(int quantita = 0; quantita < carrello.getNumeroArticoli(); quantita++)
-					totaleArticoli += quantita;
+			    totaleArticoli = carrello.getNumeroArticoli();
 			
 			request.setAttribute("scarpeEvidenza", scarpe);
 			request.setAttribute("vestitiEvidenza", vestiti);

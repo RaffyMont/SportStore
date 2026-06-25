@@ -15,16 +15,16 @@
 	UtenteBean hutente = (UtenteBean) session.getAttribute("utente");
 	
 	int totale = 0;
-	Object  totAtt = request.getAttribute("totaleArticoli");
-	
-	if(totAtt != null)
-		totale = (int) totAtt;
-	else
-	{
-		CarrelloBean carrello = (CarrelloBean) session.getAttribute("carrello");
-		if(carrello != null)
-			for(int i = 0; i < carrello.getNumeroArticoli(); i++)
-				totale += i;
+	Object totAtt = request.getAttribute("totaleArticoli");
+
+	if(totAtt != null) {
+	    totale = (int) totAtt;
+	} else {
+	    CarrelloBean carrello = (CarrelloBean) session.getAttribute("carrello");
+
+	    if(carrello != null) {
+	        totale = carrello.getNumeroArticoli();
+	    }
 	}
 	
 	String pagina = (String) request.getAttribute("paginaAttiva");
