@@ -1,0 +1,277 @@
+@charset "UTF-8";
+
+#breadcrumb {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+#breadcrumb ol {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+#breadcrumb a {
+    color: gray;
+    text-decoration: none;
+}
+
+#container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+#titolo {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+#alert {
+    padding: 12px;
+    background-color: #ffebee;
+    color: red;
+    border-left: 4px solid red;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+#checkout_layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+#form_sx {
+    flex: 1 1 600px;
+}
+
+#riepilogo {
+    flex: 1 1 300px;
+}
+
+.box {
+    background-color: white;
+    padding: 22px;
+    border-radius: 10px;
+    margin-bottom: 18px;
+}
+
+.box_titolo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 17px;
+    font-weight: bold;
+    border-bottom: 2px solid green;
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+}
+
+.form_grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.fg {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.flabel {
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+}
+
+.req {
+    color: red;
+}
+
+.finput {
+    padding: 10px;
+    border: 1px solid lightgray;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.finput:focus {
+    border-color: green;
+    outline: none;
+}
+
+#riepilogo_items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.riepilogo_item {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.riepilogo_info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.item_nome {
+    font-weight: bold;
+}
+
+.item_var,
+.item_qty {
+    font-size: 12px;
+    color: gray;
+}
+
+.item_prezzo {
+    font-weight: bold;
+    color: green;
+    white-space: nowrap;
+}
+
+.separator {
+    height: 1px;
+    background-color: #ddd;
+    margin: 12px 0;
+}
+
+.riepilogo_riga {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.spedizione_gratis {
+    color: green;
+    font-weight: bold;
+}
+
+#acquista {
+    width: 100%;
+    padding: 14px;
+    margin-top: 15px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#torna_carrello {
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+    color: gray;
+    text-decoration: none;
+}
+
+@media (max-width: 1024px) {
+    #container {
+        padding: 15px;
+    }
+
+    .form_grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    #container {
+        padding: 12px;
+        margin: 16px auto;
+    }
+
+    #breadcrumb {
+        padding: 0 12px;
+        margin: 12px auto;
+    }
+
+    #checkout_layout {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    #form_sx {
+        flex: 1 1 auto;
+    }
+
+    #riepilogo {
+        flex: 1 1 auto;
+    }
+
+    .form_grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .box {
+        padding: 16px;
+    }
+
+    #titolo {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    #container {
+        padding: 10px;
+        margin: 10px auto;
+    }
+
+    #breadcrumb {
+        padding: 0 10px;
+        margin: 10px auto;
+    }
+
+    .form_grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .box {
+        padding: 14px;
+        border-radius: 8px;
+    }
+
+    .box_titolo {
+        font-size: 15px;
+    }
+
+    .finput {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    #acquista {
+        padding: 13px;
+        font-size: 15px;
+    }
+
+    #titolo {
+        font-size: 18px;
+        margin-bottom: 14px;
+    }
+}
+
+@media (max-width: 360px) {
+    .box_titolo {
+        font-size: 14px;
+    }
+
+    #titolo {
+        font-size: 16px;
+    }
+}

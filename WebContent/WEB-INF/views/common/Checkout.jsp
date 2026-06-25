@@ -26,6 +26,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Checkout</title>
 	<link rel = "stylesheet" href = "<%= ctx %>/styles/home.css">
+	<link rel = "stylesheet" href = "<%= ctx %>/styles/checkout.css">
 </head>
 <body>
 	<%@ include file = "header.jsp" %>
@@ -67,7 +68,7 @@
 								</div>
 								
 								<div class = "fg" id = "g_cognome">
-									<label class = "flabel" for = "cognome"> Nome <span class = "req">*</span></label>
+									<label class = "flabel" for = "cognome"> Cognome <span class = "req">*</span></label>
 									<input type = "text" id = "cognome" name = "cognome" class = "finput" value = "" maxlength="256">
 								</div>
 								
