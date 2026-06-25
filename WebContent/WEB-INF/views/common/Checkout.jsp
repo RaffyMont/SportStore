@@ -205,5 +205,6 @@
 	</main>
 	
 	<%@ include file = "footer.jsp" %>
+	<script src = "<%= ctx %>/scripts/checkout.js"></script>
 </body>
 </html>
