@@ -58,6 +58,29 @@ public class OrdineDaoImpl implements OrdineDao{
             return rowsUpdated != 0;
         }
 	}
+	
+	public synchronized OrdineBean doRetrieveByKey(String id_ordine) throws SQLException
+	{
+		 String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE id_ordine = ?";
+	        try (Connection connection = ds.getConnection();
+	        		PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
+	            preparedStatement.setString(1, id_ordine);
+	            try (ResultSet rs = preparedStatement.executeQuery()) {
+	                if (rs.next()) {
+	                	OrdineBean bean = new OrdineBean();
+	                	bean.setId_ordine(rs.getString("id_ordine"));
+	                    bean.setData_ordine(rs.getTimestamp("data_ordine").toLocalDateTime());
+	                    bean.setStato(Stato.valueOf(rs.getString("stato_ordine").toUpperCase()));
+	                    bean.setPrezzo_totale(rs.getDouble("prezzo_totale"));
+	                    bean.setId_utente(utenteDao.doRetrieveByKey(rs.getString("id_utente")));
+	                    bean.setId_indirizzo(indirizzoDao.doRetrieveByKey(rs.getInt("id_indirizzo")));
+
+	                    return bean;
+	                }
+	            }
+	        }
+	        return null;
+	}
 
 	public synchronized List<OrdineBean> doRetrieveAll() throws SQLException
 	{

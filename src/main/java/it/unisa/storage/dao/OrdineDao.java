@@ -11,6 +11,8 @@ public interface OrdineDao {
 	public void doSave(OrdineBean ordine) throws SQLException;
 	
 	public boolean doUpdate(OrdineBean ordine) throws SQLException;
+	
+	public OrdineBean doRetrieveByKey(String id_ordine) throws SQLException;
 
 	public Collection<OrdineBean> doRetrieveAll() throws SQLException;
 	
