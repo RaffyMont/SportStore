@@ -70,6 +70,7 @@ public class AdminModificaProdottoServlet extends HttpServlet {
 	        request.setAttribute("utente",       utente);
 	        request.setAttribute("prodotto",     prodotto);
 	        request.setAttribute("totaleArticoli", 0);
+	        session.setAttribute("idProdotto", idProdotto);
 	        
 	        request.getRequestDispatcher("/WEB-INF/views/admin/AdminModificaProdotto.jsp").forward(request, response);
         }
@@ -94,7 +95,7 @@ public class AdminModificaProdottoServlet extends HttpServlet {
 	    
 	    request.setCharacterEncoding("UTF-8");
 
-        String idProdotto  = request.getParameter("id_prodotto");
+	    String idProdotto = (String) session.getAttribute("idProdotto");
         String modello     = request.getParameter("modello");
         String descrizione = request.getParameter("descrizione");
         String marca       = request.getParameter("marca");
