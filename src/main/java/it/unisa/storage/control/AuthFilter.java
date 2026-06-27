@@ -27,7 +27,7 @@ public class AuthFilter extends HttpFilter {
 
 	protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException
 	{
-		 String path = request.getServletPath();
+		 	String path = request.getServletPath();
 
 		    if (!path.startsWith("/admin/")) {
 		        chain.doFilter(request, response);
