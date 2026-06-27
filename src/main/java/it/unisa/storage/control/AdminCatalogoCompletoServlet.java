@@ -1,5 +1,6 @@
 package it.unisa.storage.control;
 
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -24,6 +25,9 @@ import it.unisa.storage.model.UtenteBean;
 @WebServlet("/admin/CatalogoCompleto")
 public class AdminCatalogoCompletoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private DataSource ds;
+	private ProdottoDao prodottoDao;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -31,6 +35,13 @@ public class AdminCatalogoCompletoServlet extends HttpServlet {
     public AdminCatalogoCompletoServlet() {
         super();
         // TODO Auto-generated constructor stub
+    }
+    
+    public void init(ServletConfig config) throws ServletException {
+    	super.init(config);
+    	ds = (DataSource) getServletContext().getAttribute("DataSource");
+    	if (ds == null) throw new ServletException("DataSource non disponibile");
+		prodottoDao = new ProdottoDaoImpl(ds);
     }
 
 	/**
@@ -49,8 +60,6 @@ public class AdminCatalogoCompletoServlet extends HttpServlet {
 		
 		UtenteBean utente = (UtenteBean) session.getAttribute("utente");
 		String successo = request.getParameter("successo");
-		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-		ProdottoDao prodottoDao = new ProdottoDaoImpl(ds);
 		Collection<ProdottoBean> prodotti = null;
 		String dbError = null;
 		

@@ -1,5 +1,6 @@
 package it.unisa.storage.control;
 
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,6 +26,9 @@ import it.unisa.storage.model.UtenteBean;
 @WebServlet("/admin/ModificaProdotto")
 public class AdminModificaProdottoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private DataSource ds;
+    private ProdottoDao prodottoDao;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -32,6 +36,13 @@ public class AdminModificaProdottoServlet extends HttpServlet {
     public AdminModificaProdottoServlet() {
         super();
         // TODO Auto-generated constructor stub
+    }
+    
+    public void init(ServletConfig config) throws ServletException {
+    	super.init(config);
+    	ds = (DataSource) getServletContext().getAttribute("DataSource");
+    	if (ds == null) throw new ServletException("DataSource non disponibile");
+        prodottoDao = new ProdottoDaoImpl(ds);
     }
 
 	/**
@@ -52,9 +63,6 @@ public class AdminModificaProdottoServlet extends HttpServlet {
             response.sendRedirect(ctx + "/admin/CatalogoCompleto");
             return;
         }
-        
-        DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-        ProdottoDao prodottoDao = new ProdottoDaoImpl(ds);
         
         try {
         	ProdottoBean prodotto = prodottoDao.doRetrieveByKey(idProdotto);
@@ -108,9 +116,6 @@ public class AdminModificaProdottoServlet extends HttpServlet {
         int stock = Integer.parseInt(stockStr);
         Categoria categoria = Categoria.valueOf(categoriaStr.toUpperCase());
         Genere genere = Genere.valueOf(genereStr.toUpperCase());
-        
-        DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-        ProdottoDao prodottoDao = new ProdottoDaoImpl(ds);
         
         try {
             ProdottoBean p = prodottoDao.doRetrieveByKey(idProdotto);

@@ -1,5 +1,6 @@
 package it.unisa.storage.control;
 
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,6 +26,9 @@ import it.unisa.storage.model.UtenteBean;
 @WebServlet("/Profilo")
 public class ProfiloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private DataSource ds;
+	private OrdineDao ordineDao;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -37,6 +41,14 @@ public class ProfiloServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    
+    public void init(ServletConfig config) throws ServletException {
+    	super.init(config);
+    	ds = (DataSource) getServletContext().getAttribute("DataSource");
+    	if (ds == null) throw new ServletException("DataSource non disponibile");
+		ordineDao = new OrdineDaoImpl(ds);
+    }
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String ctx = request.getContextPath();
 		HttpSession session = request.getSession(false);
@@ -64,8 +76,6 @@ public class ProfiloServlet extends HttpServlet {
 		
 		if("ordini".equals(sezione))
 		{
-			DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-			OrdineDao ordineDao = new OrdineDaoImpl(ds);
 			try
 			{
 				ordini = ordineDao.doRetrieveAllByUser(utente.getId_utente());

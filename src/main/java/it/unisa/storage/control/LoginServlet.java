@@ -1,5 +1,6 @@
 package it.unisa.storage.control;
 
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,6 +22,9 @@ import it.unisa.storage.model.UtenteBean;
 @WebServlet("/Login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private DataSource ds;
+	private UtenteDao utenteDao;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -28,6 +32,13 @@ public class LoginServlet extends HttpServlet {
     public LoginServlet() {
         super();
         // TODO Auto-generated constructor stub
+    }
+    
+    public void init(ServletConfig config) throws ServletException {
+    	super.init(config);
+    	ds = (DataSource) getServletContext().getAttribute("DataSource");
+    	if (ds == null) throw new ServletException("DataSource non disponibile");
+    	utenteDao = new UtenteDaoImpl(ds);
     }
 
 	/**
@@ -67,9 +78,6 @@ public class LoginServlet extends HttpServlet {
 		
 			return;
 		}
-		
-		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-		UtenteDao utenteDao = new UtenteDaoImpl(ds);
 		
 		try
 		{

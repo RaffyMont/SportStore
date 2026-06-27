@@ -1,5 +1,6 @@
 package it.unisa.storage.control;
 
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -30,6 +31,9 @@ public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private static final int MAX_PER_CATEGORIA = 4;
+	private DataSource ds;
+	private ProdottoDao prodottoDao;
+	private ImmaginiDao immaginiDao;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -38,17 +42,20 @@ public class HomeServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    public void init(ServletConfig config) throws ServletException {
+    	super.init(config);
+    	ds = (DataSource) getServletContext().getAttribute("DataSource");
+    	if (ds == null) throw new ServletException("DataSource non disponibile");
+		prodottoDao = new ProdottoDaoImpl(ds);
+		immaginiDao = new ImmaginiDaoImpl(ds);
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-		
-		ProdottoDao prodottoDao = new ProdottoDaoImpl(ds);
-		ImmaginiDao immaginiDao = new ImmaginiDaoImpl(ds);
-		
 		try {
 			List<ProdottoBean> scarpe = new ArrayList<>();
 			List<ProdottoBean> vestiti = new ArrayList<>();

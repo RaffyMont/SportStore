@@ -42,7 +42,6 @@ public class CarrelloServlet extends HttpServlet {
         if (carrello == null)
             carrello = new CarrelloBean();
 
-        //Forse da correggere con il token in sessione
         UtenteBean utente = (session != null) ? (UtenteBean) session.getAttribute("utente") : null;
         
         request.setAttribute("ctx", ctx);

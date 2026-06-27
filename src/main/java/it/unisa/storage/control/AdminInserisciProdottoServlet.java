@@ -1,5 +1,6 @@
 package it.unisa.storage.control;
 
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -41,6 +42,13 @@ import it.unisa.storage.model.UtenteBean;
 @WebServlet("/admin/InserisciProdotto")
 public class AdminInserisciProdottoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private DataSource ds;
+    private ProdottoDao prodottoDao;
+    private SupportoTagliaDao supportoTagliaDao;
+    private TagliaDao tagliaDao;
+    private SupportoColoreDao supportoColoreDao;
+    private ColoreDao coloreDao;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -48,6 +56,17 @@ public class AdminInserisciProdottoServlet extends HttpServlet {
     public AdminInserisciProdottoServlet() {
         super();
         // TODO Auto-generated constructor stub
+    }
+    
+    public void init(ServletConfig config) throws ServletException {
+    	 super.init(config);
+    	 ds = (DataSource) getServletContext().getAttribute("DataSource");
+    	 if (ds == null) throw new ServletException("DataSource non disponibile");
+         prodottoDao = new ProdottoDaoImpl(ds);
+         supportoTagliaDao = new SupportoTagliaDaoImpl(ds);
+	     tagliaDao = new TagliaDaoImpl(ds);
+	     supportoColoreDao = new SupportoColoreDaoImpl(ds);
+	     coloreDao = new ColoreDaoImpl(ds);
     }
 
 	/**
@@ -100,9 +119,6 @@ public class AdminInserisciProdottoServlet extends HttpServlet {
         Categoria categoria = Categoria.valueOf(categoriaStr.toUpperCase());
         Genere genere = Genere.valueOf(genereStr.toUpperCase());
         
-        DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-        ProdottoDao prodottoDao = new ProdottoDaoImpl(ds);
-        
         try{
         	String id;
         	do {
@@ -120,9 +136,6 @@ public class AdminInserisciProdottoServlet extends HttpServlet {
 	        p.setGenere(genere);
 	        p.setAttivo(true);
 	        prodottoDao.doSave(p);
-	        
-	        SupportoTagliaDao supportoTagliaDao = new SupportoTagliaDaoImpl(ds);
-	        TagliaDao tagliaDao = new TagliaDaoImpl(ds);
 
 	        String[] taglie;
 	        if (categoria == Categoria.SCARPA) {
@@ -139,9 +152,6 @@ public class AdminInserisciProdottoServlet extends HttpServlet {
 	            st.setTaglia(tagliaDao.doRetrieveByKey(t));
 	            supportoTagliaDao.doSave(st);
 	        }
-	        
-	        SupportoColoreDao supportoColoreDao = new SupportoColoreDaoImpl(ds);
-	        ColoreDao coloreDao = new ColoreDaoImpl(ds);
 
 	        String[] coloriDisponibili = {
 	            "Nero", "Bianco", "Grigio", "Rosso", "Blu",

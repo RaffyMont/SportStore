@@ -1,5 +1,6 @@
 package it.unisa.storage.control;
 
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -31,6 +32,10 @@ import it.unisa.storage.model.UtenteBean;
 @WebServlet("/admin/GestioneOrdini")
 public class AdminGestioneOrdiniServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private DataSource ds;
+	private OrdineDao ordineDao;
+	private UtenteDao utenteDao;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -38,6 +43,14 @@ public class AdminGestioneOrdiniServlet extends HttpServlet {
     public AdminGestioneOrdiniServlet() {
         super();
         // TODO Auto-generated constructor stub
+    }
+    
+    public void init(ServletConfig config) throws ServletException {
+    	super.init(config);
+    	ds = (DataSource) getServletContext().getAttribute("DataSource");
+    	if (ds == null) throw new ServletException("DataSource non disponibile");
+		ordineDao = new OrdineDaoImpl(ds);
+		utenteDao = new UtenteDaoImpl(ds);
     }
 
 	/**
@@ -70,10 +83,6 @@ public class AdminGestioneOrdiniServlet extends HttpServlet {
 		{
 			request.setAttribute("errFiltro", "Formato data non valido (usare gg/mm/aaaa).");
 		}
-		
-		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-		OrdineDao ordineDao = new OrdineDaoImpl(ds);
-		UtenteDao utenteDao = new UtenteDaoImpl(ds);
 		
 		List<OrdineBean> ordiniFiltrati = new ArrayList<>();
 		Collection<UtenteBean> clienti = null;

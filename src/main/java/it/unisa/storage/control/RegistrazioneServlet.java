@@ -1,5 +1,6 @@
 package it.unisa.storage.control;
 
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,7 +10,6 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Collection;
 import java.util.UUID;
 
 import javax.sql.DataSource;
@@ -28,6 +28,10 @@ import it.unisa.storage.model.UtenteBean.Ruolo;
 @WebServlet("/Registrazione")
 public class RegistrazioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private DataSource ds;
+	private UtenteDao utenteDao;
+	private IndirizzoDao indirizzoDao;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -40,6 +44,15 @@ public class RegistrazioneServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    
+    public void init(ServletConfig config) throws ServletException {
+    	super.init(config);
+    	ds = (DataSource) getServletContext().getAttribute("DataSource");
+    	if (ds == null) throw new ServletException("DataSource non disponibile");
+		utenteDao = new UtenteDaoImpl(ds);
+		indirizzoDao = new IndirizzoDaoImpl(ds);
+    }
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession(false);
@@ -69,10 +82,6 @@ public class RegistrazioneServlet extends HttpServlet {
 		String cap = request.getParameter("cap");
 		String provincia = request.getParameter("provincia");
 		String stato = request.getParameter("stato");
-		
-		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-		UtenteDao utenteDao = new UtenteDaoImpl(ds);
-		IndirizzoDao indirizzoDao = new IndirizzoDaoImpl(ds);
 		
 		try
 		{
