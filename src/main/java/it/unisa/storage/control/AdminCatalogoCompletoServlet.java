@@ -105,9 +105,6 @@ public class AdminCatalogoCompletoServlet extends HttpServlet {
 	    	return;
 	    }
 	    
-	    DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
-	    ProdottoDao prodottoDao = new ProdottoDaoImpl(ds);
-	    
 	    try {
 	    	switch(action != null ? action : "")
 	    	{

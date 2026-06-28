@@ -7,11 +7,11 @@ import it.unisa.storage.model.ImmagineBean;
 
 public interface ImmaginiDao {
 	
-	public void doSave(ImmagineBean image) throws SQLException;
+	public void doSave(ImmagineBean image, String id_prodotto) throws SQLException;
 	
-	public boolean doUpdate(String oldPathname, String newPathname) throws SQLException;
+	public boolean doUpdate(String oldPathname, String newPathname, String id_prodotto) throws SQLException;
 	
-	public boolean doDelete(String pathname) throws SQLException;
+	public boolean doDelete(String pathname, String id_prodotto) throws SQLException;
 	
 	public Collection<ImmagineBean> doRetrieveAllByIdProdotto(String id_prodotto) throws SQLException;
 }

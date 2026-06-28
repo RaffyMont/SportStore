@@ -2,13 +2,17 @@ package it.unisa.storage.control;
 
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +25,8 @@ import javax.sql.DataSource;
 
 import it.unisa.storage.dao.ColoreDao;
 import it.unisa.storage.dao.ColoreDaoImpl;
+import it.unisa.storage.dao.ImmaginiDao;
+import it.unisa.storage.dao.ImmaginiDaoImpl;
 import it.unisa.storage.dao.ProdottoDao;
 import it.unisa.storage.dao.ProdottoDaoImpl;
 import it.unisa.storage.dao.SupportoColoreDao;
@@ -33,12 +39,18 @@ import it.unisa.storage.model.ProdottoBean.Categoria;
 import it.unisa.storage.model.ProdottoBean.Genere;
 import it.unisa.storage.model.SupportoColoreBean;
 import it.unisa.storage.model.SupportoTagliaBean;
+import it.unisa.storage.model.ImmagineBean;
 import it.unisa.storage.model.ProdottoBean;
 import it.unisa.storage.model.UtenteBean;
 
 /**
  * Servlet implementation class AdminInserisciProdottoServlet
  */
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024,
+        maxFileSize = 5 * 1024 * 1024,
+        maxRequestSize = 25 * 1024 * 1024
+)
 @WebServlet("/admin/InserisciProdotto")
 public class AdminInserisciProdottoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -49,6 +61,7 @@ public class AdminInserisciProdottoServlet extends HttpServlet {
     private TagliaDao tagliaDao;
     private SupportoColoreDao supportoColoreDao;
     private ColoreDao coloreDao;
+    private ImmaginiDao immaginiDao;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -67,6 +80,7 @@ public class AdminInserisciProdottoServlet extends HttpServlet {
 	     tagliaDao = new TagliaDaoImpl(ds);
 	     supportoColoreDao = new SupportoColoreDaoImpl(ds);
 	     coloreDao = new ColoreDaoImpl(ds);
+	     immaginiDao = new ImmaginiDaoImpl(ds);
     }
 
 	/**
@@ -174,6 +188,11 @@ public class AdminInserisciProdottoServlet extends HttpServlet {
 
 	            supportoColoreDao.doSave(sc);
 	        }
+	        try {
+	            salvaImmagini(request, id);
+	        } catch (Exception e) {
+	            log("Errore salvataggio immagini: " + e.getMessage());
+	        }
 	        
 	        response.sendRedirect(ctx + "/admin/CatalogoCompleto?successo=Prodotto+inserito+con+successo");
         }
@@ -184,6 +203,57 @@ public class AdminInserisciProdottoServlet extends HttpServlet {
         	request.getRequestDispatcher("/WEB-INF/views/admin/AdminInserisciProdotto.jsp").forward(request, response);
         }
 
+	}
+	
+	private void salvaImmagini(HttpServletRequest request, String idProdotto) throws Exception {
+
+	    /* Cartella fisica dove salvare i file */
+	    String uploadDir = getServletContext().getRealPath(
+	            File.separator + "img" + File.separator + "prodotti");
+	    File folder = new File(uploadDir);
+	    if (!folder.exists()) folder.mkdirs();
+
+	    /* Tipi MIME accettati */
+	    List<String> tipiAccettati = Arrays.asList("image/jpeg", "image/png", "image/webp", "image/gif");
+
+	    for (int i = 1; i <= 3; i++) {
+
+	        Part part = request.getPart("immagine" + i);
+
+	        /* Salta se il campo è vuoto o non è stato inviato */
+	        if (part == null
+	                || part.getSize() == 0
+	                || part.getSubmittedFileName() == null
+	                || part.getSubmittedFileName().isBlank()) {
+	            continue;
+	        }
+
+	        /* Controlla tipo MIME */
+	        String mimeType = part.getContentType();
+	        if (mimeType == null || !tipiAccettati.contains(mimeType.toLowerCase())) {
+	            log("salvaImmagini: tipo non accettato per immagine" + i + " → " + mimeType);
+	            continue;
+	        }
+
+	        /* Ricava estensione dal nome originale */
+	        String nomeOriginale = Paths.get(part.getSubmittedFileName())
+	                                    .getFileName().toString();
+	        String estensione = "";
+	        int dot = nomeOriginale.lastIndexOf('.');
+	        if (dot > 0) estensione = nomeOriginale.substring(dot).toLowerCase();
+
+	        /* Nome univoco: timestamp + idProdotto */
+	        String nomeFile = "img_" + System.currentTimeMillis() + "_" + idProdotto + estensione;
+
+	        /* Salva fisicamente il file */
+	        String percorsoAssoluto = uploadDir + File.separator + nomeFile;
+	        part.write(percorsoAssoluto);
+
+	        /* Salva il path relativo nel DB */
+	        ImmagineBean img = new ImmagineBean();
+	        img.setPathname("img/prodotti/" + nomeFile);
+	        immaginiDao.doSave(img, idProdotto);
+	    }
 	}
 
 }

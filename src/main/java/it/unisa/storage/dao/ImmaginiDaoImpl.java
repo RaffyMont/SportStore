@@ -24,7 +24,7 @@ public class ImmaginiDaoImpl implements ImmaginiDao{
 		this.prodottoDao = new ProdottoDaoImpl(ds);
 	}
 	
-	public synchronized void doSave(ImmagineBean image) throws SQLException
+	public synchronized void doSave(ImmagineBean image, String id_prodotto) throws SQLException
 	{
 		String insertSQL = "INSERT INTO " + TABLE_NAME + " (pathname, mime_type, id_prodotto) VALUES (?, ?, ?)";
 
@@ -32,30 +32,32 @@ public class ImmaginiDaoImpl implements ImmaginiDao{
         		PreparedStatement preparedStatement = connection.prepareStatement(insertSQL)) {
             preparedStatement.setString(1, image.getPathname());
             preparedStatement.setString(2, image.getMime_type());
-            preparedStatement.setString(3, image.getId_prodotto().getId_prodotto());
+            preparedStatement.setString(3, id_prodotto);
             preparedStatement.executeUpdate();
         }
 
 	}
 	
-	public synchronized boolean doUpdate(String oldPathname, String newPathname) throws SQLException
+	public synchronized boolean doUpdate(String oldPathname, String newPathname, String id_prodotto) throws SQLException
 	{
-		String sql = "UPDATE " + TABLE_NAME + " SET pathname = ? WHERE pathname = ?";
+		String sql = "UPDATE " + TABLE_NAME + " SET pathname = ? WHERE pathname = ? && id_prodotto = ?";
         try (Connection conn = ds.getConnection();
         		PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, newPathname);
-            ps.setString(1, oldPathname);
+            ps.setString(2, oldPathname);
+            ps.setString(3, id_prodotto);
             int rowsUpdated = ps.executeUpdate();
             return rowsUpdated != 0;
         }
 	}
 	
-	public synchronized boolean doDelete(String pathname) throws SQLException
+	public synchronized boolean doDelete(String pathname, String id_prodotto) throws SQLException
 	{
-		String deleteSQL = "DELETE FROM " + TABLE_NAME + " WHERE pathname = ?";
+		String deleteSQL = "DELETE FROM " + TABLE_NAME + " WHERE pathname = ? && id_prodotto = ?";
         try (Connection connection = ds.getConnection();
         		PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL)) {
             preparedStatement.setString(1, pathname);
+            preparedStatement.setString(2, id_prodotto);
             int result = preparedStatement.executeUpdate();
             return result != 0;
         }
