@@ -168,7 +168,7 @@ public class AdminModificaProdottoServlet extends HttpServlet {
 	
 	private void salvaImmagini(HttpServletRequest request, String idProdotto) throws Exception {
 
-	    String uploadDir = getServletContext().getRealPath("/images");
+	    String uploadDir = getServletContext().getRealPath(File.separator + "img" + File.separator + "prodotti");
 	    File folder = new File(uploadDir);
 	    if (!folder.exists()) folder.mkdirs();
 
@@ -192,7 +192,7 @@ public class AdminModificaProdottoServlet extends HttpServlet {
 	        if (dot > 0) estensione = nomeOriginale.substring(dot).toLowerCase();
 
 	        String nomeFile = "img_" + System.currentTimeMillis() + "_" + idProdotto + estensione;
-	        String nuovoPathname = "images/" + nomeFile;
+	        String nuovoPathname = "img/prodotti/" + nomeFile;
 
 	        part.write(uploadDir + File.separator + nomeFile);
 

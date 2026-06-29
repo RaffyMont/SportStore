@@ -123,9 +123,7 @@
 							<div class = "card_footer">
 								<span class = "prezzo"> &euro;&nbsp;<%= String.format("%.2f", p.getPrezzo()) %></span>
 								<% if(!esaurito) { %>
-									<button class = "bottone" onclick = "aggiungiAlCarrello('<%= p.getId_prodotto() %>', this)">
-										+ Carrello
-									</button>
+									<span class = "bottone"> + Carrello </span>
 								<% } else { %>
 									<span class = "alt_bottone"> Esaurito </span>
 								<% } %>

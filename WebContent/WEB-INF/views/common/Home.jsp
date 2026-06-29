@@ -29,8 +29,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Sport Shop - Il meglio per il tuo sport</title>
-	<link rel="stylesheet" href="<%= ctx %>/styles/main.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/home.css">
+    <link rel="stylesheet" href="<%= ctx %>/styles/home.css">
 </head>
 <body>
 	<%@ include file = "header.jsp" %>
@@ -114,16 +113,14 @@
         </div>
         <div class="products-grid">
             <% for (ProdottoBean p : scarpeList) {
-                String imgSrc = (immaginiMap != null && immaginiMap.get(p.getId_prodotto()) != null)
-                              ? ctx + "/" + immaginiMap.get(p.getId_prodotto())
-                              : ctx + "/images/placeholder.png";
-            %>
+    			String imgPath = (immaginiMap != null) ? immaginiMap.get(p.getId_prodotto()) : null;
+			%>
             <article class="product-card">
                 <a href="<%= ctx %>/DettaglioProdotto?id=<%= p.getId_prodotto() %>"
                    class="product-card_media-link"
                    tabindex="-1" aria-hidden="true">
                     <div class="product-card__media">
-                        <img src="<%= imgSrc %>"
+                        <img src="<%= imgPath %>"
                              alt="<%= p.getMarca() %> <%= p.getModello() %>"
                              loading="lazy"
                              class="product-card_img">
@@ -136,11 +133,6 @@
                     </h3>
                     <div class="product-card_footer">
                         <span class="product-card_price">&euro;&nbsp;<%= String.format("%.2f", p.getPrezzo()) %></span>
-                        <button class="btn btn--primary btn--sm"
-                                data-id="<%= p.getId_prodotto() %>"
-                                onclick="aggiungiAlCarrello('<%= p.getId_prodotto() %>', this)">
-                            + Carrello
-                        </button>
                     </div>
                 </div>
             </article>
@@ -158,16 +150,14 @@
         </div>
         <div class="products-grid">
             <% for (ProdottoBean p : vestitiList) {
-                String imgSrc = (immaginiMap != null && immaginiMap.get(p.getId_prodotto()) != null)
-                              ? ctx + "/" + immaginiMap.get(p.getId_prodotto())
-                              : ctx + "/images/placeholder.png";
-            %>
+    			String imgPath = (immaginiMap != null) ? immaginiMap.get(p.getId_prodotto()) : null;
+			%>
             <article class="product-card">
                 <a href="<%= ctx %>/DettaglioProdotto?id=<%= p.getId_prodotto() %>"
                    class="product-card_media-link"
                    tabindex="-1" aria-hidden="true">
                     <div class="product-card__media">
-                        <img src="<%= imgSrc %>"
+                        <img src="<%= imgPath %>"
                              alt="<%= p.getMarca() %> <%= p.getModello() %>"
                              loading="lazy"
                              class="product-card_img">
@@ -180,11 +170,6 @@
                     </h3>
                     <div class="product-card_footer">
                         <span class="product-card_price">&euro;&nbsp;<%= String.format("%.2f", p.getPrezzo()) %></span>
-                        <button class="btn btn--primary btn--sm"
-                                data-id="<%= p.getId_prodotto() %>"
-                                onclick="aggiungiAlCarrello('<%= p.getId_prodotto() %>', this)">
-                            + Carrello
-                        </button>
                     </div>
                 </div>
             </article>
@@ -202,16 +187,14 @@
         </div>
         <div class="products-grid">
             <% for (ProdottoBean p : accessoriList) {
-                String imgSrc = (immaginiMap != null && immaginiMap.get(p.getId_prodotto()) != null)
-                              ? ctx + "/" + immaginiMap.get(p.getId_prodotto())
-                              : ctx + "/images/placeholder.png";
-            %>
+    			String imgPath = (immaginiMap != null) ? immaginiMap.get(p.getId_prodotto()) : null;
+			%>
             <article class="product-card">
                 <a href="<%= ctx %>/DettaglioProdotto?id=<%= p.getId_prodotto() %>"
                    class="product-card_media-link"
                    tabindex="-1" aria-hidden="true">
                     <div class="product-card__media">
-                        <img src="<%= imgSrc %>"
+                        <img src="<%= imgPath %>"
                              alt="<%= p.getMarca() %> <%= p.getModello() %>"
                              loading="lazy"
                              class="product-card_img">
@@ -224,11 +207,6 @@
                     </h3>
                     <div class="product-card_footer">
                         <span class="product-card_price">&euro;&nbsp;<%= String.format("%.2f", p.getPrezzo()) %></span>
-                        <button class="btn btn--primary btn--sm"
-                                data-id="<%= p.getId_prodotto() %>"
-                                onclick="aggiungiAlCarrello('<%= p.getId_prodotto() %>', this)">
-                            + Carrello
-                        </button>
                     </div>
                 </div>
             </article>
