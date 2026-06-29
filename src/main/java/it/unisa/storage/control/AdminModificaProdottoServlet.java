@@ -2,19 +2,28 @@ package it.unisa.storage.control;
 
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.sql.DataSource;
 
+import it.unisa.storage.dao.ImmaginiDao;
+import it.unisa.storage.dao.ImmaginiDaoImpl;
 import it.unisa.storage.dao.ProdottoDao;
 import it.unisa.storage.dao.ProdottoDaoImpl;
+import it.unisa.storage.model.ImmagineBean;
 import it.unisa.storage.model.ProdottoBean;
 import it.unisa.storage.model.ProdottoBean.Categoria;
 import it.unisa.storage.model.ProdottoBean.Genere;
@@ -23,12 +32,18 @@ import it.unisa.storage.model.UtenteBean;
 /**
  * Servlet implementation class Ad
  */
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024,
+        maxFileSize = 5 * 1024 * 1024,
+        maxRequestSize = 25 * 1024 * 1024
+)
 @WebServlet("/admin/ModificaProdotto")
 public class AdminModificaProdottoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private DataSource ds;
     private ProdottoDao prodottoDao;
+    private ImmaginiDao immaginiDao;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -43,6 +58,7 @@ public class AdminModificaProdottoServlet extends HttpServlet {
     	ds = (DataSource) getServletContext().getAttribute("DataSource");
     	if (ds == null) throw new ServletException("DataSource non disponibile");
         prodottoDao = new ProdottoDaoImpl(ds);
+        immaginiDao = new ImmaginiDaoImpl(ds);
     }
 
 	/**
@@ -134,6 +150,12 @@ public class AdminModificaProdottoServlet extends HttpServlet {
             p.setAttivo("true".equals(attivoStr));
             prodottoDao.doUpdate(p);
         
+            try {
+	            salvaImmagini(request, idProdotto);
+	        } catch (Exception e) {
+	            log("Errore salvataggio immagini: " + e.getMessage());
+	        }
+            
             response.sendRedirect(ctx + "/admin/CatalogoCompleto?successo=Prodotto+modificato+con+successo");
         }
         catch(SQLException e)
@@ -142,5 +164,56 @@ public class AdminModificaProdottoServlet extends HttpServlet {
         	request.setAttribute("errore", "Errore durante la modifica. Riprova.");
         	doGet(request, response);
         }
+	}
+	
+	private void salvaImmagini(HttpServletRequest request, String idProdotto) throws Exception {
+
+	    String uploadDir = getServletContext().getRealPath("/images");
+	    File folder = new File(uploadDir);
+	    if (!folder.exists()) folder.mkdirs();
+
+	    List<String> tipiAccettati = Arrays.asList("image/jpeg", "image/png", "image/webp", "image/gif");
+	    List<ImmagineBean> immaginiAttuali = (List<ImmagineBean>) immaginiDao.doRetrieveAllByIdProdotto(idProdotto);
+
+	    for (int i = 1; i <= 3; i++) {
+
+	        Part part = request.getPart("immagine" + i);
+
+	        if (part == null || part.getSize() == 0
+	                || part.getSubmittedFileName() == null
+	                || part.getSubmittedFileName().isBlank()) continue;
+
+	        String mimeType = part.getContentType();
+	        if (mimeType == null || !tipiAccettati.contains(mimeType.toLowerCase())) continue;
+
+	        String nomeOriginale = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+	        String estensione = "";
+	        int dot = nomeOriginale.lastIndexOf('.');
+	        if (dot > 0) estensione = nomeOriginale.substring(dot).toLowerCase();
+
+	        String nomeFile = "img_" + System.currentTimeMillis() + "_" + idProdotto + estensione;
+	        String nuovoPathname = "images/" + nomeFile;
+
+	        part.write(uploadDir + File.separator + nomeFile);
+
+	        if (immaginiAttuali != null && immaginiAttuali.size() >= i) {
+	            // Esiste immagine in posizione i → sostituisci
+	            String vecchioPathname = immaginiAttuali.get(i - 1).getPathname();
+
+	            // Elimina vecchio file fisico
+	            File vecchioFile = new File(getServletContext().getRealPath("/" + vecchioPathname));
+	            if (vecchioFile.exists()) vecchioFile.delete();
+
+	            // Aggiorna pathname nel DB (oldPathname → newPathname)
+	            immaginiDao.doUpdate(vecchioPathname, nuovoPathname);
+	        } else {
+	            // Non esiste immagine in posizione i → inserisci
+	            immaginiDao.doSave(new ImmagineBean() {{
+	                setPathname(nuovoPathname);
+	                setMime_type(mimeType);
+	                setId_prodotto(prodottoDao.doRetrieveByKey(idProdotto));
+	            }}, idProdotto);
+	        }
+	    }
 	}
 }

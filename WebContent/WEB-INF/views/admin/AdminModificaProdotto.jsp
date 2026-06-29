@@ -86,7 +86,7 @@
 				
 				<% if(p != null){ %>
 					<div id = "box">
-					<form action = "<%= ctx %>/admin/ModificaProdotto" method = "post" id = "formInserisci" novalidate>
+					<form action = "<%= ctx %>/admin/ModificaProdotto" method = "post" id = "formInserisci" novalidate enctype="multipart/form-data">
 						<div id = "griglia">
 							<div class = "gruppo" id = "g_modello">
 								<label class = "label" for = "modello"> Modello <span class = "req">*</span></label>
@@ -142,6 +142,24 @@
 								<label class = "label" for = "descrizione"> Descrizione </label>
 								<textarea id = "descrizione" name = "descrizione" class = "textarea" maxlength="500" rows = "4"><%=  p.getDescrizione() != null ? p.getDescrizione() : "" %></textarea>
 						</div>
+						
+						<div class="gruppo" id="g_immagini" style="grid-column: 1 / -1;">
+							    <label class="label">Immagini prodotto (max 3)</label>
+							    <div class="immagini_wrap">
+							        <div class="img_slot">
+							            <label class="label">Immagine 1</label>
+							            <input type="file" name="immagine1" class="input" accept="image/*">
+							        </div>
+							        <div class="img_slot">
+							            <label class="label">Immagine 2</label>
+							            <input type="file" name="immagine2" class="input" accept="image/*">
+							        </div>
+							        <div class="img_slot">
+							            <label class="label">Immagine 3</label>
+							            <input type="file" name="immagine3" class="input" accept="image/*">
+							        </div>
+							    </div>
+							</div>
 						
 						<div class = "azioni">
 								<button type = "submit" id = "bottone_primario"> Salva Prodotto </button>

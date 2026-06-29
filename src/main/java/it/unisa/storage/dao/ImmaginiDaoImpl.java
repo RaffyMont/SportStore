@@ -38,14 +38,13 @@ public class ImmaginiDaoImpl implements ImmaginiDao{
 
 	}
 	
-	public synchronized boolean doUpdate(String oldPathname, String newPathname, String id_prodotto) throws SQLException
+	public synchronized boolean doUpdate(String oldPathname, String newPathname) throws SQLException
 	{
-		String sql = "UPDATE " + TABLE_NAME + " SET pathname = ? WHERE pathname = ? && id_prodotto = ?";
+		String sql = "UPDATE " + TABLE_NAME + " SET pathname = ? WHERE pathname = ?";
         try (Connection conn = ds.getConnection();
         		PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, newPathname);
             ps.setString(2, oldPathname);
-            ps.setString(3, id_prodotto);
             int rowsUpdated = ps.executeUpdate();
             return rowsUpdated != 0;
         }
