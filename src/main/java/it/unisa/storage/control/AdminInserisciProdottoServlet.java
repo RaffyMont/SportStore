@@ -23,25 +23,34 @@ import java.util.UUID;
 
 import javax.sql.DataSource;
 
+import it.unisa.storage.dao.AccessoriDao;
+import it.unisa.storage.dao.AccessoriDaoImpl;
 import it.unisa.storage.dao.ColoreDao;
 import it.unisa.storage.dao.ColoreDaoImpl;
 import it.unisa.storage.dao.ImmaginiDao;
 import it.unisa.storage.dao.ImmaginiDaoImpl;
 import it.unisa.storage.dao.ProdottoDao;
 import it.unisa.storage.dao.ProdottoDaoImpl;
+import it.unisa.storage.dao.ScarpeDao;
+import it.unisa.storage.dao.ScarpeDaoImpl;
 import it.unisa.storage.dao.SupportoColoreDao;
 import it.unisa.storage.dao.SupportoColoreDaoImpl;
 import it.unisa.storage.dao.SupportoTagliaDao;
 import it.unisa.storage.dao.SupportoTagliaDaoImpl;
 import it.unisa.storage.dao.TagliaDao;
 import it.unisa.storage.dao.TagliaDaoImpl;
+import it.unisa.storage.dao.VestitiDao;
+import it.unisa.storage.dao.VestitiDaoImpl;
 import it.unisa.storage.model.ProdottoBean.Categoria;
 import it.unisa.storage.model.ProdottoBean.Genere;
+import it.unisa.storage.model.ScarpeBean;
 import it.unisa.storage.model.SupportoColoreBean;
 import it.unisa.storage.model.SupportoTagliaBean;
+import it.unisa.storage.model.AccessoriBean;
 import it.unisa.storage.model.ImmagineBean;
 import it.unisa.storage.model.ProdottoBean;
 import it.unisa.storage.model.UtenteBean;
+import it.unisa.storage.model.VestitiBean;
 
 /**
  * Servlet implementation class AdminInserisciProdottoServlet
@@ -62,6 +71,9 @@ public class AdminInserisciProdottoServlet extends HttpServlet {
     private SupportoColoreDao supportoColoreDao;
     private ColoreDao coloreDao;
     private ImmaginiDao immaginiDao;
+    private ScarpeDao scarpaDao;
+    private VestitiDao vestitiDao;
+    private AccessoriDao accessoriDao;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -81,6 +93,9 @@ public class AdminInserisciProdottoServlet extends HttpServlet {
 	     supportoColoreDao = new SupportoColoreDaoImpl(ds);
 	     coloreDao = new ColoreDaoImpl(ds);
 	     immaginiDao = new ImmaginiDaoImpl(ds);
+	     scarpaDao = new ScarpeDaoImpl(ds);
+	     vestitiDao = new VestitiDaoImpl(ds);
+	     accessoriDao = new AccessoriDaoImpl(ds);
     }
 
 	/**
@@ -150,7 +165,44 @@ public class AdminInserisciProdottoServlet extends HttpServlet {
 	        p.setGenere(genere);
 	        p.setAttivo(true);
 	        prodottoDao.doSave(p);
-
+	        
+	        if (categoria == Categoria.SCARPA) {
+	            ScarpeBean scarpa = new ScarpeBean();
+	            scarpa.setId_prodotto(id);
+	            scarpa.setTipo_suola(request.getParameter("tipo_suola"));
+	            scarpa.setMateriale(request.getParameter("materiale_scarpa"));
+	            scarpaDao.doSave(scarpa);
+	            
+	        } else if (categoria == Categoria.VESTITO) {
+	            VestitiBean vestito = new VestitiBean();
+	            vestito.setId_prodotto(id);
+	            vestito.setTipovita(request.getParameter("tipo_vita"));
+	            vestito.setTessuto(request.getParameter("tessuto"));
+	            vestito.setStagione(request.getParameter("stagione"));
+	            vestito.setTipo_collo(request.getParameter("tipo_collo"));
+	
+	            String catVestito = request.getParameter("categoriaVestito");
+	            if (catVestito != null && !catVestito.isBlank())
+	                vestito.setCategoriaVestito(VestitiBean.CategoriaVestiti.valueOf(catVestito.toUpperCase()));
+	
+	            String manica = request.getParameter("manica");
+	            if (manica != null && !manica.isBlank())
+	                vestito.setManica(VestitiBean.Manica.valueOf(manica.toUpperCase()));
+	
+	            String gamba = request.getParameter("gamba");
+	            if (gamba != null && !gamba.isBlank())
+	                vestito.setGamba(VestitiBean.Gamba.valueOf(gamba.toUpperCase()));
+	
+	            vestitiDao.doSave(vestito);
+	        
+	        }else if (categoria == Categoria.ACCESSORIO) {
+	            AccessoriBean accessorio = new AccessoriBean();
+	            accessorio.setId_prodotto(id);
+	            accessorio.setTipo_accessori(request.getParameter("tipo_accessorio"));
+	            accessorio.setMateriali(request.getParameter("materiale_accessorio"));
+	            accessoriDao.doSave(accessorio);
+	        }
+	        
 	        String[] taglie;
 	        if (categoria == Categoria.SCARPA) {
 	            taglie = new String[]{"38", "39", "40", "41", "42", "43", "44", "45"};

@@ -136,7 +136,75 @@
 								<textarea id = "descrizione" name = "descrizione" class = "textarea" maxlength="500" rows = "4"><%= vDescrizione != null ? vDescrizione : "" %></textarea>
 							</div>
 							
-							<div class="gruppo" id="g_immagini" style="grid-column: 1 / -1;">
+							<!-- SCARPE -->
+							<div class="gruppo" id="g_tipo_suola">
+							    <label class="label" for="tipo_suola">Tipo suola <span class = "req">*</span></label>
+							    <input type="text" id="tipo_suola" name="tipo_suola" class="input" maxlength="30">
+							</div>
+							
+							<div class="gruppo" id="g_materiale_scarpa">
+							    <label class="label" for="materiale_scarpa">Materiale <span class = "req">*</span></label>
+							    <input type="text" id="materiale_scarpa" name="materiale_scarpa" class="input" maxlength="128">
+							</div>
+							
+							<!-- VESTITI -->
+							<div class="gruppo" id="g_categoria_vestito">
+							    <label class="label" for="categoriaVestito">Tipo vestito <span class="req">*</span></label>
+							    <select id="categoriaVestito" name="categoriaVestito" class="select">
+							        <option value="MAGLIETTA">Maglietta</option>
+							        <option value="PANTALONE">Pantalone</option>
+							        <option value="TUTA">Tuta</option>
+							    </select>
+							</div>
+							
+							<div class="gruppo" id="g_tipo_vita">
+							    <label class="label" for="tipo_vita">Tipo vita <span class = "req">*</span></label>
+							    <input type="text" id="tipo_vita" name="tipo_vita" class="input" maxlength="30">
+							</div>
+							
+							<div class="gruppo" id="g_tessuto">
+							    <label class="label" for="tessuto">Tessuto <span class = "req">*</span></label>
+							    <input type="text" id="tessuto" name="tessuto" class="input" maxlength="128">
+							</div>
+							
+							<div class="gruppo" id="g_stagione">
+							    <label class="label" for="stagione">Stagione <span class = "req">*</span></label>
+							    <input type="text" id="stagione" name="stagione" class="input" maxlength="30">
+							</div>
+							
+							<div class="gruppo" id="g_tipo_collo">
+							    <label class="label" for="tipo_collo">Tipo collo <span class = "req">*</span></label>
+							    <input type="text" id="tipo_collo" name="tipo_collo" class="input" maxlength="30">
+							</div>
+							
+							<div class="gruppo" id="g_manica">
+							    <label class="label" for="manica">Manica <span class = "req">*</span></label>
+							    <select id="manica" name="manica" class="select">
+							        <option value="CORTA">Corta</option>
+							        <option value="LUNGA">Lunga</option>
+							    </select>
+							</div>
+							
+							<div class="gruppo" id="g_gamba">
+							    <label class="label" for="gamba">Gamba <span class = "req">*</span></label>
+							    <select id="gamba" name="gamba" class="select">
+							        <option value="CORTI">Corti</option>
+							        <option value="LUNGHI">Lunghi</option>
+							    </select>
+							</div>
+							
+							<!-- ACCESSORI -->
+							<div class="gruppo" id="g_tipo_accessorio">
+							    <label class="label" for="tipo_accessorio">Tipo accessorio <span class = "req">*</span></label>
+							    <input type="text" id="tipo_accessorio" name="tipo_accessorio" class="input" maxlength="30">
+							</div>
+							
+							<div class="gruppo" id="g_materiale_accessorio">
+							    <label class="label" for="materiale_accessorio">Materiale <span class = "req">*</span></label>
+							    <input type="text" id="materiale_accessorio" name="materiale_accessorio" class="input" maxlength="128">
+							</div>
+							
+							<div class="gruppo" id="g_immagini">
 							    <label class="label">Immagini prodotto (max 3)</label>
 							    <div class="immagini_wrap">
 							        <div class="img_slot">
