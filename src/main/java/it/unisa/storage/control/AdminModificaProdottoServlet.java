@@ -19,15 +19,24 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import it.unisa.storage.dao.AccessoriDao;
+import it.unisa.storage.dao.AccessoriDaoImpl;
 import it.unisa.storage.dao.ImmaginiDao;
 import it.unisa.storage.dao.ImmaginiDaoImpl;
 import it.unisa.storage.dao.ProdottoDao;
 import it.unisa.storage.dao.ProdottoDaoImpl;
+import it.unisa.storage.dao.ScarpeDao;
+import it.unisa.storage.dao.ScarpeDaoImpl;
+import it.unisa.storage.dao.VestitiDao;
+import it.unisa.storage.dao.VestitiDaoImpl;
+import it.unisa.storage.model.AccessoriBean;
 import it.unisa.storage.model.ImmagineBean;
 import it.unisa.storage.model.ProdottoBean;
+import it.unisa.storage.model.ScarpeBean;
 import it.unisa.storage.model.ProdottoBean.Categoria;
 import it.unisa.storage.model.ProdottoBean.Genere;
 import it.unisa.storage.model.UtenteBean;
+import it.unisa.storage.model.VestitiBean;
 
 /**
  * Servlet implementation class Ad
@@ -44,6 +53,9 @@ public class AdminModificaProdottoServlet extends HttpServlet {
 	private DataSource ds;
     private ProdottoDao prodottoDao;
     private ImmaginiDao immaginiDao;
+    private ScarpeDao scarpaDao;
+    private VestitiDao vestitiDao;
+    private AccessoriDao accessoriDao;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -59,6 +71,9 @@ public class AdminModificaProdottoServlet extends HttpServlet {
     	if (ds == null) throw new ServletException("DataSource non disponibile");
         prodottoDao = new ProdottoDaoImpl(ds);
         immaginiDao = new ImmaginiDaoImpl(ds);
+        scarpaDao = new ScarpeDaoImpl(ds);
+	    vestitiDao = new VestitiDaoImpl(ds);
+	    accessoriDao = new AccessoriDaoImpl(ds);
     }
 
 	/**
@@ -149,6 +164,43 @@ public class AdminModificaProdottoServlet extends HttpServlet {
             p.setGenere(genere);
             p.setAttivo("true".equals(attivoStr));
             prodottoDao.doUpdate(p);
+            
+            if (categoria == Categoria.SCARPA) {
+	            ScarpeBean scarpa = new ScarpeBean();
+	            scarpa.setId_prodotto(idProdotto);
+	            scarpa.setTipo_suola(request.getParameter("tipo_suola"));
+	            scarpa.setMateriale(request.getParameter("materiale_scarpa"));
+	            scarpaDao.doUpdate(scarpa);
+	            
+	        } else if (categoria == Categoria.VESTITO) {
+	            VestitiBean vestito = new VestitiBean();
+	            vestito.setId_prodotto(idProdotto);
+	            vestito.setTipovita(request.getParameter("tipo_vita"));
+	            vestito.setTessuto(request.getParameter("tessuto"));
+	            vestito.setStagione(request.getParameter("stagione"));
+	            vestito.setTipo_collo(request.getParameter("tipo_collo"));
+	
+	            String catVestito = request.getParameter("categoriaVestito");
+	            if (catVestito != null && !catVestito.isBlank())
+	                vestito.setCategoriaVestito(VestitiBean.CategoriaVestiti.valueOf(catVestito.toUpperCase()));
+	
+	            String manica = request.getParameter("manica");
+	            if (manica != null && !manica.isBlank())
+	                vestito.setManica(VestitiBean.Manica.valueOf(manica.toUpperCase()));
+	
+	            String gamba = request.getParameter("gamba");
+	            if (gamba != null && !gamba.isBlank())
+	                vestito.setGamba(VestitiBean.Gamba.valueOf(gamba.toUpperCase()));
+	
+	            vestitiDao.doUpdate(vestito);
+	        
+	        }else if (categoria == Categoria.ACCESSORIO) {
+	            AccessoriBean accessorio = new AccessoriBean();
+	            accessorio.setId_prodotto(idProdotto);
+	            accessorio.setTipo_accessori(request.getParameter("tipo_accessorio"));
+	            accessorio.setMateriali(request.getParameter("materiale_accessorio"));
+	            accessoriDao.doUpdate(accessorio);
+	        }
         
             try {
 	            salvaImmagini(request, idProdotto);
