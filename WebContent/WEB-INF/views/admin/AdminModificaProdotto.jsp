@@ -76,7 +76,7 @@
 			
 			<div id = "contenuto">
 				<div id = "header">
-					<h1 id = "title"> Nuovo prodotto </h1>
+					<h1 id = "title"> Modifica prodotto </h1>
 					<a href = "<%= ctx %>/admin/CatalogoCompleto" class = "bottone_secondario"> &larr; Torna al catalogo completo </a>
 				</div>
 				
