@@ -9,12 +9,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.sql.SQLException;
-
-import javax.sql.DataSource;
-
-import it.unisa.storage.dao.UtenteDao;
-import it.unisa.storage.dao.UtenteDaoImpl;
 import it.unisa.storage.model.UtenteBean;
 
 /**
@@ -42,22 +36,14 @@ public class AuthFilter extends HttpFilter {
 		        return;
 		    }
 		    
-		    DataSource ds = (DataSource) request.getServletContext().getAttribute("DataSource");
-		    UtenteDao utenteDao = new UtenteDaoImpl(ds);
+		    UtenteBean utente = (UtenteBean) session.getAttribute("utente");
 
-		    try {
-		        UtenteBean utente = utenteDao.doRetrieveByKey(token);
-
-		        if (utente == null || utente.getRuolo() != UtenteBean.Ruolo.ADMIN) {
-		            response.sendRedirect(request.getContextPath() + "/Home");
-		            return;
-		        }
-
-		        chain.doFilter(request, response);
-
-		    } catch (SQLException e) {
+		    if (utente == null || utente.getRuolo() != UtenteBean.Ruolo.ADMIN) {
 		        response.sendRedirect(request.getContextPath() + "/Home");
+		        return;
 		    }
+
+		    chain.doFilter(request, response);
 
 	}
 }
