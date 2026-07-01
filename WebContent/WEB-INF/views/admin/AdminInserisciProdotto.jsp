@@ -151,6 +151,7 @@
 							<div class="gruppo" id="g_categoria_vestito">
 							    <label class="label" for="categoriaVestito">Tipo vestito <span class="req">*</span></label>
 							    <select id="categoriaVestito" name="categoriaVestito" class="select">
+							    	<option value = ""> -- Seleziona -- </option>
 							        <option value="MAGLIETTA">Maglietta</option>
 							        <option value="PANTALONE">Pantalone</option>
 							        <option value="TUTA">Tuta</option>
@@ -180,6 +181,7 @@
 							<div class="gruppo" id="g_manica">
 							    <label class="label" for="manica">Manica <span class = "req">*</span></label>
 							    <select id="manica" name="manica" class="select">
+							    	<option value = ""> -- Seleziona -- </option>
 							        <option value="CORTA">Corta</option>
 							        <option value="LUNGA">Lunga</option>
 							    </select>
@@ -188,6 +190,7 @@
 							<div class="gruppo" id="g_gamba">
 							    <label class="label" for="gamba">Gamba <span class = "req">*</span></label>
 							    <select id="gamba" name="gamba" class="select">
+							    	<option value = ""> -- Seleziona -- </option>
 							        <option value="CORTI">Corti</option>
 							        <option value="LUNGHI">Lunghi</option>
 							    </select>

@@ -90,7 +90,7 @@ function validaMateriale() {
 
 //VALIDAZIONE VESTITO
 function validaCategoriaVestito() {
-	const v = document.getElementById("categoria_vestito").value;
+	const v = document.getElementById("categoriaVestito").value;
 	if(!v) { mostraErrore("g_categoria_vestito", "Seleziona una categoria di vestito."); return false; }
 	rimuoviErrore("g_categoria_vestito");
 	return true;
@@ -247,7 +247,7 @@ document.getElementById('categoria').addEventListener('change', function() {
 
     tutti.forEach(function(id) {
         document.getElementById(id).style.display = 'none';
-		//rimuoviErrore(id);
+		rimuoviErrore(id);
     });
 
     if (val === 'SCARPA') {
