@@ -96,10 +96,22 @@ public class VestitiDaoImpl implements VestitiDao{
                     bean.setTipovita(rs.getString("tipo_vita"));
                     bean.setTessuto(rs.getString("tessuto"));
                     bean.setStagione(rs.getString("stagione"));
-                    bean.setCategoriaVestito(CategoriaVestiti.valueOf(rs.getString("categoria").toUpperCase()));
+                    String categoriaVestito = rs.getString("categoriaVestito");
+                    if (categoriaVestito != null) {
+                        bean.setCategoriaVestito(
+                            CategoriaVestiti.valueOf(categoriaVestito.toUpperCase())
+                        );
+                    }
                     bean.setTipo_collo(rs.getString("tipo_collo"));
-                    bean.setManica(Manica.valueOf(rs.getString("manica").toUpperCase()));
-                    bean.setGamba(Gamba.valueOf(rs.getString("gamba").toUpperCase()));
+                    String manica = rs.getString("manica");
+                    if (manica != null) {
+                        bean.setManica(Manica.valueOf(manica.toUpperCase()));
+                    }
+
+                    String gamba = rs.getString("gamba");
+                    if (gamba != null) {
+                        bean.setGamba(Gamba.valueOf(gamba.toUpperCase()));
+                    }
                     return bean;
                 }
             }
@@ -130,10 +142,22 @@ public class VestitiDaoImpl implements VestitiDao{
                     bean.setTipovita(rs.getString("tipo_vita"));
                     bean.setTessuto(rs.getString("tessuto"));
                     bean.setStagione(rs.getString("stagione"));
-                    bean.setCategoriaVestito(CategoriaVestiti.valueOf(rs.getString("categoria").toUpperCase()));
+                    String categoriaVestito = rs.getString("categoriaVestito");
+                    if (categoriaVestito != null) {
+                        bean.setCategoriaVestito(
+                            CategoriaVestiti.valueOf(categoriaVestito.toUpperCase())
+                        );
+                    }
                     bean.setTipo_collo(rs.getString("tipo_collo"));
-                    bean.setManica(Manica.valueOf(rs.getString("manica").toUpperCase()));
-                    bean.setGamba(Gamba.valueOf(rs.getString("gamba").toUpperCase()));
+                    String manica = rs.getString("manica");
+                    if (manica != null) {
+                        bean.setManica(Manica.valueOf(manica.toUpperCase()));
+                    }
+
+                    String gamba = rs.getString("gamba");
+                    if (gamba != null) {
+                        bean.setGamba(Gamba.valueOf(gamba.toUpperCase()));
+                    }
                     vestiti.add(bean);
                 }
             }
@@ -163,10 +187,22 @@ public class VestitiDaoImpl implements VestitiDao{
                 bean.setTipovita(rs.getString("tipo_vita"));
                 bean.setTessuto(rs.getString("tessuto"));
                 bean.setStagione(rs.getString("stagione"));
-                bean.setCategoriaVestito(CategoriaVestiti.valueOf(rs.getString("categoria").toUpperCase()));
+                String categoriaVestito = rs.getString("categoriaVestito");
+                if (categoriaVestito != null) {
+                    bean.setCategoriaVestito(
+                        CategoriaVestiti.valueOf(categoriaVestito.toUpperCase())
+                    );
+                }
                 bean.setTipo_collo(rs.getString("tipo_collo"));
-                bean.setManica(Manica.valueOf(rs.getString("manica").toUpperCase()));
-                bean.setGamba(Gamba.valueOf(rs.getString("gamba").toUpperCase()));
+                String manica = rs.getString("manica");
+                if (manica != null) {
+                    bean.setManica(Manica.valueOf(manica.toUpperCase()));
+                }
+
+                String gamba = rs.getString("gamba");
+                if (gamba != null) {
+                    bean.setGamba(Gamba.valueOf(gamba.toUpperCase()));
+                }
                 vestiti.add(bean);
             }
         }

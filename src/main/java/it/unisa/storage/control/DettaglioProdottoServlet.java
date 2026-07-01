@@ -14,20 +14,29 @@ import java.util.Collection;
 
 import javax.sql.DataSource;
 
+import it.unisa.storage.dao.AccessoriDao;
+import it.unisa.storage.dao.AccessoriDaoImpl;
 import it.unisa.storage.dao.ImmaginiDao;
 import it.unisa.storage.dao.ImmaginiDaoImpl;
 import it.unisa.storage.dao.ProdottoDao;
 import it.unisa.storage.dao.ProdottoDaoImpl;
+import it.unisa.storage.dao.ScarpeDao;
+import it.unisa.storage.dao.ScarpeDaoImpl;
 import it.unisa.storage.dao.SupportoColoreDao;
 import it.unisa.storage.dao.SupportoColoreDaoImpl;
 import it.unisa.storage.dao.SupportoTagliaDao;
 import it.unisa.storage.dao.SupportoTagliaDaoImpl;
+import it.unisa.storage.dao.VestitiDao;
+import it.unisa.storage.dao.VestitiDaoImpl;
+import it.unisa.storage.model.AccessoriBean;
 import it.unisa.storage.model.CarrelloBean;
 import it.unisa.storage.model.ImmagineBean;
 import it.unisa.storage.model.ProdottoBean;
+import it.unisa.storage.model.ScarpeBean;
 import it.unisa.storage.model.SupportoColoreBean;
 import it.unisa.storage.model.SupportoTagliaBean;
 import it.unisa.storage.model.UtenteBean;
+import it.unisa.storage.model.VestitiBean;
 
 /**
  * Servlet implementation class DettaglioProdottoServlet
@@ -40,6 +49,9 @@ public class DettaglioProdottoServlet extends HttpServlet {
 	private ImmaginiDao immaginiDao;
 	private SupportoColoreDao coloreDao;
 	private SupportoTagliaDao tagliaDao;
+	private ScarpeDao scarpaDao;
+	private VestitiDao vestitoDao;
+	private AccessoriDao accessorioDao;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -57,6 +69,9 @@ public class DettaglioProdottoServlet extends HttpServlet {
 		immaginiDao = new ImmaginiDaoImpl(ds);
 		coloreDao = new SupportoColoreDaoImpl(ds);
 		tagliaDao = new SupportoTagliaDaoImpl(ds);
+		scarpaDao = new ScarpeDaoImpl(ds);
+	    vestitoDao = new VestitiDaoImpl(ds);
+	    accessorioDao = new AccessoriDaoImpl(ds);
     }
 
 	/**
@@ -74,8 +89,8 @@ public class DettaglioProdottoServlet extends HttpServlet {
 		}
 		
 		HttpSession session = request.getSession(false);
-        String     token   = (session != null) ? (String)     session.getAttribute("token")  : null;
-        UtenteBean utente  = (token   != null) ? (UtenteBean) session.getAttribute("utente") : null;
+        String token = (session != null) ? (String) session.getAttribute("token")  : null;
+        UtenteBean utente = (token != null) ? (UtenteBean) session.getAttribute("utente") : null;
 		
 		
 		
@@ -86,6 +101,32 @@ public class DettaglioProdottoServlet extends HttpServlet {
 			{
 				response.sendRedirect(ctx + "/Home");
 				return;
+			}
+			
+			if (prodotto.getCategoria() == ProdottoBean.Categoria.SCARPA) {
+			    Collection<ScarpeBean> scarpe = scarpaDao.doRetrieveAll();
+			    for (ScarpeBean s : scarpe) {
+			        if (s.getId_prodotto().equals(idProdotto)) {
+			            request.setAttribute("dettaglioScarpa", s);
+			            break;
+			        }
+			    }
+			} else if (prodotto.getCategoria() == ProdottoBean.Categoria.VESTITO) {
+			    Collection<VestitiBean> vestiti = vestitoDao.doRetrieveAll();
+			    for (VestitiBean v : vestiti) {
+			        if (v.getId_prodotto().equals(idProdotto)) {
+			            request.setAttribute("dettaglioVestito", v);
+			            break;
+			        }
+			    }
+			} else if (prodotto.getCategoria() == ProdottoBean.Categoria.ACCESSORIO) {
+			    Collection<AccessoriBean> accessori = accessorioDao.doRetrieveAll();
+			    for (AccessoriBean a : accessori) {
+			        if (a.getId_prodotto().equals(idProdotto)) {
+			            request.setAttribute("dettaglioAccessorio", a);
+			            break;
+			        }
+			    }
 			}
 			
 			Collection<ImmagineBean> immagini = immaginiDao.doRetrieveAllByIdProdotto(idProdotto);

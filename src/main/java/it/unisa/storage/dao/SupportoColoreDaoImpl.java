@@ -10,7 +10,6 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import it.unisa.storage.model.SupportoColoreBean;
-import it.unisa.storage.model.SupportoTagliaBean;
 
 public class SupportoColoreDaoImpl implements SupportoColoreDao{
 	private static final String TABLE_NAME = "SupportoColore";
